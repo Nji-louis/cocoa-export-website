@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Newsletter Admin</title>
+ <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+    }
+    #adminContainer, #authContainer {
+      max-width: 600px;
+      margin: auto;
+    }
+    input, textarea {
+      width: 100%;
+      padding: 10px;
+      margin: 5px 0;
+    }
+    button {
+      padding: 10px 15px;
+      cursor: pointer;
+      margin-top: 5px;
+    }
+    ul {
+      list-style: none;
+      padding-left: 0;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 10px;
+    }
+    table, th, td {
+      border: 1px solid #ccc;
+    }
+    th, td {
+      padding: 8px;
+      text-align: left;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- LOGIN FORM -->
+  <div id="authContainer">
+    <h2>Admin Login</h2>
+    <form id="loginForm">
+      <input type="email" id="authEmail" placeholder="Email" required autocomplete="email">
+      <input type="password" id="authPassword" placeholder="Password" required autocomplete="current-password">
+      <button type="submit" id="loginBtn">Login</button>
+    </form>
+  </div>
+
+  <!-- ADMIN DASHBOARD -->
+  <div id="adminContainer" style="display:none;">
+    <h2>Newsletter Admin Dashboard</h2>
+    <button id="logoutBtn" style="margin-bottom: 15px;">Logout</button>
+
+    <!-- Subscriber List -->
+    <h3>Subscribers</h3>
+    <ul id="subscriberList"></ul>
+
+    <!-- Send Email -->
+    <h3>Send Email</h3>
+    <input type="text" id="emailSubject" placeholder="Subject" />
+    <textarea id="emailMessage" placeholder="Message"></textarea>
+    <button id="sendEmailBtn">Send Email</button>
+
+    <!-- Email Log -->
+    <h3>Email Sending Log</h3>
+    <table id="emailLog">
+      <thead>
+        <tr>
+          <th>Email</th>
+          <th>Status</th>
+          <th>Error</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+  </div>
+
+  <script>
+    //-------- Initializze Supabase
+const SUPABASE_URL = "https://qnepxdyvfctreegcduxj.supabase.co";
+const SUPABASE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InFuZXB4ZHl2ZmN0cmVlZ2NkdXhqIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjAxMjY1NzYsImV4cCI6MjA3NTcwMjU3Nn0.9FTpA7Dg6PxD01j3Uo_eTURXAarsSV3C3_vDIU5fpbE";
+const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+
+    // DOM Elements
+    const authContainer = document.getElementById("authContainer");
+    const adminContainer = document.getElementById("adminContainer");
+    const loginForm = document.getElementById("loginForm");
+    const subscriberList = document.getElementById("subscriberList");
+    const logoutBtn = document.getElementById("logoutBtn");
+    const emailLogBody = document.querySelector("#emailLog tbody");
+    const sendEmailBtn = document.getElementById("sendEmailBtn");
+
+    let subscribers = [];
+
+    // -----------------------------
+    // Check Existing Session
+    // -----------------------------
+    supabase.auth.getSession().then(({ data: { session } }) => {
+      if (session) showAdminDashboard();
+    });
+
+    // -----------------------------
+    // Login
+    // -----------------------------
+    loginForm.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const email = document.getElementById("authEmail").value.trim();
+      const password = document.getElementById("authPassword").value.trim();
+      const { data, error } = await supabase.auth.signInWithPassword({ email, password });
+      if (error) return alert("Login failed: " + error.message);
+      showAdminDashboard();
+    });
+
+    // -----------------------------
+    // Logout
+    // -----------------------------
+    logoutBtn.addEventListener("click", async () => {
+      await supabase.auth.signOut();
+      authContainer.style.display = "block";
+      adminContainer.style.display = "none";
+    });
+
+    // -----------------------------
+    // Show Admin Dashboard
+    // -----------------------------
+    function showAdminDashboard() {
+      authContainer.style.display = "none";
+      adminContainer.style.display = "block";
+      loadSubscribers();
+    }
+
+    // -----------------------------
+    // Load Subscribers
+    // -----------------------------
+    async function loadSubscribers() {
+      const { data, error } = await supabase
+        .from("newsletter")
+        .select("email")
+        .order("subscribed_at", { ascending: false });
+      if (error) return console.error(error);
+      subscribers = data.map(item => item.email);
+      subscriberList.innerHTML = "";
+      subscribers.forEach(email => {
+        const li = document.createElement("li");
+        li.textContent = email;
+        subscriberList.appendChild(li);
+      });
+    }
+
+    // -----------------------------
+    // Send Email via newsletter_send
+    // -----------------------------
+    sendEmailBtn.addEventListener("click", async () => {
+  const subject = document.getElementById("emailSubject").value.trim();
+  const message = document.getElementById("emailMessage").value.trim();
+  if (!subject || !message) return alert("Please enter subject and message");
+
+  const token = (await supabase.auth.getSession()).data.session?.access_token;
+  if (!token) return alert("Not authenticated!");
+
+  console.log("Sending to newsletter_send function...");
+  console.log("Subscribers:", subscribers);
+  console.log("Subject:", subject);
+
+  try {
+    const response = await fetch(
+  "https://qnepxdyvfctreegcduxj.supabase.co/functions/v1/newsletter_send",
+  {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      "Authorization": `Bearer ${token}`
+    },
+    body: JSON.stringify({
+      subject,
+      message,
+      emails: subscribers
+    })
+  }
+);
+
+    console.log("Response status:", response.status);
+    const result = await response.json();
+    console.log("Result:", result);
+
+    emailLogBody.innerHTML = "";
+
+    if (response.ok && result.result) {
+      for (const [email, statusObj] of Object.entries(result.result)) {
+        const tr = document.createElement("tr");
+        tr.innerHTML = `
+          <td>${email}</td>
+          <td>${statusObj.status}</td>
+          <td>${statusObj.error || ""}</td>
+        `;
+        emailLogBody.appendChild(tr);
+      }
+      alert("Emails sent successfully!");
+    } else {
+      alert("Failed to send emails: " + (result.error || "Unknown error"));
+      console.error(result);
+    }
+  } catch (err) {
+    console.error("Request failed:", err);
+    alert("Request failed: " + err.message);
+  }
+});
+
+  </script>
+</body>
+</html>
