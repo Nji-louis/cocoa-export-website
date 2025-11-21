@@ -57,7 +57,6 @@ async function fetchStats() {
 }
 
 
-
 // --------------------
 // Fetch all other About section content
 // --------------------
@@ -286,39 +285,6 @@ async function initExportSection() {
 }
 
 initExportSection();
-
-
-
-
-
-
-//Blog $ News
-async function loadBlogPosts() {
-  const { data: posts, error } = await supabase.from('blog_posts').select('*').order('created_at', { ascending: false });
-  if (error) return console.error('Error loading blog posts:', error);
-
-  const blogGrid = document.querySelector('.blog-grid');
-  blogGrid.innerHTML = ''; // Clear static HTML
-
-  posts.forEach(post => {
-    const postEl = document.createElement('div');
-    postEl.classList.add('blog-card');
-    postEl.innerHTML = `
-      <div class="blog-img">
-        <img src="${post.image_url}" alt="${post.title}">
-      </div>
-      <div class="blog-content">
-        <h3>${post.title}</h3>
-        <p>${post.content}</p>
-        <a href="/blog/${post.slug}" class="btn-read">Read More</a>
-      </div>
-    `;
-    blogGrid.appendChild(postEl);
-  });
-}
-
-loadBlogPosts();
-
 
 
 

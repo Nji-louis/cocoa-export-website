@@ -70,70 +70,75 @@
 
 
 <body>
-
-
-
-<!-- Unified Header -->
+<!-- Modern 2-Row Header -->
 <header class="site-header">
-  <!-- Top Bar -->
-  <div class="top-bar">
+
+  <!-- Row 1: Contact + Social + WhatsApp -->
+  <div class="top-bar row1">
     <div class="top-left">
       <span class="header-location"><i class="fas fa-map-marker-alt"></i> Douala - Cameroon</span>
       <span class="header-email"><i class="fas fa-envelope"></i> chococamsarl@gmail.com</span>
     </div>
-    <!-- Search Form -->
-    <form class="form-inline my-2 my-lg-0" id="searchForm">
-      <input 
-        class="search-input" 
-        type="search" 
-        placeholder="Search on our site or Google..." 
-        aria-label="Search" 
-        id="siteSearch"
-      >
-      <button class="search-btn" type="submit">
-        <i class="fas fa-search"></i>
-      </button>
-    </form>
-    <p id="noResult" style="display:none;">No results found. Redirecting to Google...</p>
     <div class="top-right">
       <div class="social-icons">
         <a href="#"><i class="fab fa-linkedin-in"></i></a>
         <a href="#"><i class="fab fa-facebook-f"></i></a>
         <a href="#"><i class="fab fa-instagram"></i></a>
       </div>
-      <a href="#quote" class="top-link header-secure-offer">Secure Offer</a>
-      <a href="https://wa.me/237699745546" class="top-link header-customer-service">
+      <a href="https://wa.me/237699745546" class="header-customer-service">
         <i class="fa-brands fa-whatsapp"></i> Customer Service
       </a>
-
-      
-      <!-- Google Translate Widget -->
-  <div id="google_translate_element"></div>
     </div>
   </div>
-  <!-- Navbar -->
-  <div class="navbar">
-    <img src="images/logo.jpg" alt="Cameroon Cocoa Holdings Logo" />
-    <nav>
+
+  <!-- Row 2: Logo + Navigation + Search + Google Translate + Hamburger -->
+  <div class="top-bar row2">
+    <!-- Logo -->
+    <div class="header-logo">
+      <img src="images/logo.jpg" alt="Cameroon Cocoa Holdings Logo">
+    </div>
+
+    <!-- Navigation -->
+    <nav class="main-nav">
       <ul class="nav-links">
-        <li><a href="#home" class="active" data-translate="navHome">Home</a></li>
-        <li><a href="#about" data-translate="navAbout">About</a></li>
-        <li><a href="#products" data-translate="navProducts">Products</a></li>
-        <li><a href="#export" data-translate="navExport">Export</a></li>
-        <li><a href="#document" data-translate="navDocuments">Documents</a></li>
-        <li><a href="#quote" data-translate="navQuote">Request Quote</a></li>
-        <li><a href="#contact" data-translate="navContact">Contact</a></li>
-        <li><a href="#gallery" data-translate="navGallery">Gallery</a></li>
-        <li><a href="#testimonials" data-translate="navTestimonials">Testimonials</a></li>
+        <li><a href="#home" class="active">Home</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#products">Products</a></li>
+        <li><a href="#export">Export</a></li>
+        <li><a href="#document">Documents</a></li>
+
+        <!-- Dropdown for remaining links -->
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle">More <i class="fas fa-chevron-down"></i></a>
+          <ul class="dropdown-menu">
+            <li><a href="#quote">Request Quote</a></li>
+            <li><a href="#contact">Contact</a></li>
+            <li><a href="#gallery">Gallery</a></li>
+            <li><a href="#testimonials">Testimonials</a></li>
+          </ul>
+        </li>
       </ul>
-      <div class="hamburger">
-        <span></span>
-        <span></span>
-        <span></span>
-      </div>
     </nav>
+
+    <!-- Search Form -->
+    <form class="header-search" id="searchForm">
+      <input type="search" placeholder="Search on our site or Google..." id="siteSearch">
+      <button type="submit"><i class="fas fa-search"></i></button>
+    </form>
+
+    <!-- Google Translate -->
+    <div id="google_translate_element"></div>
+
+    <!-- Hamburger for mobile -->
+    <div class="hamburger">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
   </div>
+
 </header>
+
 
 
 
@@ -197,6 +202,10 @@
         we help communities thrive while delivering world-class cocoa.
       </p>
     </div>
+
+
+
+
     <!-- What We Stand For -->
     <div class="about-block">
       <h2 class="faq-heading">What We Stand For</h2>
@@ -225,6 +234,7 @@
         <p>Strong, long-term relationships with both farmers and global buyers.</p>
       </div>
     </div>
+
     <!-- Timeline -->
     <div class="timeline">
       <div class="timeline-item">
@@ -244,13 +254,47 @@
         <div class="timeline-content">Expanded exports to international chocolate manufacturers across Europe and Asia.</div>
       </div>
     </div>
-    <!-- Farmer Gallery -->
-    <div class="farmer-gallery">
-      <img src="images/farmer.jpg" alt="Cocoa farmer" class="gallery-img">
-      <img src="images/farm.jpg" alt="Cocoa farm" class="gallery-img">
-      <img src="images/farm1.jpg" alt="Harvesting cocoa" class="gallery-img">
-      <img src="images/farm2.jpg" alt="Processing cocoa" class="gallery-img">
+
+
+    <!-- ===== Gallery ===== -->
+  <div class="about-gallery-container">
+    <!-- Slides -->
+    <div class="about-slide fade">
+      <img loading="lazy" src="images/farmer.jpg" alt="Farmer at Work">
+      <p class="about-caption">Farmer at Work</p>
     </div>
+    <div class="about-slide fade">
+      <img loading="lazy" src="images/farm.jpg" alt="Cocoa Farm">
+      <p class="about-caption">Cocoa Farm</p>
+    </div>
+    <div class="about-slide fade">
+      <img loading="lazy" src="images/farm1.jpg" alt="Harvesting Cocoa">
+      <p class="about-caption">Harvesting Cocoa</p>
+    </div>
+    <div class="about-slide fade">
+      <img loading="lazy" src="images/farm2.jpg" alt="Cocoa Storage">
+      <p class="about-caption">Cocoa Storage</p>
+    </div>
+    <!-- Arrows -->
+    <a class="about-prev" onclick="aboutPlusSlides(-1)">&#10094;</a>
+    <a class="about-next" onclick="aboutPlusSlides(1)">&#10095;</a>
+  </div>
+  <!-- Dots/Indicators -->
+  <div class="about-dots-container" style="text-align:center; margin-top:12px;">
+    <span class="about-dot" onclick="aboutCurrentSlide(1)"></span>
+    <span class="about-dot" onclick="aboutCurrentSlide(2)"></span>
+    <span class="about-dot" onclick="aboutCurrentSlide(3)"></span>
+    <span class="about-dot" onclick="aboutCurrentSlide(4)"></span>
+  </div>
+<!-- ================= LIGHTBOX ================= -->
+<div id="aboutLightbox" class="about-lightbox">
+  <span class="about-lightbox-close" onclick="closeAboutLightbox()">&times;</span>
+  <img id="aboutLightboxImg" class="about-lightbox-content">
+  <div id="aboutLightboxCaption" class="about-lightbox-caption"></div>
+</div>
+
+
+
     <!-- Stats -->
     <div class="stats-row">
       <div class="stat">
@@ -391,131 +435,190 @@
 
 
 
- 
 <!-- ================= Export Section ================= -->
-  <section id="export" class="export-section">
-    <div class="container">
-      <h2>Export Process</h2>
-      <p class="section-subtitle">
-        We ship from the Port of Douala. Supported Incoterms: CIF & FOB to major international ports in Europe and the USA.</p>
-      <div class="steps">
-  <div class="step" data-aos="fade-up">
-    <i class="fas fa-seedling step-icon"></i>
-    <h3>Sourcing & Quality Control</h3>
-    <p>Beans are harvested, fermented, dried, and graded with strict quality checks.</p>
-  </div>
-  <div class="step" data-aos="fade-up" data-aos-delay="100">
-    <i class="fas fa-file-contract step-icon"></i>
-    <h3>Inspection & Documentation</h3>
-    <p>Certificates of Origin, Phytosanitary Certificates, and quality checks are issued.</p>
-  </div>
-  <div class="step" data-aos="fade-up" data-aos-delay="200">
-    <i class="fas fa-boxes-packing step-icon"></i>
-    <h3>Packaging & Logistics</h3>
-    <p>Packed in jute bags, loaded into 20ft containers (19–20 metric tons).</p>
-  </div>
-  <div class="step" data-aos="fade-up" data-aos-delay="300">
-    <i class="fas fa-ship step-icon"></i>
-    <h3>Shipping</h3>
-    <p>Sea freight from the Port of Douala, delivered under CIF or FOB Incoterms.</p>
-  </div>
-</div>
-<div class="export-details" data-aos="fade-up" data-aos-delay="400">
-  <h3><i class="fas fa-cubes"></i> Minimum Order Quantity</h3>
-  <p>One 20ft container (approx. 19–20MT).</p>
-  <h3><i class="fas fa-file-alt"></i> Documents Provided</h3>
-  <ul id="exportText">
-    <li>Certificate of Origin</li>
-    <li>Phytosanitary Certificate</li>
-    <li>EUR.1 Movement Certificates</li>
-  </ul>
-</div>
+<section id="export" class="export-section">
+  <div class="container">
+
+    <h2 class="section-title">Cocoa Export & Customs Clearance</h2>
+    <p class="section-subtitle">CHOCOCAM SARL Ltd ensures full compliance with Cameroonian cocoa export regulations and global trade standards.</p>
+
+    <!-- Timeline Steps -->
+    <div class="timeline">
+      <div class="timeline-step" data-category="Pre-Export">
+        <div class="step-icon">📝</div>
+        <h3>Pre-Export Formalities</h3>
+        <ul>
+          <li>Register CHOCOCAM SARL Ltd in the Ministry of Trade exporters’ file.</li>
+          <li>Obtain taxpayer card & customs registration.</li>
+          <li>Secure all permits and commercial documentation.</li>
+          <li>Obtain Certificate of Origin, Phytosanitary Certificate, and Stuffing Certificate.</li>
+          <li>Quality verification through accredited agencies (e.g., SGS).</li>
+        </ul>
+      </div>
+
+      <div class="timeline-step" data-category="Taxation">
+        <div class="step-icon">💰</div>
+        <h3>Taxation & Single Window</h3>
+        <ul>
+          <li>Submit documents to the Single Window for Foreign Trade (GUCE).</li>
+          <li>Obtain Bordereau de Taxation (BDT) for exit duties.</li>
+          <li>Pay exit duty (typically 10% of FOB value).</li>
+          <li>Pay royalties or levies required by the National Cocoa & Coffee Board (ONCC).</li>
+        </ul>
+      </div>
+
+      <div class="timeline-step" data-category="Declaration">
+        <div class="step-icon">📂</div>
+        <h3>Export Declaration</h3>
+        <ul>
+          <li>Submit export declaration via SYDONIA++ system.</li>
+          <li>Customs verification of pre-liquidation & liquidation forms.</li>
+          <li>Provide all required certificates and quality verification documents.</li>
+        </ul>
+      </div>
+
+      <div class="timeline-step" data-category="Approval">
+        <div class="step-icon">✅</div>
+        <h3>Good-to-Ship (GTS)</h3>
+        <ul>
+          <li>Customs grants GTS authorization after document verification.</li>
+          <li>Physical inspection may be conducted before cargo leaves storage.</li>
+          <li>Present waybill or export manifest at exit points (port/land/river).</li>
+        </ul>
+      </div>
+
+      <div class="timeline-step" data-category="Loading">
+        <div class="step-icon">🚢</div>
+        <h3>Loading & Export</h3>
+        <ul>
+          <li>Load cocoa into containers or vessels using stuffing certificate.</li>
+          <li>Carrier issues Bill of Lading and transport documentation.</li>
+          <li>Final clearance by customs after GTS approval & duty payment.</li>
+        </ul>
+      </div>
+
+      <div class="timeline-step" data-category="Post-Export">
+        <div class="step-icon">📦</div>
+        <h3>Post-Export Compliance</h3>
+        <ul>
+          <li>Retain all export documentation for audits.</li>
+          <li>Traceability for zero-deforestation certified cocoa.</li>
+          <li>Report export volumes & quality to ONCC.</li>
+        </ul>
+      </div>
     </div>
-  </section>
 
+    <!-- Export Details -->
+    <div class="export-details">
+      <h3><i class="fas fa-cubes"></i> Minimum Order Quantity</h3>
+      <p>One 20ft container (approx. 19–20MT).</p>
 
-
-
+      <h3><i class="fas fa-file-alt"></i> Documents Provided</h3>
+      <ul>
+        <li>Certificate of Origin</li>
+        <li>Phytosanitary Certificate</li>
+        <li>EUR.1 Movement Certificates</li>
+      </ul>
+    </div>
+  </div>
+</section>
 
 <!-- ================= Documents Section ================= -->
-  <section id="document" class="documents-section">
-    <div class="container">
-      <h2 class="section-title">Documents & Certifications</h2>
-      <p class="section-subtitle">Download PDF copies of our core documents for verification.</p>
-      <div class="documents-grid">
-  <div class="document-card" data-aos="fade-up">
-    <i class="fas fa-certificate doc-icon"></i>
-    <h4>Certificate of Origin</h4>
-    <p>Official origin certificate for export shipments.</p>
-    <a href="docs/certificate-of-origin.pdf" download class="btn">
-      <i class="fas fa-file-pdf"></i> Download PDF
-    </a>
-  </div>
-  <div class="document-card" data-aos="fade-up" data-aos-delay="100">
-    <i class="fas fa-leaf doc-icon"></i>
-    <h4>Phytosanitary Certificate</h4>
-    <p>Official health clearance from Cameroonian authorities.</p>
-    <a href="docs/phytosanitary-certificate.pdf" download class="btn">
-      <i class="fas fa-file-pdf"></i> Download PDF
-    </a>
-  </div>
-  <div class="document-card" data-aos="fade-up" data-aos-delay="200">
-    <i class="fas fa-vials doc-icon"></i>
-    <h4>Quality Analysis</h4>
-    <p>Sample lab analysis and quality report available per lot.</p>
-    <a href="docs/quality-analysis.pdf" download class="btn">
-      <i class="fas fa-file-pdf"></i> Download PDF
-    </a>
-  </div>
-</div>
-    </div>
-  </section>
-  
-
-
-
-
-
-
-<!---Blog & News-->
-  <section id="blog" class="blog-section">
+<section id="document" class="documents-section">
   <div class="container">
+    <h2 class="section-title">Documents & Certifications</h2>
+    <p class="section-subtitle">Download PDF copies of our core documents for verification.</p>
+
+    <div class="documents-grid">
+      <div class="document-card">
+        <i class="fas fa-certificate doc-icon"></i>
+        <h4>Certificate of Origin</h4>
+        <p>Official origin certificate for export shipments.</p>
+        <a href="docs/certificate-of-origin.pdf" download class="btn">
+          <i class="fas fa-file-pdf"></i> Download PDF
+        </a>
+      </div>
+
+      <div class="document-card">
+        <i class="fas fa-leaf doc-icon"></i>
+        <h4>Phytosanitary Certificate</h4>
+        <p>Official health clearance from Cameroonian authorities.</p>
+        <a href="docs/phytosanitary-certificate.pdf" download class="btn">
+          <i class="fas fa-file-pdf"></i> Download PDF
+        </a>
+      </div>
+
+      <div class="document-card">
+        <i class="fas fa-vials doc-icon"></i>
+        <h4>Quality Analysis</h4>
+        <p>Sample lab analysis and quality report available per lot.</p>
+        <a href="docs/quality-analysis.pdf" download class="btn">
+          <i class="fas fa-file-pdf"></i> Download PDF
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+
+
+
+<!-- Blog & News Section -->
+<section id="blog" class="blog-section">
+  <div class="container">
+
     <h2 class="section-title">Latest News & Insights</h2>
     <p class="section-subtitle">Stay updated with trends and insights from the cocoa industry</p>
+
+    <!-- Live Cocoa News -->
+    <div class="live-news-area">
+      <h3 class="live-news-title">Live Cocoa News (Auto-Updated)</h3>
+      <div id="news-list" class="news-list">
+        <p>Loading latest cocoa news…</p>
+      </div>
+    </div>
+
+    <!-- Existing Blog Posts -->
     <div class="blog-grid">
+
       <!-- Blog Post 1 -->
-      <div class="blog-card">
+      <article class="blog-card" itemscope itemtype="https://schema.org/BlogPosting">
         <div class="blog-img">
-          <img src="images/slide1.jpg" alt="Cocoa Harvest">
+          <img src="images/slide1.jpg" alt="Cocoa Harvest" itemprop="image">
         </div>
         <div class="blog-content">
-          <h3>Cocoa Harvesting Tips</h3>
-          <p>Discover how Cameroonian farmers harvest and prepare cocoa beans to ensure the best quality exports.</p>
-          <a href="#" class="btn-read">Read More</a>
+          <h3 itemprop="headline">Cocoa Harvesting Tips</h3>
+          <p itemprop="description">Discover how Cameroonian farmers harvest and prepare cocoa beans to ensure the best quality exports.</p>
+          <a href="https://www.google.com/search?q=Cocoa+Harvesting+Tips+in+cameroon" class="btn-read" target="_blank" rel="noopener noreferrer" itemprop="url">Read More</a>
         </div>
-      </div>
+      </article>
+
       <!-- Blog Post 2 -->
-      <div class="blog-card">
+      <article class="blog-card" itemscope itemtype="https://schema.org/BlogPosting">
         <div class="blog-img">
-          <img src="images/slide2.jpg" alt="Sustainable Cocoa">
+          <img src="images/slide2.jpg" alt="Sustainable Cocoa" itemprop="image">
         </div>
         <div class="blog-content">
-          <h3>Sustainable Cocoa Farming</h3>
-          <p>Learn about eco-friendly farming practices that ensure ethical sourcing and long-term productivity.</p>
-          <a href="#" class="btn-read">Read More</a>
+          <h3 itemprop="headline">Sustainable Cocoa Farming</h3>
+          <p itemprop="description">Learn about eco-friendly farming practices that ensure ethical sourcing and long-term productivity.</p>
+          <a href="https://www.google.com/search?q=Sustainable+Cocoa+Farming+in+cameroon" class="btn-read" target="_blank" rel="noopener noreferrer" itemprop="url">Read More</a>
         </div>
-      </div>
+      </article>
+
       <!-- Blog Post 3 -->
-      <div class="blog-card">
+      <article class="blog-card" itemscope itemtype="https://schema.org/BlogPosting">
         <div class="blog-img">
-          <img src="images/slide3.jpg" alt="Cocoa Export">
+          <img src="images/slide3.jpg" alt="Cocoa Export" itemprop="image">
         </div>
         <div class="blog-content">
-          <h3>Exporting Cocoa Worldwide</h3>
-          <p>From Cameroon to the world: explore the global journey of our cocoa exports to international markets.</p>
-          <a href="#" class="btn-read">Read More</a>
+          <h3 itemprop="headline">Exporting Cocoa Worldwide</h3>
+          <p itemprop="description">From Cameroon to the world: explore the global journey of our cocoa exports to international markets.</p>
+          <a href="https://www.google.com/search?q=Exporting+cameroon+Cocoa+Worldwide" class="btn-read" target="_blank" rel="noopener noreferrer" itemprop="url">Read More</a>
         </div>
-      </div>
+      </article>
+
     </div>
   </div>
 </section>
@@ -676,41 +779,65 @@
 
 
 
-<!-- Gallery Section -->
-<section id="gallery" class="gallery-section">
-  <h2>Our Cocoa Gallery</h2>
-  <p>Explore premium Cameroonian cocoa from farm to export.</p>
-  <div class="gallery-grid">
-    <div class="gallery-item">
-      <img src="images/slide1.jpg" alt="Cameroonian Cocoa Farm" loading="lazy">
-      <div class="overlay"><span>Cocoa Farm</span></div>
+<!-- ===== Google Photos Style Gallery with Lightbox ===== -->
+<section id="gallery">
+
+  <div class="gp-gallery-container">
+
+    <!-- Slides -->
+    <div class="gp-slide fade">
+      <img loading="lazy" src="images/slide1.jpg" alt="Cocoa Processing">
+      <p class="gp-caption">Cocoa Processing</p>
     </div>
-    <div class="gallery-item">
-      <img src="images/slide2.jpg" alt="Organic Cocoa Beans" loading="lazy">
-      <div class="overlay"><span>Organic Cocoa Beans</span></div>
+
+    <div class="gp-slide fade">
+      <img loading="lazy" src="images/slide2.jpg" alt="Cocoa Beans Warehouse">
+      <p class="gp-caption">Cocoa Beans Warehouse</p>
     </div>
-    <div class="gallery-item">
-      <img src="images/slide3.jpg" alt="Cocoa Drying Process" loading="lazy">
-      <div class="overlay"><span >Drying Process</span></div>
+
+    <div class="gp-slide fade">
+      <img loading="lazy" src="images/slide3.jpg" alt="Export Quality Cocoa">
+      <p class="gp-caption">Export Quality Cocoa</p>
     </div>
-    <div class="gallery-item">
-      <img src="images/slide4.jpg" alt="Cocoa Export Packaging" loading="lazy">
-      <div class="overlay"><span>Export Packaging</span></div>
+
+    <div class="gp-slide fade">
+      <img loading="lazy" src="images/gallery1.jpg" alt="Cocoa Storage">
+      <p class="gp-caption">Cocoa Storage</p>
     </div>
+
+    <div class="gp-slide fade">
+      <img loading="lazy" src="images/gallery2.jpg" alt="Cocoa Shipping">
+      <p class="gp-caption">Cocoa Shipping</p>
+    </div>
+
+    <div class="gp-slide fade">
+      <img loading="lazy" src="images/gallery3.jpg" alt="Cocoa Packaging">
+      <p class="gp-caption">Cocoa Packaging</p>
+    </div>
+
+    <!-- Arrows -->
+    <a class="gp-prev" onclick="gpPlusSlides(-1)">&#10094;</a>
+    <a class="gp-next" onclick="gpPlusSlides(1)">&#10095;</a>
+  </div>
+
+  <!-- Thumbnails -->
+  <div class="gp-row">
+    <img loading="lazy" class="gp-thumb" src="images/slide1.jpg" onclick="gpCurrentSlide(1)" alt="Cocoa Processing">
+    <img loading="lazy" class="gp-thumb" src="images/slide2.jpg" onclick="gpCurrentSlide(2)" alt="Cocoa Beans Warehouse">
+    <img loading="lazy" class="gp-thumb" src="images/slide3.jpg" onclick="gpCurrentSlide(3)" alt="Export Quality Cocoa">
+    <img loading="lazy" class="gp-thumb" src="images/gallery1.jpg" onclick="gpCurrentSlide(4)" alt="Cocoa Storage">
+    <img loading="lazy" class="gp-thumb" src="images/gallery2.jpg" onclick="gpCurrentSlide(5)" alt="Cocoa Shipping">
+    <img loading="lazy" class="gp-thumb" src="images/gallery3.jpg" onclick="gpCurrentSlide(6)" alt="Cocoa Packaging">
   </div>
 </section>
-<!-- Lightbox Modal -->
-<div id="lightbox" class="lightbox">
-  <span class="close">&times;</span>
-  <img class="lightbox-content" id="lightbox-img" alt="">
-  <div id="lightbox-caption"></div>
-  <!-- Navigation Arrows -->
-  <a class="lightbox-prev">&#10094;</a>
-  <a class="lightbox-next">&#10095;</a>
+
+
+<!-- ===================== LIGHTBOX ====================== -->
+<div id="gpLightbox" class="gp-lightbox">
+  <span class="gp-lightbox-close" onclick="closeLightbox()">&times;</span>
+  <img id="gpLightboxImg" class="gp-lightbox-content">
+  <div id="gpLightboxCaption" class="gp-lightbox-caption"></div>
 </div>
-
-
-
 
 
 
@@ -1448,6 +1575,7 @@ We accept bank wire transfers and letters of credit (LC) for international buyer
 
 
 
+
    <!-- ===== Terms & Conditions Modal ===== -->
 <div id="termsModal" class="modal">
   <div class="modal-content">
@@ -1579,6 +1707,50 @@ Phone: [Insert Company Phone Number]</p>
 
 
 
+<!-- Advanced WhatsApp Chat Widget -->
+<div class="wa-advanced-widget">
+  <!-- Floating Button -->
+  <div class="wa-advanced-btn" id="advWaBtn">
+    <img src="https://cdn-icons-png.flaticon.com/512/124/124034.png">
+  </div>
+
+  <!-- Chat Box -->
+  <div class="wa-advanced-box" id="advWaBox">
+
+    <div class="wa-adv-header">
+      <img src="https://i.ibb.co/HC0Qk8F/agent-profile.png" class="agent-img">
+      <div>
+        <h4>CHOCOCAM SARL Ltd</h4>
+        <p class="online-dot">● Online</p>
+      </div>
+    </div>
+
+    <div class="wa-adv-body">
+      <div class="typing">
+        <span></span><span></span><span></span>
+      </div>
+
+      <div class="welcome-msg">
+        👋 Hello!  
+        How may we assist you with cocoa exportation?
+      </div>
+
+      <div class="suggestions">
+        <p class="sug" data-msg="I want information about cocoa exportation.">Cocoa Export Info</p>
+        <p class="sug" data-msg="I want to know your cocoa price per ton.">Price Per Ton</p>
+        <p class="sug" data-msg="I want to speak with an export specialist.">Speak to Specialist</p>
+      </div>
+    </div>
+
+    <a id="startChatBtn" class="wa-adv-start" target="_blank">
+      Start WhatsApp Chat
+    </a>
+
+  </div>
+</div>
+
+
+
 
 <!-- ===== Privacy Policy Modal ===== -->
 <div id="privacyModal" class="modal">
@@ -1680,6 +1852,74 @@ us at:
  <a href="mailto:contact@yourwebsite.com">contact@yourwebsite.com</a></p>
   </div>
 </div>
+
+
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const newsList = document.getElementById("news-list");
+
+  // Curated Cameroon cocoa news with real links
+  const articles = [
+    {
+      title: "Black pod disease devastates cocoa farms in Southwest Cameroon",
+      link: "https://www.reuters.com/business/environment/black-pod-disease-devastates-cocoa-farms-southwest-cameroon-2025-09-16/?utm_source=chatgpt.com",
+      description: "Black pod disease has been affecting cocoa farms in Southwest Cameroon, reducing yield and impacting local farmers.",
+      source: "Reuters"
+    },
+    {
+      title: "Cameroon farmers turn to vigilantes and amulets to stop cocoa theft",
+      link: "https://www.reuters.com/world/africa/cameroon-farmers-turn-vigilantes-amulets-stop-cocoa-theft-2024-10-01/?utm_source=chatgpt.com",
+      description: "Farmers in Cameroon are using unconventional methods such as vigilantes and charms to protect cocoa farms from theft.",
+      source: "Reuters"
+    },
+    {
+      title: "Cameroon to share cocoa location data to meet EU environment rules",
+      link: "https://www.reuters.com/markets/commodities/cameroon-share-cocoa-location-data-meet-eu-environment-rules-2024-08-28/?utm_source=chatgpt.com",
+      description: "Cameroon plans to share cocoa plantation location data to comply with EU deforestation-free regulations.",
+      source: "Reuters"
+    },
+    {
+      title: "Cocoa processing in Cameroon tops 100,000 tons for first time",
+      link: "https://www.businessincameroon.com/agriculture/0808-14904-cocoa-processing-in-cameroon-tops-100-000-tons-for-first-time?utm_source=chatgpt.com",
+      description: "Cameroon’s cocoa processing industry reached a milestone of 100,000 tons, boosting the country’s export potential.",
+      source: "Business in Cameroon"
+    },
+    {
+      title: "Cameroon nears full cocoa traceability as EU deadline looms",
+      link: "https://allafrica.com/stories/202507210357.html?utm_source=chatgpt.com",
+      description: "Cameroon is close to full traceability of cocoa beans, improving transparency and sustainability in the supply chain.",
+      source: "AllAfrica"
+    },
+    {
+      title: "Telcar Cocoa halts processing amid Cameroon bean quality crisis",
+      link: "https://www.foodbusinessmea.com/telcar-cocoa-halts-processing-amid-cameroon-bean-quality-crisis/?utm_source=chatgpt.com",
+      description: "Telcar Cocoa has temporarily stopped processing due to quality issues affecting Cameroon's cocoa beans.",
+      source: "Food Business MEA"
+    },
+  ];
+
+  // Render articles in #news-list
+  newsList.innerHTML = ""; // Clear any placeholder text
+
+  articles.forEach(article => {
+    const div = document.createElement("div");
+    div.className = "news-item";
+
+    div.innerHTML = `
+      <h4>${article.title}</h4>
+      <p class="news-meta">${article.source}</p>
+      <p>${article.description}</p>
+      <a href="${article.link}" target="_blank" rel="noopener noreferrer">Read More →</a>
+    `;
+
+    newsList.appendChild(div);
+  });
+});
+</script>
+
+
+
 
 
 
