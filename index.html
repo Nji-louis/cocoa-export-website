@@ -70,7 +70,6 @@
 
 
 <body>
-<!-- Modern 2-Row Header -->
 <header class="site-header">
 
   <!-- Row 1: Contact + Social + WhatsApp -->
@@ -93,24 +92,20 @@
 
   <!-- Row 2: Logo + Navigation + Search + Google Translate + Hamburger -->
   <div class="top-bar row2">
-    <!-- Logo -->
     <div class="header-logo">
       <img src="images/logo.jpg" alt="Cameroon Cocoa Holdings Logo">
     </div>
 
-    <!-- Navigation -->
     <nav class="main-nav">
       <ul class="nav-links">
         <li><a href="#home" class="active">Home</a></li>
         <li><a href="#about">About</a></li>
         <li><a href="#products">Products</a></li>
         <li><a href="#export">Export</a></li>
-        <li><a href="#document">Documents</a></li>
-
-        <!-- Dropdown for remaining links -->
         <li class="dropdown">
           <a href="#" class="dropdown-toggle">More <i class="fas fa-chevron-down"></i></a>
           <ul class="dropdown-menu">
+            <li><a href="#document">Documents</a></li>
             <li><a href="#quote">Request Quote</a></li>
             <li><a href="#contact">Contact</a></li>
             <li><a href="#gallery">Gallery</a></li>
@@ -118,18 +113,13 @@
           </ul>
         </li>
       </ul>
+      <form class="header-search" id="searchForm">
+        <input type="search" placeholder="Search on our site or Google..." id="siteSearch">
+        <button type="submit"><i class="fas fa-search"></i></button>
+      </form>
+      <div id="google_translate_element"></div>
     </nav>
 
-    <!-- Search Form -->
-    <form class="header-search" id="searchForm">
-      <input type="search" placeholder="Search on our site or Google..." id="siteSearch">
-      <button type="submit"><i class="fas fa-search"></i></button>
-    </form>
-
-    <!-- Google Translate -->
-    <div id="google_translate_element"></div>
-
-    <!-- Hamburger for mobile -->
     <div class="hamburger">
       <span></span>
       <span></span>
@@ -138,8 +128,6 @@
   </div>
 
 </header>
-
-
 
 
 
