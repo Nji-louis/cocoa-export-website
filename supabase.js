@@ -6,176 +6,261 @@ const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 
 
 
-//----------- Animate counter------------
+
+
+// -------------------------
+// Supabase: make sure client is initialized before running this file.
+// Example (uncomment + replace):
+// import { createClient } from '@supabase/supabase-js'
+// const SUPABASE_URL = 'https://your-project.supabase.co'
+// const SUPABASE_ANON_KEY = 'your-anon-key'
+// const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY)
+// -------------------------
+
+// ---------- Helpers ----------
+function escapeHtml(str) {
+  if (str == null) return '';
+  return String(str);
+}
+
 function animateCounter(counterEl, target) {
   let count = 0;
-  const speed = 200; // higher = slower
-  const increment = target / speed;
-  const updateCount = () => {
+  const speed = 200;
+  const increment = Math.max(1, target / speed);
+  const update = () => {
     count += increment;
     if (count < target) {
       counterEl.innerText = Math.ceil(count);
-      requestAnimationFrame(updateCount);
+      requestAnimationFrame(update);
     } else {
       counterEl.innerText = target;
     }
   };
-  updateCount();
+  update();
 }
 
-
-// --------------------
-// Fetch stats from Supabase
-// --------------------
-async function fetchStats() {
-  const { data, error } = await supabase
-  .from('about_stats')
-  .select('*');
-
-  if (error) {
-    console.error('Error fetching stats:', error);
-    return;
-  }
-
-  const statsContainer = document.querySelector('.stats-row');
-  if (!statsContainer) return console.warn('No .stats-row found');
-  statsContainer.innerHTML = ''; // Clear existing counters
-
-  data.forEach(stat => {
-    const statEl = document.createElement('div');
-    statEl.classList.add('stat');
-    statEl.innerHTML = `
-      <h3 class="counter">0</h3>
-      <p>${stat.label}</p>
-    `;
-    statsContainer.appendChild(statEl);
-
-    // Animate counter
-    const counterEl = statEl.querySelector('.counter');
-    animateCounter(counterEl, stat.value);
-  });
-}
-
-
-// --------------------
-// Fetch all other About section content
-// --------------------
-async function fetchAboutContent() {
-  // Main headings and blocks
-  const { data: contentData, error: contentError } = await supabase
-  .from('about_content')
-  .select('*');
-
-  if (contentError) {
-    console.error('Error fetching about_content:', contentError);
-  } else {
-    
-  }
-
-
-  // Values
-  const { data: valuesData, error: valuesError } = await supabase
-  .from('about_values')
-  .select('*');
-
-  if (valuesError) {
-    console.error('Error fetching about_values:', valuesError);
-  } else {
-    const valuesContainer = document.querySelector('.values-row');
-    if (valuesContainer) {
-      valuesContainer.innerHTML = '';
-      valuesData.forEach(val => {
-        const block = document.createElement('div');
-        block.classList.add('value-block');
-        block.innerHTML = `
-          <img src="${val.image_url}" alt="${val.title}">
-          <h3>${val.title}</h3>
-          <p>${val.description}</p>
-        `;
-        valuesContainer.appendChild(block);
-      });
+// find heading element by text content (case-insensitive, trimmed)
+function findHeadingElement(tagSelector, textOptions = []) {
+  const nodes = document.querySelectorAll(tagSelector);
+  for (const n of nodes) {
+    const t = (n.textContent || '').trim().toLowerCase();
+    for (const opt of textOptions) {
+      if (t === opt.toLowerCase() || t.startsWith(opt.toLowerCase())) return n;
     }
   }
+  return null;
+}
 
-  // Timeline
-  const { data: timelineData, error: timelineError } = await supabase
-    .from('about_timeline')
+// set content in block after heading (common pattern in your HTML)
+function setBlockContentByHeading(headingSelectors, headingNames, contentHtml) {
+  const h = findHeadingElement(headingSelectors, headingNames);
+  if (!h) return false;
+  // prefer the next paragraph element sibling
+  let p = h.nextElementSibling;
+  // if next sibling is not p, search for first p within parent
+  if (!p || p.tagName.toLowerCase() !== 'p') {
+    p = h.parentElement?.querySelector('p');
+  }
+  if (p) p.innerHTML = escapeHtml(contentHtml);
+  else {
+    // fallback: set heading's nextElementSibling text
+    if (h.nextElementSibling) h.nextElementSibling.innerHTML = escapeHtml(contentHtml);
+  }
+  return true;
+}
+
+// ---------- Main fetch function ----------
+async function fetchAndRenderAbout() {
+  // 1) about_content
+  const { data: contentData, error: contentErr } = await supabase
+    .from('about_content')
     .select('*')
-    .order('year', { ascending: true });
-  if (timelineError) {
-    console.error('Error fetching about_timeline:', timelineError);
-  } else {
-    const timelineContainer = document.querySelector('.timeline');
-    if (timelineContainer) {
-      timelineContainer.innerHTML = '';
-      timelineData.forEach(item => {
-        const el = document.createElement('div');
-        el.classList.add('timeline-item');
-        el.innerHTML = `
-          <div class="timeline-date">${item.year}</div>
-          <div class="timeline-content">${item.content}</div>
-        `;
-        timelineContainer.appendChild(el);
-      });
+    .order('position', { ascending: true });
+
+  if (contentErr) console.error('about_content error', contentErr);
+
+  if (contentData && contentData.length) {
+    for (const item of contentData) {
+      const sec = (item.section || '').toLowerCase();
+
+      if (sec === 'hero') {
+        // hero: first H1.faq-heading inside #about-content and the first paragraph after it
+        const heroH1 = document.querySelector('#about-content h1.faq-heading');
+        if (heroH1) heroH1.innerText = item.heading || heroH1.innerText;
+        const heroP = document.querySelector('#about-content > p');
+        if (heroP) heroP.innerText = item.content || heroP.innerText;
+      } else if (sec === 'who_we_are') {
+        setBlockContentByHeading('h3.faq-heading', ['Who We Are'], item.content);
+      } else if (sec === 'mission') {
+        // mission is inside div.about-mission -> p
+        const missionP = document.querySelector('.about-mission p');
+        if (missionP) missionP.innerHTML = escapeHtml(item.content);
+      } else if (sec === 'vision' || sec === 'our version') {
+        const visionP = document.querySelector('.about-vision p');
+        if (visionP) visionP.innerHTML = escapeHtml(item.content);
+      } else if (sec === 'story') {
+        const storyP = document.querySelector('.about-story p');
+        if (storyP) storyP.innerHTML = escapeHtml(item.content);
+      } else if (sec === 'ceo_message' || sec === 'ceo') {
+        const ceoP = document.querySelector('.about-ceo p');
+        if (ceoP) ceoP.innerHTML = escapeHtml(item.content);
+      } else if (sec === 'what_we_stand_for') {
+        const h = findHeadingElement('h2.faq-heading', ['What We Stand For']);
+        if (h) {
+          // paragraph is next sibling or inside same block
+          let p = h.nextElementSibling;
+          if (!p || p.tagName.toLowerCase() !== 'p') p = h.parentElement?.querySelector('p');
+          if (p) p.innerHTML = escapeHtml(item.content);
+        }
+      } else if (sec === 'export_intro') {
+        // export intro: the paragraph just above the .export-process-list
+        const ul = document.querySelector('.export-process-list');
+        if (ul) {
+          // find the nearest paragraph sibling above the ul
+          let p = ul.previousElementSibling;
+          if (!p || p.tagName.toLowerCase() !== 'p') p = ul.parentElement?.querySelector('p');
+          if (p) p.innerHTML = escapeHtml(item.content);
+        }
+      }
     }
   }
 
-  // Team
-  const { data: teamData, error: teamError } = await supabase.from('about_team').select('*');
-  if (teamError) {
-    console.error('Error fetching about_team:', teamError);
-  } else {
-    const teamContainer = document.querySelector('.team-row');
-    if (teamContainer) {
-      teamContainer.innerHTML = '';
-      teamData.forEach(member => {
-        const el = document.createElement('div');
-        el.classList.add('team-card');
-        el.innerHTML = `
-          <div class="team-img">
-            <img src="${member.image_url}" alt="${member.name}">
-          </div>
-          <div class="team-info">
-            <h3>${member.name}</h3>
-            <p class="role">${member.role}</p>
-            <p class="desc">${member.description}</p>
-            <a href="mailto:${member.email}" class="btn-outline">Contact</a>
-          </div>
-        `;
-        teamContainer.appendChild(el);
-      });
+  // 2) about_values
+  const { data: valuesData, error: valuesErr } = await supabase.from('about_values').select('*').order('position', { ascending: true });
+  if (valuesErr) console.error('about_values error', valuesErr);
+  const valuesContainer = document.querySelector('.values-row');
+  if (valuesContainer && valuesData) {
+    valuesContainer.innerHTML = '';
+    for (const v of valuesData) {
+      const div = document.createElement('div');
+      div.className = 'value-block';
+      div.innerHTML = `
+        <img src="${escapeHtml(v.image_url || '')}" alt="${escapeHtml(v.title || '')}">
+        <h3 class="faq-heading">${escapeHtml(v.title || '')}</h3>
+        <p>${escapeHtml(v.description || '')}</p>
+      `;
+      valuesContainer.appendChild(div);
     }
   }
 
-  // Gallery
-  const { data: galleryData, error: galleryError } = await supabase.from('about_gallery').select('*');
-  if (galleryError) {
-    console.error('Error fetching about_gallery:', galleryError);
-  } else {
-    const galleryContainer = document.querySelector('.farmer-gallery');
-    if (galleryContainer) {
-      galleryContainer.innerHTML = '';
-      galleryData.forEach(img => {
-        const el = document.createElement('img');
-        el.src = img.image_url;
-        el.alt = img.alt_text || '';
-        el.classList.add('gallery-img');
-        galleryContainer.appendChild(el);
-      });
+  // 3) about_export_steps
+  const { data: stepsData, error: stepsErr } = await supabase.from('about_export_steps').select('*').order('step_number', { ascending: true });
+  if (stepsErr) console.error('about_export_steps error', stepsErr);
+  const stepsList = document.querySelector('.export-process-list');
+  if (stepsList && stepsData) {
+    stepsList.innerHTML = '';
+    for (const s of stepsData) {
+      const li = document.createElement('li');
+      li.innerHTML = `<strong>${s.step_number}. </strong>${escapeHtml(s.content)}`;
+      stepsList.appendChild(li);
     }
   }
+
+  // 4) about_timeline
+  const { data: timelineData, error: timelineErr } = await supabase.from('about_timeline').select('*').order('year', { ascending: true });
+  if (timelineErr) console.error('about_timeline error', timelineErr);
+  const timelineContainer = document.querySelector('.timeline');
+  if (timelineContainer && timelineData) {
+    timelineContainer.innerHTML = '';
+    for (const t of timelineData) {
+      const el = document.createElement('div');
+      el.className = 'timeline-item';
+      el.innerHTML = `<div class="timeline-date">${escapeHtml(String(t.year))}</div><div class="timeline-content">${escapeHtml(t.content)}</div>`;
+      timelineContainer.appendChild(el);
+    }
+  }
+
+  // 5) about_gallery
+  const { data: galleryData, error: galleryErr } = await supabase.from('about_gallery').select('*').order('position', { ascending: true });
+  if (galleryErr) console.error('about_gallery error', galleryErr);
+  const galleryContainer = document.querySelector('.about-gallery-container');
+  if (galleryContainer && galleryData) {
+    // We'll rebuild slides + arrows (keeps your existing lightbox IDs)
+    let slidesHtml = '';
+    galleryData.forEach((g, idx) => {
+      slidesHtml += `
+        <div class="about-slide fade">
+          <img loading="lazy" src="${escapeHtml(g.image_url)}" alt="${escapeHtml(g.alt_text || '')}">
+          <p class="about-caption">${escapeHtml(g.alt_text || '')}</p>
+        </div>
+      `;
+    });
+
+    // Add arrows (they were in your original HTML). We'll keep the same class names and onclick handlers.
+    slidesHtml += `
+      <a class="about-prev" onclick="aboutPlusSlides(-1)">&#10094;</a>
+      <a class="about-next" onclick="aboutPlusSlides(1)">&#10095;</a>
+    `;
+
+    galleryContainer.innerHTML = slidesHtml;
+
+    // Rebuild dots container separately
+    const dotsContainer = document.querySelector('.about-dots-container');
+    if (dotsContainer) {
+      dotsContainer.innerHTML = '';
+      galleryData.forEach((_, i) => {
+        const span = document.createElement('span');
+        span.className = 'about-dot';
+        span.setAttribute('onclick', `aboutCurrentSlide(${i + 1})`);
+        dotsContainer.appendChild(span);
+      });
+    }
+
+    // initialize slides (use your existing slide functions if present)
+    if (typeof aboutInitSlides === 'function') aboutInitSlides();
+  }
+
+  // 6) about_stats
+  const { data: statsData, error: statsErr } = await supabase.from('about_stats').select('*').order('position', { ascending: true });
+  if (statsErr) console.error('about_stats error', statsErr);
+  const statsContainer = document.querySelector('.stats-row');
+  if (statsContainer && statsData) {
+    statsContainer.innerHTML = '';
+    for (const s of statsData) {
+      const div = document.createElement('div');
+      div.className = 'stat';
+      div.innerHTML = `<h3 class="counter">0</h3><p>${escapeHtml(s.label)}</p>`;
+      statsContainer.appendChild(div);
+      // animate
+      const counterEl = div.querySelector('.counter');
+      animateCounter(counterEl, Number(s.value || 0));
+    }
+  }
+
+  // 7) about_team
+  const { data: teamData, error: teamErr } = await supabase.from('about_team').select('*').order('position', { ascending: true });
+  if (teamErr) console.error('about_team error', teamErr);
+  const teamContainer = document.querySelector('.team-row');
+  if (teamContainer && teamData) {
+    teamContainer.innerHTML = '';
+    for (const m of teamData) {
+      const card = document.createElement('div');
+      card.className = 'team-card';
+      card.innerHTML = `
+        <div class="team-img"><img src="${escapeHtml(m.image_url || '')}" alt="${escapeHtml(m.name || '')}"></div>
+        <div class="team-info">
+          <h3>${escapeHtml(m.name || '')}</h3>
+          <p class="role">${escapeHtml(m.role || '')}</p>
+          <p class="desc">${escapeHtml(m.description || '')}</p>
+          <a href="mailto:${escapeHtml(m.email || '')}" class="btn-outline">Contact</a>
+        </div>
+      `;
+      teamContainer.appendChild(card);
+    }
+  }
+
+  // final: log success
+  // console.log('About section loaded from Supabase');
 }
 
-// --------------------
-// Initialize About Section
-// --------------------
-async function initAboutSection() {
-  await fetchAboutContent();
-  await fetchStats(); // Stats counters with animation
-}
-
-initAboutSection();
-
+// ---------- Initialization ----------
+document.addEventListener('DOMContentLoaded', async () => {
+  try {
+    await fetchAndRenderAbout();
+  } catch (err) {
+    console.error('Error initializing About section:', err);
+  }
+});
 
 
 
@@ -292,111 +377,106 @@ initExportSection();
 
 
 
-// Testimonial Section
-let testiCards = [];
-let dots = [];
-let testiIndex = 0;
-let testiInterval;
 
-// ===========================
-// Load Testimonials
-// ===========================
-async function loadTestimonials() {
-  const { data: testimonials, error } = await supabase
-    .from('testimonials')
+
+
+// Function to fetch and render Terms & Conditions
+async function loadTermsAndConditions() {
+  const { data, error } = await supabase
+    .from('terms_and_conditions')
     .select('*')
-    .order('created_at', { ascending: false });
+    .order('order_num', { ascending: true });
 
-  if (error) return console.error('Error loading testimonials:', error);
-
-  const slider = document.getElementById('testiSlider');
-  const dotsContainer = document.getElementById('testiDots');
-
-  slider.innerHTML = '';
-  dotsContainer.innerHTML = '';
-
-  testimonials.forEach((testi, idx) => {
-    const card = document.createElement('div');
-    card.classList.add('testi-card');
-    if (idx === 0) card.classList.add('active');
-    card.setAttribute('data-aos', 'fade-up');
-    card.setAttribute('data-aos-delay', idx * 100);
-    card.innerHTML = `
-      <img src="${testi.avatar_url}" alt="Client Avatar" class="testi-avatar">
-      <p class="testi-text">"${testi.testimonial_text}"</p>
-      <div class="testi-rating">${'★'.repeat(testi.rating)}${'☆'.repeat(5 - testi.rating)}</div>
-      <cite>— ${testi.company_name}</cite>
-    `;
-    slider.appendChild(card);
-
-    // Create dot
-    const dot = document.createElement('span');
-    dot.classList.add('dot');
-    if (idx === 0) dot.classList.add('active');
-    dot.dataset.index = idx;
-    dot.addEventListener('click', () => {
-      testiIndex = parseInt(dot.dataset.index);
-      showTesti(testiIndex);
-      resetInterval();
-    });
-    dotsContainer.appendChild(dot);
-  });
-
-  testiCards = Array.from(document.querySelectorAll('.testi-card'));
-  dots = Array.from(document.querySelectorAll('.dot'));
-  showTesti(testiIndex);
-  startAutoRotate();
-}
-
-// ===========================
-// Show testimonial by index
-// ===========================
-function showTesti(i) {
-  testiCards.forEach((card, idx) => card.classList.toggle('active', idx === i));
-  dots.forEach((dot, idx) => dot.classList.toggle('active', idx === i));
-}
-
-// ===========================
-// Auto-rotate testimonials
-// ===========================
-function startAutoRotate() {
-  testiInterval = setInterval(() => {
-    testiIndex = (testiIndex + 1) % testiCards.length;
-    showTesti(testiIndex);
-  }, 4200);
-}
-
-// ===========================
-// Reset interval
-// ===========================
-function resetInterval() {
-  clearInterval(testiInterval);
-  startAutoRotate();
-}
-
-// ===========================
-// Swipe support
-// ===========================
-const slider = document.getElementById('testiSlider');
-let startX = 0;
-let endX = 0;
-
-slider.addEventListener('touchstart', e => { startX = e.touches[0].clientX; });
-slider.addEventListener('touchmove', e => { endX = e.touches[0].clientX; });
-slider.addEventListener('touchend', () => {
-  const deltaX = endX - startX;
-  if (Math.abs(deltaX) > 50) {
-    testiIndex = deltaX < 0 ? (testiIndex + 1) % testiCards.length
-                             : (testiIndex - 1 + testiCards.length) % testiCards.length;
-    showTesti(testiIndex);
-    resetInterval();
+  if (error) {
+    console.error('Error fetching Terms:', error);
+    return;
   }
+
+  const termsContent = document.querySelector('#termsModal .modal-content');
+  if (!termsContent) return;
+
+  // Clear existing content except close button
+  const closeBtn = termsContent.querySelector('.close');
+  termsContent.innerHTML = '';
+  if (closeBtn) termsContent.appendChild(closeBtn);
+
+  // Render fetched data
+  data.forEach(item => {
+    if (item.heading) {
+      const hTag = item.order_num === 1 ? document.createElement('h1') : document.createElement('h2');
+      hTag.textContent = item.heading;
+      termsContent.appendChild(hTag);
+    }
+    if (item.subheading) {
+      const subH = document.createElement('h5');
+      subH.textContent = item.subheading;
+      termsContent.appendChild(subH);
+    }
+    if (item.content) {
+      const p = document.createElement('p');
+      p.innerHTML = item.content.replace(/\n/g, '<br>'); // preserve line breaks
+      termsContent.appendChild(p);
+    }
+  });
+}
+
+// Function to fetch and render Privacy Policy
+async function loadPrivacyPolicy() {
+  const { data, error } = await supabase
+    .from('privacy_policy')
+    .select('*')
+    .order('order_num', { ascending: true });
+
+  if (error) {
+    console.error('Error fetching Privacy Policy:', error);
+    return;
+  }
+
+  const privacyContent = document.querySelector('#privacyModal .modal-content');
+  if (!privacyContent) return;
+
+  // Clear existing content except close button
+  const closeBtn = privacyContent.querySelector('.close');
+  privacyContent.innerHTML = '';
+  if (closeBtn) privacyContent.appendChild(closeBtn);
+
+  // Render fetched data
+  data.forEach(item => {
+    if (item.heading) {
+      const hTag = item.order_num === 1 ? document.createElement('h1') : document.createElement('h2');
+      hTag.textContent = item.heading;
+      privacyContent.appendChild(hTag);
+    }
+    if (item.subheading) {
+      const subH = document.createElement('h5');
+      subH.textContent = item.subheading;
+      privacyContent.appendChild(subH);
+    }
+    if (item.content) {
+      const p = document.createElement('p');
+      p.innerHTML = item.content.replace(/\n/g, '<br>'); // preserve line breaks
+      privacyContent.appendChild(p);
+    }
+  });
+}
+
+// Call the functions to load data on page load
+document.addEventListener('DOMContentLoaded', () => {
+  loadTermsAndConditions();
+  loadPrivacyPolicy();
 });
 
-// ===========================
-// Initialize
-// ===========================
-loadTestimonials();
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -660,88 +740,91 @@ async function submitQuote(event) {
 
 
 
-// ===== Supabase Gallery Loader =====
+
+
+// ===== Supabase Google Photos Style Gallery Loader =====
 async function loadGallery() {
   const { data, error } = await supabase
     .from('gallery')
     .select('*')
-    .order('id');
+    .order('position', { ascending: true });
 
   if (error) {
     console.error("Failed to fetch gallery:", error);
     return;
   }
 
-  const galleryGrid = document.querySelector(".gallery-grid");
-  galleryGrid.innerHTML = ""; // Clear existing HTML before adding new items
+  // Containers
+  const slideContainer = document.querySelector(".gp-gallery-container");
+  const thumbContainer = document.querySelector(".gp-row");
 
-  for (const item of data) {
-    const galleryItem = document.createElement("div");
-    galleryItem.classList.add("gallery-item");
-    galleryItem.innerHTML = `
-      <img src="${item.image_url}" alt="${item.alt_text}" loading="lazy">
-      <div class="overlay"><span>${item.title}</span></div>
+  // Clear old static HTML
+  slideContainer.innerHTML = `
+    <a class="gp-prev" onclick="gpPlusSlides(-1)">&#10094;</a>
+    <a class="gp-next" onclick="gpPlusSlides(1)">&#10095;</a>
+  `;
+  thumbContainer.innerHTML = "";
+
+  // Build dynamic slides & thumbnails
+  data.forEach((item, index) => {
+    // SLIDES
+    const slide = document.createElement("div");
+    slide.classList.add("gp-slide", "fade");
+    slide.innerHTML = `
+      <img src="${item.image_url}" alt="${item.alt_text || ''}" loading="lazy">
+      <p class="gp-caption">${item.caption || ''}</p>
     `;
-    galleryGrid.appendChild(galleryItem);
-  }
+    slideContainer.insertBefore(slide, slideContainer.querySelector(".gp-prev"));
 
-  // Reinitialize your lightbox functionality after loading
-  initializeLightbox();
+    // THUMBNAILS
+    const thumb = document.createElement("img");
+    thumb.classList.add("gp-thumb");
+    thumb.src = item.image_url;
+    thumb.alt = item.alt_text || '';
+    thumb.loading = "lazy";
+    thumb.onclick = function () {
+      gpCurrentSlide(index + 1);
+    };
+
+    thumbContainer.appendChild(thumb);
+  });
+
+  // After loading images, activate slideshow
+  gpShowSlides(slideIndex = 1);
 }
 
-// Reuse your lightbox logic in a function
-function initializeLightbox() {
-  const galleryItems = document.querySelectorAll(".gallery-item");
-  const lightbox = document.getElementById("lightbox");
-  const lightboxImg = document.getElementById("lightbox-img");
-  const lightboxCaption = document.getElementById("lightbox-caption");
-  const closeBtn = document.querySelector(".lightbox .close");
-  const prevBtn = document.querySelector(".lightbox-prev");
-  const nextBtn = document.querySelector(".lightbox-next");
-  let currentIndex = 0;
+// ===== Original Slideshow Logic (unchanged) =====
+let slideIndex = 1;
 
-  function openLightbox(index) {
-    currentIndex = index;
-    const img = galleryItems[index].querySelector("img");
-    const caption = galleryItems[index].querySelector(".overlay span").innerText;
-    lightboxImg.src = img.src;
-    lightboxImg.alt = img.alt;
-    lightboxCaption.innerText = caption;
-    lightbox.style.display = "block";
-  }
-
-  function closeLightbox() {
-    lightbox.style.display = "none";
-  }
-
-  function showNext() {
-    currentIndex = (currentIndex + 1) % galleryItems.length;
-    openLightbox(currentIndex);
-  }
-
-  function showPrev() {
-    currentIndex = (currentIndex - 1 + galleryItems.length) % galleryItems.length;
-    openLightbox(currentIndex);
-  }
-
-  galleryItems.forEach((item, index) => {
-    item.addEventListener("click", () => openLightbox(index));
-  });
-  closeBtn.addEventListener("click", closeLightbox);
-  nextBtn.addEventListener("click", (e) => { e.stopPropagation(); showNext(); });
-  prevBtn.addEventListener("click", (e) => { e.stopPropagation(); showPrev(); });
-  lightbox.addEventListener("click", (e) => { if (e.target === lightbox) closeLightbox(); });
-  document.addEventListener("keydown", (e) => {
-    if (lightbox.style.display === "block") {
-      if (e.key === "ArrowRight") showNext();
-      if (e.key === "ArrowLeft") showPrev();
-      if (e.key === "Escape") closeLightbox();
-    }
-  });
+function gpPlusSlides(n) {
+  gpShowSlides(slideIndex += n);
 }
 
+function gpCurrentSlide(n) {
+  gpShowSlides(slideIndex = n);
+}
+
+function gpShowSlides(n) {
+  let i;
+  const slides = document.getElementsByClassName("gp-slide");
+  const thumbs = document.getElementsByClassName("gp-thumb");
+
+  if (n > slides.length) slideIndex = 1;
+  if (n < 1) slideIndex = slides.length;
+
+  for (i = 0; i < slides.length; i++) {
+    slides[i].style.display = "none";
+  }
+  for (i = 0; i < thumbs.length; i++) {
+    thumbs[i].classList.remove("active-thumb");
+  }
+
+  slides[slideIndex - 1].style.display = "block";
+  thumbs[slideIndex - 1].classList.add("active-thumb");
+}
+
+// Load Gallery
 document.addEventListener("DOMContentLoaded", loadGallery);
-
 
 
 

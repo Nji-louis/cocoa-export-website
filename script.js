@@ -351,47 +351,33 @@ aboutLightboxImg.addEventListener('touchend', function(e) {
 
 
 
-// Toggle Chat Box
-const advBtn = document.getElementById("advWaBtn");
-const advBox = document.getElementById("advWaBox");
 
-advBtn.addEventListener("click", () => {
-  advBox.style.display = advBox.style.display === "block" ? "none" : "block";
+
+// Toggle window
+const waBtn = document.getElementById("waSuiteBtn");
+const waWindow = document.getElementById("waSuiteWindow");
+const bubble = document.getElementById("waWelcomeBubble");
+
+waBtn.addEventListener("click", () => {
+  waWindow.style.display =
+    waWindow.style.display === "block" ? "none" : "block";
+  bubble.style.display = "none";
 });
 
-// Suggested messages
-const suggestions = document.querySelectorAll(".sug");
-const startChatBtn = document.getElementById("startChatBtn");
-
-suggestions.forEach(item => {
-  item.addEventListener("click", () => {
-    const msg = item.getAttribute("data-msg");
-    startChatBtn.href = `https://wa.me/237699745546?text=${encodeURIComponent(msg)}`;
+// Direct WhatsApp click for each agent
+document.querySelectorAll(".wa-agent").forEach(agent => {
+  agent.addEventListener("click", () => {
+    const number = agent.getAttribute("data-number");
+    const msg = agent.getAttribute("data-msg");
+    window.open(`https://wa.me/${number}?text=${encodeURIComponent(msg)}`, "_blank");
   });
 });
 
-// Default message if no option selected
-startChatBtn.href = "https://wa.me/237699745546?text=Hello%20CHOCOCAM%20SARL%20Ltd%2C%20I%20need%20help%20with%20cocoa%20exportation.";
-
-
-// export
-// Simple scroll animation for timeline steps
-document.addEventListener('DOMContentLoaded', () => {
-  const steps = document.querySelectorAll('.timeline-step');
-
-  const observer = new IntersectionObserver(entries => {
-    entries.forEach(entry => {
-      if(entry.isIntersecting){
-        entry.target.classList.add('visible');
-      }
-    });
-  }, { threshold: 0.1 });
-
-  steps.forEach(step => {
-    observer.observe(step);
-  });
+// Dark Mode
+const toggle = document.getElementById("waDarkToggle");
+toggle.addEventListener("click", () => {
+  document.body.classList.toggle("dark");
 });
-
 
 
 
