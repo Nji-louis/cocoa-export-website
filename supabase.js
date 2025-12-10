@@ -249,6 +249,48 @@ async function fetchAndRenderAbout() {
     }
   }
 
+
+
+
+
+
+
+async function loadAboutInfo() {
+  const { data, error } = await supabase
+    .from("about_info") // correct table name
+    .select("*")
+    .order("position", { ascending: true }); // use 'position' for ordering
+
+  if (error) {
+    console.error("Error loading About Info:", error);
+    return;
+  }
+
+  const container = document.querySelector(".about-info-grid");
+
+  if (!container) {
+    console.error("❌ ERROR: .about-info-grid container not found.");
+    return;
+  }
+
+  container.innerHTML = ""; // Clear old content
+
+  data.forEach((item) => {
+    const card = document.createElement("div");
+    card.classList.add("info-card");
+
+    card.innerHTML = `
+      <i class="fas fa-id-card"></i> <!-- static icon for now -->
+      <h4>${item.title ?? ""}</h4>
+      <p>${item.value ?? ""}</p>
+    `;
+
+    container.appendChild(card);
+  });
+}
+
+loadAboutInfo();
+
   // final: log success
   // console.log('About section loaded from Supabase');
 }
@@ -266,40 +308,89 @@ document.addEventListener('DOMContentLoaded', async () => {
 
 
 
-
-// ===== Supabase Product Fetch =====
+// ====================================
+// LOAD PRODUCTS INTO PRODUCT GRID
+// ====================================
 async function loadProducts() {
-  const { data: products, error } = await supabase.from('products').select('*').order('id', { ascending: true });
+  const { data: products, error } = await supabase
+    .from("products")
+    .select("*")
+    .order("id", { ascending: true });
+
   if (error) {
-    console.error('Error loading products:', error);
+    console.error("Error loading products:", error);
     return;
   }
 
-  const carousel = document.getElementById('productCarousel');
-  carousel.innerHTML = ''; // Clear static HTML
+  const grid = document.getElementById("productGrid");
+  const resultsCount = document.getElementById("resultsCount");
 
-  products.forEach(product => {
-    const card = document.createElement('div');
-    card.classList.add('product-card');
+  if (!grid) {
+    console.error("❌ ERROR: #productGrid container not found.");
+    return;
+  }
+
+  grid.innerHTML = ""; // Clear static HTML
+
+  products.forEach((p) => {
+    const card = document.createElement("article");
+    card.classList.add("product-card");
+    card.setAttribute("tabindex", "0");
+    card.dataset.type = p.type;
+    card.dataset.origin = p.origin;
+
     card.innerHTML = `
-      <img src="${product.image_url}" alt="${product.name}">
-      <h3>${product.name}</h3>
-      <p>${product.description}</p>
+      <div class="card-media">
+        <img src="${p.image_url}" alt="${p.name}">
+        <div class="badge ${p.badge_class || ""}">${p.badge_text || ""}</div>
+      </div>
+
+      <div class="card-body">
+        <h3 class="product-title">${p.name}</h3>
+        <p class="product-sub">${p.subtitle}</p>
+
+        <ul class="specs">
+          ${p.specs
+            .map((spec) => `<li><strong>${spec.label}:</strong> ${spec.value}</li>`)
+            .join("")}
+        </ul>
+
+        <div class="card-footer">
+          <div class="price">${p.price_label} <span>${p.price_value}</span></div>
+
+          <div class="actions">
+            <button class="btn btn-quote" data-id="${p.slug}">Request Quote</button>
+            <button class="btn btn-details" data-id="${p.slug}">Learn More</button>
+          </div>
+        </div>
+      </div>
     `;
-    carousel.appendChild(card);
+
+    grid.appendChild(card);
   });
+
+  // Update product counter
+  resultsCount.textContent = `Showing ${products.length} products`;
 }
 
+// ====================================
+// LOAD VIDEO (unchanged)
+// ====================================
 async function loadProductVideo() {
-  const { data: videos, error } = await supabase.from('product_videos').select('*').limit(1).single();
+  const { data: videos, error } = await supabase
+    .from("product_videos")
+    .select("*")
+    .limit(1)
+    .single();
+
   if (error) {
-    console.error('Error loading video:', error);
+    console.error("Error loading video:", error);
     return;
   }
 
-  document.querySelector('.video-container h2').textContent = videos.title;
-  document.querySelector('.video-container p').textContent = videos.description;
-  document.querySelector('.video-container iframe').src = videos.video_url;
+  document.querySelector(".video-container h2").textContent = videos.title;
+  document.querySelector(".video-container p").textContent = videos.description;
+  document.querySelector(".video-container iframe").src = videos.video_url;
 }
 
 loadProducts();
@@ -310,69 +401,175 @@ loadProductVideo();
 
 
 
-// ===========================
-// Load Export Steps
-// ===========================
-async function loadExportSteps() {
-  const { data: steps, error } = await supabase.from('export_steps').select('*').order('step_number');
-  if (error) return console.error('Error loading export steps:', error);
+  
+// fetch export
+async function loadExportData() {
+  const { data, error } = await supabase
+    .from('exports')
+    .select('*')
+    .order('id', { ascending: true })
+    .limit(1);
 
-  const stepsContainer = document.querySelector('.steps');
-  stepsContainer.innerHTML = ''; // clear static HTML
+  if (error) {
+    console.error('Error fetching export data:', error);
+    return;
+  }
 
-  steps.forEach((step, index) => {
-    const stepEl = document.createElement('div');
-    stepEl.classList.add('step');
-    stepEl.setAttribute('data-aos', 'fade-up');
-    stepEl.setAttribute('data-aos-delay', index * 100);
-    stepEl.innerHTML = `
-      <i class="${step.icon_class} step-icon"></i>
-      <h3>${step.title}</h3>
-      <p>${step.description}</p>
-    `;
-    stepsContainer.appendChild(stepEl);
-  });
+  if (data && data.length > 0) {
+    const exportData = data[0];
+    displayExportData(exportData);
+  }
 }
 
-// ===========================
-// Load Export Documents
-// ===========================
-async function loadExportDocuments() {
-  const { data: docs, error } = await supabase.from('export_documents').select('*').order('id');
-  if (error) return console.error('Error loading documents:', error);
+// 4. Display data on the page
+function displayExportData(exportData) {
+  // Section title & subtitle
+  document.querySelector('.export-section .section-title').textContent = exportData.section_title;
+  document.querySelector('.export-section .section-subtitle').textContent = exportData.section_subtitle;
 
-  const docsContainer = document.querySelector('.documents-grid');
-  docsContainer.innerHTML = '';
+  // Timeline
+  const timelineContainer = document.querySelector('.export-section .timeline');
+  timelineContainer.innerHTML = ''; // clear existing
 
-  docs.forEach((doc, index) => {
-    const docEl = document.createElement('div');
-    docEl.classList.add('document-card');
-    docEl.setAttribute('data-aos', 'fade-up');
-    docEl.setAttribute('data-aos-delay', index * 100);
-    docEl.innerHTML = `
+  exportData.timeline.forEach(step => {
+    const stepDiv = document.createElement('div');
+    stepDiv.classList.add('timeline-step');
+    stepDiv.dataset.category = step.category;
+
+    stepDiv.innerHTML = `
+      <div class="step-icon">${step.icon}</div>
+      <h3>${step.title}</h3>
+      <ul>
+        ${step.steps.map(s => `<li>${s}</li>`).join('')}
+      </ul>
+    `;
+    timelineContainer.appendChild(stepDiv);
+  });
+
+  // Minimum order
+  document.querySelector('.export-section .export-details p').textContent = exportData.min_order;
+
+  // Documents
+  const docList = document.querySelector('.export-section .export-doc-list');
+  docList.innerHTML = exportData.documents.map(d => `<li>${d}</li>`).join('');
+}
+
+// 5. Load data on page load
+window.addEventListener('DOMContentLoaded', loadExportData);
+
+  
+
+
+  // ============================
+  // FETCH COCOA SPECIFICATIONS
+  // ============================
+  async function loadSpecifications() {
+    const table = document.querySelector('.spec-table');
+
+    const { data: specs, error } = await supabase
+      .from('cocoa_specifications')
+      .select('*')
+      .order('id');
+
+    if (error) {
+      console.error("Spec fetch error:", error);
+      return;
+    }
+
+    // Keep table header only
+    table.innerHTML = `
+      <tr>
+        <th>Parameter</th>
+        <th>Specification</th>
+      </tr>
+    `;
+
+    specs.forEach(row => {
+      table.innerHTML += `
+        <tr>
+          <td><strong>${row.parameter}</strong></td>
+          <td>${row.specification}</td>
+        </tr>
+      `;
+    });
+  }
+
+  // ============================
+  // FETCH EXPORT DOCUMENTS
+  // ============================
+  async function loadExportDocuments() {
+    const list = document.querySelector('.export-details');
+
+    const { data: documents, error } = await supabase
+      .from('export_documents')
+      .select('*')
+      .order('id');
+
+    if (error) {
+      console.error("Documents fetch error:", error);
+      return;
+    }
+
+    list.innerHTML = "";
+
+    documents.forEach(doc => {
+      list.innerHTML += `<li>${doc.title}</li>`;
+    });
+  }
+
+  // ============================
+  // LOAD ALL EXPORT DATA
+  // ============================
+  document.addEventListener("DOMContentLoaded", () => {
+  loadSpecifications();
+  loadExportDocuments();
+});
+
+
+
+
+
+
+
+// Load documents from Supabase
+async function loadDocuments() {
+  const { data, error } = await supabase
+    .from('documents')
+    .select('*')
+    .order('id', { ascending: true });
+
+  if (error) {
+    console.error('Error loading documents:', error);
+    return;
+  }
+
+  displayDocuments(data || []);
+}
+
+// Render documents on the page
+function displayDocuments(documents) {
+  const grid = document.querySelector('.documents-grid');
+  grid.innerHTML = ''; // clear existing
+
+  documents.forEach(doc => {
+    const card = document.createElement('div');
+    card.classList.add('document-card');
+
+    card.innerHTML = `
       <i class="${doc.icon_class} doc-icon"></i>
       <h4>${doc.title}</h4>
       <p>${doc.description}</p>
-      <a href="${doc.file_url}" download class="btn">
+      <a href="${doc.pdf_url}" download class="btn">
         <i class="fas fa-file-pdf"></i> Download PDF
       </a>
     `;
-    docsContainer.appendChild(docEl);
+
+    grid.appendChild(card);
   });
 }
 
-// ===========================
-// Initialize Section
-// ===========================
-async function initExportSection() {
-  await loadExportSteps();
-  await loadExportDocuments();
-}
-
-initExportSection();
-
-
-
+// Load documents on page load
+window.addEventListener('DOMContentLoaded', loadDocuments);
 
 
 
@@ -1194,12 +1391,6 @@ document.addEventListener("DOMContentLoaded", async () => {
     contentContainer.appendChild(wrapper);
   }
 }
-
-
-
-
-
-
 
 
 

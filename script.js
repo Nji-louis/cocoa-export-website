@@ -43,6 +43,16 @@
 
 
 
+ 
+
+
+
+
+
+
+
+
+
 
 // ================= HERO SLIDER =================
 (() => {
@@ -245,67 +255,128 @@ aboutLightboxImg.addEventListener('touchend', function(e) {
 
 
 
-
-
-
-
-
-// ================= PRODUCTS CAROUSEL =================
+// Upgraded product grid interactions: filtering, search, modal, WhatsApp quote.
 (() => {
-  const carousel = document.getElementById('productCarousel');
-  const nextBtn = document.getElementById('nextProduct');
-  const prevBtn = document.getElementById('prevProduct');
-  const scrollAmount = 330;
-  let startX = 0;
-  let autoPlayInterval;
-  nextBtn.addEventListener('click', () => carousel.scrollBy({ left: scrollAmount, behavior: 'smooth' }));
-  prevBtn.addEventListener('click', () => carousel.scrollBy({ left: -scrollAmount, behavior: 'smooth' }));
-  // Swipe support
-  carousel.addEventListener('touchstart', e => startX = e.touches[0].clientX);
-  carousel.addEventListener('touchend', e => {
-    const endX = e.changedTouches[0].clientX;
-    const diff = startX - endX;
-    if (Math.abs(diff) > 50) {
-      carousel.scrollBy({ left: diff > 0 ? scrollAmount : -scrollAmount, behavior: 'smooth' });
+  const filterSelect = document.getElementById('filterType');
+  const searchInput = document.getElementById('productSearch');
+  const grid = document.getElementById('productGrid');
+  const resultsCount = document.getElementById('resultsCount');
+
+  const modal = document.getElementById('productModal');
+  const modalTitle = document.getElementById('modalTitle');
+  const modalImage = document.getElementById('modalImage');
+  const modalSummary = document.getElementById('modalSummary');
+  const modalSpecs = document.getElementById('modalSpecs');
+  const modalWA = document.getElementById('modalWhatsApp');
+  const modalRequest = document.getElementById('modalRequest');
+  const modalClose = modal.querySelector('.modal-close');
+
+  const cards = Array.from(grid.querySelectorAll('.product-card'));
+
+  function updateResultsCount(n) {
+    resultsCount.textContent = `Showing ${n} product${n !== 1 ? 's' : ''}`;
+  }
+
+  function matchesFilter(card, typeFilter, searchTerm) {
+    const type = card.dataset.type || '';
+    const origin = card.dataset.origin || '';
+    const text = (card.innerText || '').toLowerCase();
+    const matchesType = (typeFilter === 'all') || (type.toLowerCase() === typeFilter.toLowerCase());
+    const matchesSearch = !searchTerm || text.includes(searchTerm);
+    return matchesType && matchesSearch;
+  }
+
+  function applyFilters() {
+    const typeFilter = filterSelect.value;
+    const searchTerm = searchInput.value.trim().toLowerCase();
+    let visible = 0;
+    cards.forEach(card => {
+      if (matchesFilter(card, typeFilter, searchTerm)) {
+        card.style.display = '';
+        visible++;
+      } else {
+        card.style.display = 'none';
+      }
+    });
+    updateResultsCount(visible);
+  }
+
+  filterSelect.addEventListener('change', applyFilters);
+  searchInput.addEventListener('input', () => { applyFilters(); });
+
+  // Modal helpers: gather product info from card and populate modal
+  function openModalFromCard(cardId) {
+    const card = cards.find(c => c.dataset.type === cardId || c.querySelector(`[data-id="${cardId}"]`));
+    if (!card) return;
+    const title = card.querySelector('.product-title')?.innerText || 'Product';
+    const summary = card.querySelector('.product-sub')?.innerText || '';
+    const img = card.querySelector('.card-media img')?.getAttribute('src') || 'images/slide1.jpg';
+    const specItems = Array.from(card.querySelectorAll('.specs li')).map(li => li.innerText);
+
+    modalTitle.innerText = title;
+    modalSummary.innerText = summary;
+    modalImage.setAttribute('src', img);
+    modalImage.setAttribute('alt', title);
+
+    modalSpecs.innerHTML = '';
+    specItems.forEach(s => {
+      const tr = document.createElement('tr');
+      tr.innerHTML = `<td>${s}</td>`;
+      modalSpecs.appendChild(tr);
+    });
+
+    // Setup whatsapp message link (pre-filled)
+    const waText = encodeURIComponent(`Hello, I'm interested in your product: ${title}. Please send price, MOQ, and export details.`);
+    modalWA.onclick = () => {
+      // replace the number with your WhatsApp number for export inquiries
+      const waNumber = '237699745546'; // example Cameroonian number - replace if needed
+      window.open(`https://wa.me/${waNumber}?text=${waText}`, '_blank');
+    };
+
+    // Request Quote button - mailto fallback
+    modalRequest.onclick = () => {
+      const subject = encodeURIComponent(`Quote request: ${title}`);
+      const body = encodeURIComponent(`Hello,\n\nI'm requesting a formal quote for: ${title}\n\nPlease provide price, MOQ, CIF terms and shipping timeline.\n\nRegards,\n`);
+      // replace with your business email
+      window.location.href = `mailto:export@chocam.com?subject=${subject}&body=${body}`;
+    };
+
+    // show modal
+    modal.setAttribute('aria-hidden', 'false');
+    document.body.style.overflow = 'hidden';
+  }
+
+  // Close modal
+  function closeModal() {
+    modal.setAttribute('aria-hidden', 'true');
+    document.body.style.overflow = '';
+  }
+  modalClose.addEventListener('click', closeModal);
+  modal.addEventListener('click', (e) => { if (e.target === modal) closeModal(); });
+  document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeModal(); });
+
+  // Wire up Learn More and Request Quote buttons in grid
+  grid.addEventListener('click', (e) => {
+    const lm = e.target.closest('.btn-details');
+    const rq = e.target.closest('.btn-quote');
+    if (lm) {
+      const id = lm.dataset.id;
+      openModalFromCard(id);
+      return;
+    }
+    if (rq) {
+      const id = rq.dataset.id;
+      const card = cards.find(c => c.dataset.type === id);
+      const title = card?.querySelector('.product-title')?.innerText || 'Product';
+      // open WhatsApp prefilled (same number used in modal)
+      const waText = encodeURIComponent(`Hello, I'd like a quote for: ${title}. MOQ & price please.`);
+      const waNumber = '237699745546';
+      window.open(`https://wa.me/${waNumber}?text=${waText}`, '_blank');
     }
   });
-  // Carousel indicators
-  const carouselItems = carousel.querySelectorAll('.product-card');
-  const indicatorsContainer = document.getElementById('carouselIndicators');
-  carouselItems.forEach((_, index) => {
-    const dot = document.createElement('button');
-    if (index === 0) dot.classList.add('active');
-    dot.addEventListener('click', () => {
-      carousel.scrollTo({ left: index * scrollAmount, behavior: 'smooth' });
-      updateIndicators(index);
-    });
-    indicatorsContainer.appendChild(dot);
-  });
-  const indicators = indicatorsContainer.querySelectorAll('button');
-  function updateIndicators(activeIndex) {
-    indicators.forEach(dot => dot.classList.remove('active'));
-    if (indicators[activeIndex]) indicators[activeIndex].classList.add('active');
-  }
-  // Update dots on scroll
-  carousel.addEventListener('scroll', () => {
-    const index = Math.round(carousel.scrollLeft / scrollAmount);
-    updateIndicators(index);
-  });
-  // Autoplay
-  function startAutoplay() {
-    autoPlayInterval = setInterval(() => {
-      carousel.scrollBy({ left: scrollAmount, behavior: 'smooth' });
-      if (carousel.scrollLeft + carousel.clientWidth >= carousel.scrollWidth - 5) {
-        carousel.scrollTo({ left: 0, behavior: 'smooth' });
-      }
-    }, 4000);
-  }
-  function stopAutoplay() { clearInterval(autoPlayInterval); }
-  startAutoplay();
-  carousel.addEventListener('mouseenter', stopAutoplay);
-  carousel.addEventListener('mouseleave', startAutoplay);
-  carousel.addEventListener('touchstart', stopAutoplay);
-  carousel.addEventListener('touchend', startAutoplay);
+
+  // Initial load
+  applyFilters();
 })();
 
 
@@ -502,3 +573,79 @@ function handleSwipe() {
     gpPlusSlides(1);
   }
 }
+
+
+
+
+
+// FAQ module script
+(function(){
+  const originSelect = document.getElementById('originSelect');
+  const portsAnswerEl = document.querySelector('.ports-answer');
+  const faqList = document.getElementById('faqList');
+  const faqSearch = document.getElementById('faqSearch');
+
+  // Mapping origins -> ports & recommended text (edit as needed)
+  const originPorts = {
+    douala: 'Douala Autonomous Port (Douala). Main loading point for inland cocoa shipments.',
+    kribi: 'Kribi Deep Seaport (Kribi). Suitable for larger vessels and containerized shipments.',
+    limbe: 'Limbe Port (Limbe) / smaller ports — typically for specific orders or coastal shipments.',
+    other: 'We can load from nominated ports depending on logistics and buyer preference. Contact us with your target port.'
+  };
+
+  function updatePortsAnswer() {
+    const origin = originSelect.value || 'other';
+    portsAnswerEl.textContent = originPorts[origin] || originPorts.other;
+  }
+
+  // Initialize the answer text
+  updatePortsAnswer();
+  originSelect.addEventListener('change', updatePortsAnswer);
+
+  // Accessible accordion toggles
+  faqList.addEventListener('click', (e) => {
+    const btn = e.target.closest('.faq-q');
+    if (!btn) return;
+    const expanded = btn.getAttribute('aria-expanded') === 'true';
+    // collapse any open one (optional: allow multiple open by commenting out)
+    faqList.querySelectorAll('.faq-q').forEach(b => b.setAttribute('aria-expanded','false'));
+    if (!expanded) btn.setAttribute('aria-expanded','true');
+    else btn.setAttribute('aria-expanded','false');
+  });
+
+  // Search/filter
+  faqSearch.addEventListener('input', () => {
+    const q = faqSearch.value.trim().toLowerCase();
+    faqList.querySelectorAll('.faq-item').forEach(item => {
+      const text = item.textContent.toLowerCase();
+      item.style.display = text.includes(q) ? '' : 'none';
+    });
+  });
+
+  // Admin: add new FAQ quickly
+  const addBtn = document.getElementById('addFaqBtn');
+  addBtn.addEventListener('click', () => {
+    const qText = document.getElementById('newQ').value.trim();
+    const aText = document.getElementById('newA').value.trim();
+    if (!qText || !aText) {
+      alert('Enter both question and answer to add.');
+      return;
+    }
+    const idSafe = 'q-' + Date.now();
+    const article = document.createElement('article');
+    article.className = 'faq-item';
+    article.innerHTML = `
+      <button class="faq-q" aria-expanded="false" aria-controls="${idSafe}-a" id="${idSafe}">
+        ${escapeHtml(qText)} <span class="faq-toggle-indicator">+</span>
+      </button>
+      <div id="${idSafe}-a" class="faq-a" role="region" aria-labelledby="${idSafe}">
+        <p>${escapeHtml(aText)}</p>
+      </div>`;
+    faqList.appendChild(article);
+    document.getElementById('newQ').value = '';
+    document.getElementById('newA').value = '';
+  });
+
+  // small helper to avoid injection
+  function escapeHtml(s){ return s.replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('>','&gt;'); }
+})();
