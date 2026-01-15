@@ -1,21 +1,15 @@
-//-------- Initializze Supabase
+//-------- Initialize Supabase using CDN
 const SUPABASE_URL = "https://qnepxdyvfctreegcduxj.supabase.co";
 const SUPABASE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InFuZXB4ZHl2ZmN0cmVlZ2NkdXhqIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjAxMjY1NzYsImV4cCI6MjA3NTcwMjU3Nn0.9FTpA7Dg6PxD01j3Uo_eTURXAarsSV3C3_vDIU5fpbE";
-const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+
+// Use a new variable name to avoid conflicts
+const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 
 
 
 
 
 
-// -------------------------
-// Supabase: make sure client is initialized before running this file.
-// Example (uncomment + replace):
-// import { createClient } from '@supabase/supabase-js'
-// const SUPABASE_URL = 'https://your-project.supabase.co'
-// const SUPABASE_ANON_KEY = 'your-anon-key'
-// const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY)
-// -------------------------
 
 // ---------- Helpers ----------
 function escapeHtml(str) {
@@ -72,8 +66,8 @@ function setBlockContentByHeading(headingSelectors, headingNames, contentHtml) {
 // ---------- Main fetch function ----------
 async function fetchAndRenderAbout() {
   // 1) about_content
-  const { data: contentData, error: contentErr } = await supabase
-    .from('about_content')
+  const { data: contentData, error: contentErr } = await supabaseClient
+  .from('about_content')
     .select('*')
     .order('position', { ascending: true });
 
@@ -126,7 +120,11 @@ async function fetchAndRenderAbout() {
   }
 
   // 2) about_values
-  const { data: valuesData, error: valuesErr } = await supabase.from('about_values').select('*').order('position', { ascending: true });
+  const { data: valuesData, error: valuesErr } = await supabaseClient
+  .from('about_values')
+  .select('*')
+  .order('position', 
+    { ascending: true });
   if (valuesErr) console.error('about_values error', valuesErr);
   const valuesContainer = document.querySelector('.values-row');
   if (valuesContainer && valuesData) {
@@ -144,7 +142,11 @@ async function fetchAndRenderAbout() {
   }
 
   // 3) about_export_steps
-  const { data: stepsData, error: stepsErr } = await supabase.from('about_export_steps').select('*').order('step_number', { ascending: true });
+  const { data: stepsData, error: stepsErr } = await supabaseClient
+  .from('about_export_steps')
+  .select('*')
+  .order('step_number', 
+    { ascending: true });
   if (stepsErr) console.error('about_export_steps error', stepsErr);
   const stepsList = document.querySelector('.export-process-list');
   if (stepsList && stepsData) {
@@ -157,7 +159,11 @@ async function fetchAndRenderAbout() {
   }
 
   // 4) about_timeline
-  const { data: timelineData, error: timelineErr } = await supabase.from('about_timeline').select('*').order('year', { ascending: true });
+  const { data: timelineData, error: timelineErr } = await supabaseClient
+  .from('about_timeline')
+  .select('*')
+  .order('year', 
+    { ascending: true });
   if (timelineErr) console.error('about_timeline error', timelineErr);
   const timelineContainer = document.querySelector('.timeline');
   if (timelineContainer && timelineData) {
@@ -171,7 +177,11 @@ async function fetchAndRenderAbout() {
   }
 
   // 5) about_gallery
-  const { data: galleryData, error: galleryErr } = await supabase.from('about_gallery').select('*').order('position', { ascending: true });
+  const { data: galleryData, error: galleryErr } = await supabaseClient
+  .from('about_gallery')
+  .select('*')
+  .order('position', 
+    { ascending: true });
   if (galleryErr) console.error('about_gallery error', galleryErr);
   const galleryContainer = document.querySelector('.about-gallery-container');
   if (galleryContainer && galleryData) {
@@ -211,7 +221,11 @@ async function fetchAndRenderAbout() {
   }
 
   // 6) about_stats
-  const { data: statsData, error: statsErr } = await supabase.from('about_stats').select('*').order('position', { ascending: true });
+  const { data: statsData, error: statsErr } = await supabaseClient
+  .from('about_stats')
+  .select('*')
+  .order('position', 
+    { ascending: true });
   if (statsErr) console.error('about_stats error', statsErr);
   const statsContainer = document.querySelector('.stats-row');
   if (statsContainer && statsData) {
@@ -228,7 +242,11 @@ async function fetchAndRenderAbout() {
   }
 
   // 7) about_team
-  const { data: teamData, error: teamErr } = await supabase.from('about_team').select('*').order('position', { ascending: true });
+  const { data: teamData, error: teamErr } = await supabaseClient
+  .from('about_team')
+  .select('*')
+  .order('position', 
+    { ascending: true });
   if (teamErr) console.error('about_team error', teamErr);
   const teamContainer = document.querySelector('.team-row');
   if (teamContainer && teamData) {
@@ -256,7 +274,7 @@ async function fetchAndRenderAbout() {
 
 
 async function loadAboutInfo() {
-  const { data, error } = await supabase
+  const { data, error } = await supabaseClient
     .from("about_info") // correct table name
     .select("*")
     .order("position", { ascending: true }); // use 'position' for ordering
@@ -290,10 +308,109 @@ async function loadAboutInfo() {
 }
 
 loadAboutInfo();
-
-  // final: log success
-  // console.log('About section loaded from Supabase');
 }
+
+
+
+
+async function loadWhyChoose() {
+  const { data, error } = await supabaseClient
+    .from('about_why_choose')
+    .select('*')
+    .order('position');
+
+  if (error) return console.error(error);
+
+  const grid = document.getElementById('why-grid');
+  if (!grid) return console.warn('why-grid not found');
+
+  grid.innerHTML = '';
+
+  data.forEach(item => {
+    grid.innerHTML += `
+      <div class="why-card">
+        <h3>${escapeHtml(item.title)}</h3>
+        <p>${escapeHtml(item.description)}</p>
+      </div>
+    `;
+  });
+  loadWhyChoose();
+}
+
+
+
+// ---------- EXPORT HERO ----------
+async function loadExportHero() {
+  const { data, error } = await supabaseClient
+    .from('about_export_hero')
+    .select('*')
+    .limit(1)
+    .single();
+
+  if (error) {
+    console.error('Export Hero error:', error);
+    return;
+  }
+
+  const heading = document.getElementById('export-heading');
+  const desc = document.getElementById('export-description');
+  const btn = document.getElementById('export-btn');
+
+  if (heading) heading.innerText = data.heading ?? '';
+  if (desc) desc.innerText = data.description ?? '';
+  if (btn) {
+    btn.innerText = data.button_text ?? '';
+    btn.href = data.button_link ?? '#';
+  }
+}
+
+
+async function loadExportStats() {
+  const { data, error } = await supabaseClient
+    .from('about_export_stats')
+    .select('*')
+    .order('position', { ascending: true });
+
+  if (error) return console.error(error);
+
+  const container = document.getElementById('export-stats');
+  if (!container) return;
+
+  container.innerHTML = '';
+
+  data.forEach(stat => {
+    const div = document.createElement('div');
+
+    div.innerHTML = `
+      <strong class="counter" data-suffix="${stat.suffix || ''}">0</strong>
+      <span>${escapeHtml(stat.label)}</span>
+    `;
+
+    container.appendChild(div);
+
+    const counterEl = div.querySelector('.counter');
+
+    animateCounter(counterEl, Number(stat.value || 0));
+
+    // append suffix AFTER animation ends
+    setTimeout(() => {
+      counterEl.innerText += stat.suffix || '';
+    }, 900);
+  });
+}
+
+
+// ---------- INIT ----------
+document.addEventListener('DOMContentLoaded', async () => {
+  try {
+    await fetchAndRenderAbout();
+    await loadExportHero();
+    await loadExportStats();
+    await loadWhyChoose();
+  } catch (err) {
+    console.error('Initialization error:', err);
+  }
+});
 
 // ---------- Initialization ----------
 document.addEventListener('DOMContentLoaded', async () => {
@@ -308,11 +425,15 @@ document.addEventListener('DOMContentLoaded', async () => {
 
 
 
+
+
+
+
 // ====================================
 // LOAD PRODUCTS INTO PRODUCT GRID
 // ====================================
 async function loadProducts() {
-  const { data: products, error } = await supabase
+  const { data: products, error } = await supabaseClient
     .from("products")
     .select("*")
     .order("id", { ascending: true });
@@ -377,7 +498,7 @@ async function loadProducts() {
 // LOAD VIDEO (unchanged)
 // ====================================
 async function loadProductVideo() {
-  const { data: videos, error } = await supabase
+  const { data: videos, error } = await supabaseClient
     .from("product_videos")
     .select("*")
     .limit(1)
@@ -404,7 +525,7 @@ loadProductVideo();
   
 // fetch export
 async function loadExportData() {
-  const { data, error } = await supabase
+  const { data, error } = await supabaseClient
     .from('exports')
     .select('*')
     .order('id', { ascending: true })
@@ -466,7 +587,7 @@ window.addEventListener('DOMContentLoaded', loadExportData);
   async function loadSpecifications() {
     const table = document.querySelector('.spec-table');
 
-    const { data: specs, error } = await supabase
+    const { data: specs, error } = await supabaseClient
       .from('cocoa_specifications')
       .select('*')
       .order('id');
@@ -500,7 +621,7 @@ window.addEventListener('DOMContentLoaded', loadExportData);
   async function loadExportDocuments() {
     const list = document.querySelector('.export-details');
 
-    const { data: documents, error } = await supabase
+    const { data: documents, error } = await supabaseClient
       .from('export_documents')
       .select('*')
       .order('id');
@@ -533,7 +654,7 @@ window.addEventListener('DOMContentLoaded', loadExportData);
 
 // Load documents from Supabase
 async function loadDocuments() {
-  const { data, error } = await supabase
+  const { data, error } = await supabaseClient
     .from('documents')
     .select('*')
     .order('id', { ascending: true });
@@ -579,7 +700,7 @@ window.addEventListener('DOMContentLoaded', loadDocuments);
 
 // Function to fetch and render Terms & Conditions
 async function loadTermsAndConditions() {
-  const { data, error } = await supabase
+  const { data, error } = await supabaseClient
     .from('terms_and_conditions')
     .select('*')
     .order('order_num', { ascending: true });
@@ -619,7 +740,7 @@ async function loadTermsAndConditions() {
 
 // Function to fetch and render Privacy Policy
 async function loadPrivacyPolicy() {
-  const { data, error } = await supabase
+  const { data, error } = await supabaseClient
     .from('privacy_policy')
     .select('*')
     .order('order_num', { ascending: true });
@@ -700,7 +821,7 @@ async function loadComments() {
   const savedComments = JSON.parse(localStorage.getItem("comments")) || [];
   savedComments.forEach((comment, index) => addCommentToDOM(comment, index, true));
 
-  const { data: comments, error } = await supabase
+  const { data: comments, error } = await supabaseClient
     .from('comments')
     .select('*')
     .order('created_at', { ascending: false });
@@ -804,7 +925,7 @@ function editComment(index) {
 
   // Delete from Supabase if it exists
   if (commentObj.id) {
-    supabase
+    supabaseClient
       .from('comments')
       .delete()
       .eq('id', commentObj.id)
@@ -827,7 +948,7 @@ function deleteComment(index) {
   showMessage("❌ Comment deleted.", "error");
 
   if (commentObj.id) {
-    supabase
+    supabaseClient
       .from('comments')
       .delete()
       .eq('id', commentObj.id)
@@ -907,7 +1028,7 @@ async function submitQuote(event) {
   }
 
   // Save to Supabase
-  const { data, error } = await supabase
+  const { data, error } = await supabaseClient
     .from("quotes")
     .insert([{ name, email, product, quantity, incoterm, message }]);
 
@@ -941,7 +1062,7 @@ async function submitQuote(event) {
 
 // ===== Supabase Google Photos Style Gallery Loader =====
 async function loadGallery() {
-  const { data, error } = await supabase
+  const { data, error } = await supabaseClient
     .from('gallery')
     .select('*')
     .order('position', { ascending: true });
@@ -1114,164 +1235,88 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
 
-
-// HERO SECTION (Dynamic from Supabase)
+// HERO Section
 document.addEventListener("DOMContentLoaded", async () => {
-  const slidesContainer = document.querySelector(".hero");
-  const dotsContainer = document.querySelector(".dots");
-  const prev = document.querySelector(".prev");
-  const next = document.querySelector(".next");
-  const heroContent = document.querySelector(".hero-content");
+  const supabase = window.supabaseClient;
+
+  const hero = document.querySelector('[data-sb="hero"]');
+  const heroContent = hero.querySelector('[data-sb="hero-content"]');
+  const headingEl = hero.querySelector('[data-sb="hero-heading"]');
+  const descEl = hero.querySelector('[data-sb="hero-description"]');
+  const btnEl = hero.querySelector('[data-sb="hero-button"]');
+  const dotsContainer = hero.querySelector('[data-sb="hero-dots"]');
+  const prevBtn = hero.querySelector('[data-sb="hero-prev"]');
+  const nextBtn = hero.querySelector('[data-sb="hero-next"]');
 
   let slides = [];
+  let slideEls = [];
+  let dots = [];
   let currentSlide = 0;
-  let slideInterval;
+  let interval;
+  let currentLang = "en";
 
-  // Default language
-  let currentLang = 'en'; // can be changed dynamically
-
-  // Fetch hero slides from Supabase
-  const { data, error } = await supabase
+  // Fetch hero data
+  const { data, error } = await supabaseClient
     .from("hero")
     .select("*")
     .order("id");
 
-  if (error) {
-    console.error("Error loading hero slides:", error);
+  if (error || !data.length) {
+    console.error("Hero load failed:", error);
     return;
   }
 
   slides = data;
 
-  // Build slides dynamically
-  const slideElements = slides.map((slide, index) => {
+  // Build slides
+  slides.forEach((slide, index) => {
     const div = document.createElement("div");
     div.className = `slide ${index === 0 ? "active" : ""}`;
     div.style.backgroundImage = `url(${slide.image_url})`;
-    slidesContainer.insertBefore(div, slidesContainer.querySelector(".overlay"));
-    return div;
-  });
+    hero.insertBefore(div, hero.querySelector(".overlay"));
+    slideEls.push(div);
 
-  // Build dots
-  dotsContainer.innerHTML = "";
-  slides.forEach((_, i) => {
     const dot = document.createElement("span");
-    if (i === 0) dot.classList.add("active");
-    dot.addEventListener("click", () => goToSlide(i));
+    if (index === 0) dot.classList.add("active");
+    dot.onclick = () => goTo(index);
     dotsContainer.appendChild(dot);
+    dots.push(dot);
   });
-  const dots = document.querySelectorAll(".dots span");
 
-  // Function to update hero text based on current language
-  function updateHeroText() {
-    const slide = slides[currentSlide];
-
-    const heading = slide[`heading_${currentLang}`] || slide.heading_en;
-    const description = slide[`description_${currentLang}`] || slide.description_en;
-    const buttonText = slide[`button_text_${currentLang}`] || slide.button_text_en;
-
-    heroContent.querySelector("h1").innerHTML = heading;
-    heroContent.querySelector("p").innerHTML = description;
-    const btn = heroContent.querySelector("a");
-    btn.textContent = buttonText;
-    btn.href = slide.button_link;
+  function updateText() {
+    const s = slides[currentSlide];
+    headingEl.innerHTML = s[`heading_${currentLang}`] || s.heading_en;
+    descEl.innerHTML = s[`description_${currentLang}`] || s.description_en;
+    btnEl.textContent = s[`button_text_${currentLang}`] || s.button_text_en;
+    btnEl.href = s.button_link || "#";
   }
 
-  // Slide navigation
-  function changeSlide(nextIndex) {
-    slideElements[currentSlide].classList.remove("active");
+  function goTo(i) {
+    slideEls[currentSlide].classList.remove("active");
     dots[currentSlide].classList.remove("active");
-    currentSlide = (nextIndex + slides.length) % slides.length;
-    slideElements[currentSlide].classList.add("active");
+    currentSlide = (i + slides.length) % slides.length;
+    slideEls[currentSlide].classList.add("active");
     dots[currentSlide].classList.add("active");
-    updateHeroText();
+    updateText();
   }
 
-  function nextSlide() { changeSlide(currentSlide + 1); }
-  function prevSlide() { changeSlide(currentSlide - 1); }
-  function goToSlide(index) { changeSlide(index); }
+  function next() { goTo(currentSlide + 1); }
+  function prev() { goTo(currentSlide - 1); }
 
-  // Auto slideshow
-  function startSlideShow() { slideInterval = setInterval(nextSlide, 5000); }
-  function stopSlideShow() { clearInterval(slideInterval); }
-
-  // Event listeners
-  prev.addEventListener("click", () => { prevSlide(); stopSlideShow(); startSlideShow(); });
-  next.addEventListener("click", () => { nextSlide(); stopSlideShow(); startSlideShow(); });
-  dots.forEach((dot, index) => {
-    dot.addEventListener("click", () => { goToSlide(index); stopSlideShow(); startSlideShow(); });
-  });
-
-  // Initial render
-  updateHeroText();
-  startSlideShow();
-
-  // --- LANGUAGE SWITCHER ---
-  // Make sure your language buttons have a class "lang-btn" and a data attribute: data-lang="fr" etc.
-  document.querySelectorAll('.lang-btn').forEach(btn => {
-    btn.addEventListener('click', () => {
-      currentLang = btn.dataset.lang;
-      updateHeroText();
-    });
-  });
-});
-
-// 🌍 Handle language switching
-document.querySelectorAll('.lang-btn').forEach(btn => {
-  btn.addEventListener('click', () => {
-    document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
-    btn.classList.add('active');
-
-    const selectedLang = btn.dataset.lang;
-    if (typeof updateHeroLanguage === 'function') {
-      updateHeroLanguage(selectedLang);
-    }
-
-    // Collapse selector after choosing on mobile
-    const selector = document.querySelector('.language-selector');
-    if (window.innerWidth <= 600) {
-      selector.classList.remove('expanded');
-    }
-  });
-});
-
-// 🌍 Handle language switching (desktop & mobile)
-document.querySelectorAll('.lang-btn').forEach(btn => {
-  btn.addEventListener('click', (e) => {
-    e.stopPropagation(); // prevent parent toggle on mobile
-    document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
-    btn.classList.add('active');
-
-    const selectedLang = btn.dataset.lang;
-    if (typeof updateHeroLanguage === 'function') {
-      updateHeroLanguage(selectedLang);
-    }
-
-    // Collapse selector after choosing on mobile
-    const selector = document.querySelector('.language-selector');
-    if (window.innerWidth <= 600) {
-      selector.classList.remove('expanded');
-      const toggle = selector.querySelector('.language-toggle');
-      toggle.style.opacity = '0';
-      toggle.style.pointerEvents = 'none';
-    }
-  });
-});
-
-// 📱 Mobile Tap Toggle for Language Selector
-const selector = document.querySelector('.language-selector');
-selector.addEventListener('click', () => {
-  if (window.innerWidth <= 600) {
-    selector.classList.toggle('expanded');
-    const toggle = selector.querySelector('.language-toggle');
-    if (selector.classList.contains('expanded')) {
-      toggle.style.opacity = '1';
-      toggle.style.pointerEvents = 'all';
-    } else {
-      toggle.style.opacity = '0';
-      toggle.style.pointerEvents = 'none';
-    }
+  function start() {
+    interval = setInterval(next, 5000);
   }
+
+  function reset() {
+    clearInterval(interval);
+    start();
+  }
+
+  prevBtn.onclick = () => { prev(); reset(); };
+  nextBtn.onclick = () => { next(); reset(); };
+
+  updateText();
+  start();
 });
 
 
@@ -1295,7 +1340,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     // Insert subscriber into Supabase
-    const { data, error } = await supabase
+    const { data, error } = await supabaseClient
       .from("newsletter")
       .insert([{ email }]);
 
@@ -1321,7 +1366,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 // ===== Load Footer Content from Supabase =====
 document.addEventListener("DOMContentLoaded", async () => {
-  const { data, error } = await supabase
+  const { data, error } = await supabaseClient
     .from("footer_content")
     .select("*")
     .order("id", { ascending: true })
@@ -1366,7 +1411,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
 // Tearms and Conditions / Privacy & Policy
  async function loadPageContent(slug, modalId) {
-  const { data, error } = await supabase
+  const { data, error } = await supabaseClient
     .from('site_pages')
     .select('content')
     .eq('slug', slug)
@@ -1390,7 +1435,180 @@ document.addEventListener("DOMContentLoaded", async () => {
     wrapper.innerHTML = data.content;
     contentContainer.appendChild(wrapper);
   }
+};
+
+
+
+
+
+
+
+
+// BLOG Post
+async function loadBlogPosts() {
+  const { data, error } = await supabaseClient
+    .from("blog_posts")
+    .select("*")
+    .order("created_at", { ascending: false });
+
+  if (error) {
+    console.error("Blog error:", error);
+    return;
+  }
+
+  const grid = document.querySelector(".blog-grid");
+  grid.innerHTML = "";
+
+  data.forEach(post => {
+    grid.innerHTML += `
+      <article class="blog-card" itemscope itemtype="https://schema.org/BlogPosting">
+        <div class="blog-img">
+          <a href="${post.image_url}" target="_blank">
+            <img src="${post.image_url}" alt="${post.title}" loading="lazy">
+          </a>
+        </div>
+        <div class="blog-content">
+          <h3 itemprop="headline">${post.title}</h3>
+          <p itemprop="description">${post.description}</p>
+          <a href="${post.read_more_url}" class="btn-read" target="_blank" rel="noopener noreferrer">
+            Read More
+          </a>
+        </div>
+      </article>
+    `;
+  });
 }
 
+async function loadCocoaNews() {
+  const { data, error } = await supabaseClient
+    .from("cocoa_news")
+    .select("*")
+    .order("published_at", { ascending: false })
+    .limit(5);
+
+  if (error) {
+    console.error("News error:", error);
+    return;
+  }
+
+  const newsList = document.getElementById("news-list");
+  newsList.innerHTML = "";
+
+  data.forEach(news => {
+    newsList.innerHTML += `
+      <p>
+        <a href="${news.url}" target="_blank" rel="noopener noreferrer">
+          ${news.headline}
+        </a>
+        <small> – ${news.source || "News"}</small>
+      </p>
+    `;
+  });
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+  loadBlogPosts();
+  loadCocoaNews();
+});
 
 
+
+
+
+
+// TESTIMONAIL
+
+async function loadTestimonials() {
+  const { data, error } = await supabaseClient
+    .from("testimonials")
+    .select("*")
+    .order("created_at", { ascending: true });
+
+  if (error) {
+    console.error("Testimonials error:", error);
+    return;
+  }
+
+  const slider = document.getElementById("testiSlider");
+  const dots = document.getElementById("testiDots");
+
+  slider.innerHTML = "";
+  dots.innerHTML = "";
+
+  data.forEach((t, index) => {
+    slider.insertAdjacentHTML("beforeend", `
+      <div class="testi-card ${index === 0 ? "active" : ""}">
+        <img src="${t.avatar_url}" class="testi-avatar" loading="lazy"
+             alt="Cocoa buyer from ${t.country || "Global"}">
+
+        <p class="testi-text">“${t.review}”</p>
+
+        <div class="testi-rating">
+          ${"★".repeat(t.rating)}${"☆".repeat(5 - t.rating)}
+        </div>
+
+        <cite>— ${t.company}${t.country ? ", " + t.country : ""}</cite>
+      </div>
+    `);
+
+    dots.insertAdjacentHTML("beforeend", `
+      <span class="dot ${index === 0 ? "active" : ""}" data-index="${index}"></span>
+    `);
+  });
+
+  initTestimonialSlider(); // 🔥 THIS IS CRITICAL
+}
+
+document.addEventListener("DOMContentLoaded", loadTestimonials);
+
+
+
+
+
+
+
+
+// ---------- Fetch & Render Office Info ----------
+async function loadOfficeInfo() {
+  const { data, error } = await supabaseClient
+    .from('office_info')
+    .select('*')
+    .limit(1);
+
+  if (error) {
+    console.error('Error loading office info:', error);
+    return;
+  }
+
+  if (!data || data.length === 0) return;
+
+  const office = data[0];
+
+  // Heading & Subtitle
+  document.getElementById('office-heading').textContent = `Our Office in ${office.location}`;
+  document.querySelector('.office-subtitle').textContent = 
+    `Visit or contact our cocoa export office in ${office.location} — the commercial hub of Cameroon and a key gateway for international cocoa shipments.`;
+
+  // Map
+  document.getElementById('officeMap').src = office.map_embed;
+
+  // Quick Contact
+  const phoneBtn = document.getElementById('phoneBtn');
+  phoneBtn.href = `tel:${office.phone}`;
+  phoneBtn.textContent = office.phone;
+
+  const whatsappBtn = document.getElementById('whatsappBtn');
+  whatsappBtn.href = `https://wa.me/${office.whatsapp}`;
+  whatsappBtn.textContent = "Chat on WhatsApp";
+
+  const linkedinBtn = document.getElementById('linkedinBtn');
+  linkedinBtn.href = office.linkedin;
+  linkedinBtn.textContent = "LinkedIn";
+
+  // Office note
+  document.getElementById('officeNote').innerHTML = 
+    `📍 <strong>Location:</strong> ${office.location} • <strong>Availability:</strong> Office hours & WhatsApp support available for international buyers`;
+}
+
+// ---------- Initialize ----------
+document.addEventListener('DOMContentLoaded', loadOfficeInfo);

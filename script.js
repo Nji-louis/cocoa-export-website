@@ -39,12 +39,7 @@
   }
 })();
 
-
-
-
-
  
-
 
 
 
@@ -386,38 +381,74 @@ aboutLightboxImg.addEventListener('touchend', function(e) {
 
 
 // ================= TESTIMONIALS =================
-(() => {
+function initTestimonialSlider() {
   const testiCards = Array.from(document.querySelectorAll('.testi-card'));
   const testiDots = Array.from(document.querySelectorAll('.dot'));
+
+  if (!testiCards.length) return;
+
   let testiIndex = 0;
+  let testiInterval;
+
   function showTesti(i) {
-    testiCards.forEach((c, idx) => c.classList.toggle('active', idx === i));
-    testiDots.forEach((d, idx) => d.classList.toggle('active', idx === i));
+    testiCards.forEach((c, idx) =>
+      c.classList.toggle('active', idx === i)
+    );
+    testiDots.forEach((d, idx) =>
+      d.classList.toggle('active', idx === i)
+    );
   }
-  let testiInterval = setInterval(() => { testiIndex = (testiIndex + 1) % testiCards.length; showTesti(testiIndex); }, 4200);
-  testiDots.forEach(dot => dot.addEventListener('click', () => {
-    testiIndex = parseInt(dot.dataset.index);
-    showTesti(testiIndex);
-    resetTestiInterval();
-  }));
-  let startTouchX = 0, endTouchX = 0;
-  const slider = document.getElementById('testiSlider');
-  slider.addEventListener('touchstart', e => startTouchX = e.touches[0].clientX);
-  slider.addEventListener('touchmove', e => endTouchX = e.touches[0].clientX);
-  slider.addEventListener('touchend', () => {
-    const deltaX = endTouchX - startTouchX;
-    if (Math.abs(deltaX) > 50) {
-      testiIndex = deltaX < 0 ? (testiIndex + 1) % testiCards.length : (testiIndex - 1 + testiCards.length) % testiCards.length;
+
+  function startInterval() {
+    testiInterval = setInterval(() => {
+      testiIndex = (testiIndex + 1) % testiCards.length;
       showTesti(testiIndex);
-      resetTestiInterval();
+    }, 4200);
+  }
+
+  function resetInterval() {
+    clearInterval(testiInterval);
+    startInterval();
+  }
+
+  testiDots.forEach(dot => {
+    dot.addEventListener('click', () => {
+      testiIndex = Number(dot.dataset.index);
+      showTesti(testiIndex);
+      resetInterval();
+    });
+  });
+
+  // Swipe support (unchanged)
+  let startX = 0;
+  const slider = document.getElementById('testiSlider');
+
+  slider.addEventListener('touchstart', e => {
+    startX = e.touches[0].clientX;
+  });
+
+  slider.addEventListener('touchend', e => {
+    const endX = e.changedTouches[0].clientX;
+    const delta = endX - startX;
+
+    if (Math.abs(delta) > 50) {
+      testiIndex = delta < 0
+        ? (testiIndex + 1) % testiCards.length
+        : (testiIndex - 1 + testiCards.length) % testiCards.length;
+
+      showTesti(testiIndex);
+      resetInterval();
     }
   });
-  function resetTestiInterval() {
-    clearInterval(testiInterval);
-    testiInterval = setInterval(() => { testiIndex = (testiIndex + 1) % testiCards.length; showTesti(testiIndex); }, 4200);
-  }
-  showTesti(testiIndex);
-})();
+
+  showTesti(0);
+  startInterval();
+}
+
+
+
+
+
 
 
 
