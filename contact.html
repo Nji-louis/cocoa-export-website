@@ -426,16 +426,15 @@
 }
 </script>
 
-
 <!-- Load an icon library to show a hamburger menu (bars) on small screens -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
 
-
    <!-- Custom CSS -->
   <link rel="stylesheet" href="style.css">
-
 </head>
+
+
 
 
 
@@ -485,135 +484,150 @@
 
 
 
-<div id="overlay"></div>
-
-<section class="hero">
-<div class="slide active" style="background-image:url('images/ga1.png')" aria-label="Cameroon cocoa farm producing premium cocoa beans"></div>
-<div class="slide" style="background-image:url('images/ga2.png')" aria-label="Fermented cocoa beans ready for export"></div>
-<div class="slide" style="background-image:url('images/AG1.jpg')" aria-label="Sun-dried cocoa beans for export"></div>
-<div class="slide" style="background-image:url('images/AG3.png')" aria-label="Sun-dried cocoa beans for export"></div>
-<div class="slide" style="background-image:url('images/hero3.png')" aria-label="Sun-dried cocoa beans for export"></div>
-<div class="overlay"></div>
-<div class="hero-content">
-<h1>Cameroon Cocoa Exporter of Premium Fermented Cocoa Beans</h1>
-<p>We supply export-quality cocoa beans from Cameroon to international chocolate manufacturers, processors, and wholesalers. Our cocoa is ethically sourced, fully traceable, fermented, sun-dried, and prepared to meet global export standards.</p>
-<a href="quote.html" class="btn-quote">Request a Cocoa Export Quote</a>
-</div>
-<a class="prev" onclick="changeSlide(-1)">&#10094;</a>
-<a class="next" onclick="changeSlide(1)">&#10095;</a>
-<div class="dots" id="heroDots"></div>
-</section>
+<!-- Contact Section -->
+<section id="contact" class="contact-section" aria-labelledby="contact-title">
+  <div class="contact-overlay"></div>
 
 
-
-
-
-<!-- ================= Office & Location ================= -->
-<section
-  id="office"
-  class="section office-section"
-  aria-labelledby="office-heading"
-  itemscope
-  itemtype="https://schema.org/LocalBusiness"
->
-
-  <div class="container">
-
-    <!-- Business identity -->
-    <meta itemprop="name" content="CHOCOCAM S.A.R.L">
-    <meta itemprop="industry" content="Cocoa Exporter">
-    <meta itemprop="url" content="https://chococa.netlify.app">
-
-    <header class="office-header">
-      <h2 id="office-heading" itemprop="name">
-        Our Office in Douala, Cameroon
-      </h2>
-      <p class="office-subtitle">
-        Visit or contact our cocoa export office in Douala — the commercial hub of Cameroon and
-        a strategic gateway for international cocoa shipments.
+  <div class="contact-container">
+   <header class="contact-header">
+      <h2 id="contact-title">Contact Our Cocoa Export Team</h2>
+      <p class="contact-subtitle">
+        Get in touch with a trusted Cameroon cocoa exporter.
+        Reach out for product inquiries, export partnerships, or business collaborations.
       </p>
     </header>
 
-    <!-- Map -->
-    <div
-      class="map-wrap"
-      role="region"
-      aria-label="CHOCAM cocoa export office location map"
+
+    <div class="contact-grid">
+
+      
+      <!-- Business Contact Information -->
+       <address class="contact-info" itemscope itemtype="https://schema.org/Organization">
+        <meta itemprop="name" content="CHOCOCAM SARL Ltd">
+        <meta itemprop="url" content="https://chococa.netlify.app">
+
+
+      
+        <div class="contact-card">
+          <i class="fa fa-map-marker" aria-hidden="true"></i>
+          <h3>Office Location</h3>
+          <p itemprop="address" itemscope itemtype="https://schema.org/PostalAddress">
+            <span itemprop="addressLocality">Douala</span>,
+            <span itemprop="addressCountry">Cameroon</span>
+          </p>
+        </div>
+
+
+        <div class="contact-card">
+          <i class="fa fa-phone" aria-hidden="true"></i>
+          <h3>Phone</h3>
+          <p>
+             <a href="tel:+237671742824" itemprop="telephone">
+              +237 671 742 824
+            </a>
+          </p>
+        </div>
+
+
+
+        <div class="contact-card">
+          <i class="fa fa-envelope" aria-hidden="true"></i>
+          <h3>Email</h3>
+          <p>
+            <a href="mailto:chococamsarl@gmail.com" itemprop="email">
+              chococamsarl@gmail.com
+            </a>
+          </p>
+        </div>
+       </address>
+
+
+
+        <!-- Contact Form -->
+  <form 
+  action="https://formspree.io/f/xanlejjv"
+  class="fs-form"
+  target="_top"
+  method="POST"
+  aria-label="Contact form"
+  id="contactForm"
+  aria-label="Contact CHOCOCAM cocoa export form"
+>
+
+
+
+  <div class="fs-field">
+    <label class="fs-label" for="name">Full Name</label>
+    <input 
+    class="fs-input" 
+    id="name" 
+    name="name" 
+    type="text" 
+    placeholder="Your full name"  
+    required aria-required="true"
+    autocomplete="name"
+    />
+  </div>
+
+
+
+  <div class="fs-field">
+    <label class="fs-label" for="email">Email Address</label>
+    <input 
+    class="fs-input" 
+    id="email" 
+    name="email" 
+    type="email"  
+    placeholder="you@example.com" 
+     required aria-required="true"
+     autocomplete="email"
+    />
+  </div>
+
+
+
+  <div class="fs-field">
+    <label class="fs-label" for="message">Message</label>
+    <textarea 
+    class="fs-textarea" 
+    id="message" 
+    name="message" 
+    rows="5" 
+    placeholder="Write your message here..." 
+    required aria-required="true"
+     autocomplete="off"
     >
-      <iframe
-        title="CHOCOCAM S.A.R.L cocoa export office location in Douala, Cameroon"
-        src="https://www.google.com/maps/embed?pb=!1m18..."
-        width="100%"
-        height="300"
-        style="border:0;"
-        allowfullscreen
-        loading="lazy"
-        referrerpolicy="no-referrer-when-downgrade"
-      ></iframe>
-    </div>
+  </textarea>
 
-    <!-- Address (SEO critical) -->
-    <address
-      class="office-address"
-      itemprop="address"
-      itemscope
-      itemtype="https://schema.org/PostalAddress"
-    >
-      <meta itemprop="addressLocality" content="Douala">
-      <meta itemprop="addressCountry" content="Cameroon">
 
-      <p>
-        📍 <strong>Location:</strong>
-        <span itemprop="addressLocality">Douala</span>,
-        <span itemprop="addressCountry">Cameroon</span>
-      </p>
-    </address>
-
-    <!-- Quick Contact -->
-    <div class="contact-quick">
-
-      <a
-        id="phoneBtn"
-        href="tel:+237671742824"
-        class="btn outline"
-        itemprop="telephone"
-        aria-label="Call CHOCOCAM cocoa export office"
-      >
-        <i class="fa fa-phone" aria-hidden="true"></i>
-        +237 671 742 824
-      </a>
-
-      <a
-        href="https://wa.me/237699745546"
-        id="whatsappBtn"
-        class="btn whatsapp"
-        aria-label="Chat with CHOCOCAM cocoa export team on WhatsApp"
-        target="_blank"
-        rel="noopener"
-      >
-        <i class="fab fa-whatsapp" aria-hidden="true"></i>
-        Chat on WhatsApp
-      </a>
-
-      <a
-        href="https://www.linkedin.com/in/eudriverslicence"
-        id="linkedinBtn"
-        target="_blank"
-        rel="noopener"
-        class="btn outline"
-        aria-label="CHOCOCAM cocoa export LinkedIn page"
-      >
-        <i class="fab fa-linkedin" aria-hidden="true"></i>
-        LinkedIn
-      </a>
-
-    </div>
-
-    <p class="office-note">
-      <strong>Availability:</strong>
-      Office hours & WhatsApp support available for international cocoa buyers.
+    <p class="fs-description">
+       We usually respond within <strong>1–2 business days</strong>.
     </p>
+  </div>
 
+  <!-- Form Messages -->
+<div class="form-messages" aria-live="polite">
+  <p class="form-success" hidden>
+    ✅ Thank you! Your message has been sent successfully.  
+    Our cocoa export team will contact you shortly.
+  </p>
+
+  <p class="form-error" hidden>
+    ❌ Oops! Something went wrong.  
+    Please try again or contact us directly.
+  </p>
+</div>
+
+
+  <div class="fs-button-group">
+    <button class="fs-button" type="submit">
+      <i class="fa fa-paper-plane" aria-hidden="true"></i>
+            <span>Send Message</span>
+    </button>
+  </div>
+</form>      
+    </div>
   </div>
 </section>
 
@@ -623,7 +637,8 @@
 
 
 
-    <!-- FOOTER -->
+
+<!-- FOOTER -->
 <footer 
 class="site-footer"
 itemscope
@@ -1716,6 +1731,10 @@ s0.parentNode.insertBefore(s1,s0);
 
 </div>
 
+
+
+
+
 <script type="text/javascript">
 function googleTranslateElementInit() {
   new google.translate.TranslateElement({pageLanguage: 'en'}, 'google_translate_element');
@@ -1798,12 +1817,6 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 });
 </script>
-
-
-
-
-
-
 
 
 
@@ -1910,26 +1923,14 @@ window.addEventListener("scroll", activateNavLink);
 </script>
 
 
-
-
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2" defer></script>
 
-
 <script src="supabase.js" defer></script>
-
 
 
 <script src="script.js" defer></script>
 </body>
 </html>
-
-
-
-
-
-
-
-
 
 
 

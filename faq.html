@@ -485,135 +485,124 @@
 
 
 
-<div id="overlay"></div>
-
-<section class="hero">
-<div class="slide active" style="background-image:url('images/ga1.png')" aria-label="Cameroon cocoa farm producing premium cocoa beans"></div>
-<div class="slide" style="background-image:url('images/ga2.png')" aria-label="Fermented cocoa beans ready for export"></div>
-<div class="slide" style="background-image:url('images/AG1.jpg')" aria-label="Sun-dried cocoa beans for export"></div>
-<div class="slide" style="background-image:url('images/AG3.png')" aria-label="Sun-dried cocoa beans for export"></div>
-<div class="slide" style="background-image:url('images/hero3.png')" aria-label="Sun-dried cocoa beans for export"></div>
-<div class="overlay"></div>
-<div class="hero-content">
-<h1>Cameroon Cocoa Exporter of Premium Fermented Cocoa Beans</h1>
-<p>We supply export-quality cocoa beans from Cameroon to international chocolate manufacturers, processors, and wholesalers. Our cocoa is ethically sourced, fully traceable, fermented, sun-dried, and prepared to meet global export standards.</p>
-<a href="quote.html" class="btn-quote">Request a Cocoa Export Quote</a>
-</div>
-<a class="prev" onclick="changeSlide(-1)">&#10094;</a>
-<a class="next" onclick="changeSlide(1)">&#10095;</a>
-<div class="dots" id="heroDots"></div>
-</section>
-
-
-
-
-
-<!-- ================= Office & Location ================= -->
-<section
-  id="office"
-  class="section office-section"
-  aria-labelledby="office-heading"
-  itemscope
-  itemtype="https://schema.org/LocalBusiness"
->
-
-  <div class="container">
-
-    <!-- Business identity -->
-    <meta itemprop="name" content="CHOCOCAM S.A.R.L">
-    <meta itemprop="industry" content="Cocoa Exporter">
-    <meta itemprop="url" content="https://chococa.netlify.app">
-
-    <header class="office-header">
-      <h2 id="office-heading" itemprop="name">
-        Our Office in Douala, Cameroon
-      </h2>
-      <p class="office-subtitle">
-        Visit or contact our cocoa export office in Douala — the commercial hub of Cameroon and
-        a strategic gateway for international cocoa shipments.
-      </p>
-    </header>
-
-    <!-- Map -->
-    <div
-      class="map-wrap"
-      role="region"
-      aria-label="CHOCAM cocoa export office location map"
-    >
-      <iframe
-        title="CHOCOCAM S.A.R.L cocoa export office location in Douala, Cameroon"
-        src="https://www.google.com/maps/embed?pb=!1m18..."
-        width="100%"
-        height="300"
-        style="border:0;"
-        allowfullscreen
-        loading="lazy"
-        referrerpolicy="no-referrer-when-downgrade"
-      ></iframe>
-    </div>
-
-    <!-- Address (SEO critical) -->
-    <address
-      class="office-address"
-      itemprop="address"
-      itemscope
-      itemtype="https://schema.org/PostalAddress"
-    >
-      <meta itemprop="addressLocality" content="Douala">
-      <meta itemprop="addressCountry" content="Cameroon">
-
-      <p>
-        📍 <strong>Location:</strong>
-        <span itemprop="addressLocality">Douala</span>,
-        <span itemprop="addressCountry">Cameroon</span>
-      </p>
-    </address>
-
-    <!-- Quick Contact -->
-    <div class="contact-quick">
-
-      <a
-        id="phoneBtn"
-        href="tel:+237671742824"
-        class="btn outline"
-        itemprop="telephone"
-        aria-label="Call CHOCOCAM cocoa export office"
-      >
-        <i class="fa fa-phone" aria-hidden="true"></i>
-        +237 671 742 824
-      </a>
-
-      <a
-        href="https://wa.me/237699745546"
-        id="whatsappBtn"
-        class="btn whatsapp"
-        aria-label="Chat with CHOCOCAM cocoa export team on WhatsApp"
-        target="_blank"
-        rel="noopener"
-      >
-        <i class="fab fa-whatsapp" aria-hidden="true"></i>
-        Chat on WhatsApp
-      </a>
-
-      <a
-        href="https://www.linkedin.com/in/eudriverslicence"
-        id="linkedinBtn"
-        target="_blank"
-        rel="noopener"
-        class="btn outline"
-        aria-label="CHOCOCAM cocoa export LinkedIn page"
-      >
-        <i class="fab fa-linkedin" aria-hidden="true"></i>
-        LinkedIn
-      </a>
-
-    </div>
-
-    <p class="office-note">
-      <strong>Availability:</strong>
-      Office hours & WhatsApp support available for international cocoa buyers.
+<!-- FAQ module -->
+<section id="faq-module" class="faq-section" aria-labelledby="faq-title">
+  <div class="faq-header">
+    <h2 id="faq-title">Frequently Asked Questions – Cameroon Cocoa Export</h2>
+    <p class="faq-subtitle">
+      Answers to common questions about Cameroonian cocoa beans, export procedures, logistics, and compliance.
     </p>
 
+    <!-- Origin control (updates some answers dynamically) -->
+    <label for="originSelect" class="origin-label">Your origin:</label>
+    <select id="originSelect" class="origin-select" aria-label="Select your location">
+      <option value="douala">Douala</option>
+      <option value="kribi">Kribi</option>
+      <option value="limbe">Limbe</option>
+      <option value="other">Other / International</option>
+    </select>
+
+    <!-- quick search -->
+    <input id="faqSearch" 
+    class="faq-search" 
+    type="search" 
+    placeholder="Search cocoa export FAQs..."
+    aria-label="Search frequently asked questions">
+  </div>
+
+  <div id="faqList" class="faq-list" role="list">
+
+    <!-- Each item follows accessible accordion pattern -->
+    <article class="faq-item" data-key="moisture">
+      <button class="faq-q" aria-expanded="false" aria-controls="a-moisture" id="q-moisture">
+        What is your cocoa bean moisture and fermentation level?
+        <span class="faq-toggle-indicator">+</span>
+      </button>
+      <div id="a-moisture" class="faq-a" role="region" aria-labelledby="q-moisture">
+        <p> Our Cameroonian cocoa beans have a typical moisture content of
+          <strong>6.0% – 7.0%</strong>. Fermentation lasts
+          <strong>5–7 days</strong> using box or heap fermentation methods.
+          Full quality certificates are provided per shipment.</p>
+      </div>
+    </article>
+
+    <article class="faq-item" data-key="min-order">
+      <button class="faq-q" aria-expanded="false" aria-controls="a-min-order" id="q-min-order">
+        What is your minimum order quantity (MOQ)?
+        <span class="faq-toggle-indicator">+</span>
+      </button>
+      <div id="a-min-order" class="faq-a" role="region" aria-labelledby="q-min-order">
+        <p>Our minimum order quantity is
+          <strong>one 20ft container (19–20 metric tonnes)</strong>.
+          Smaller sample orders may be arranged for evaluation purposes.</p>
+      </div>
+    </article>
+
+    <article class="faq-item" data-key="ports">
+      <button class="faq-q" aria-expanded="false" aria-controls="a-ports" id="q-ports">
+        Which ports do you ship cocoa from in Cameroon?
+        <span class="faq-toggle-indicator">+</span>
+      </button>
+      <div id="a-ports" class="faq-a" role="region" aria-labelledby="q-ports">
+        <p class="ports-answer">Loading ports for selected origin...</p>
+      </div>
+    </article>
+
+    <article class="faq-item" data-key="payment">
+      <button class="faq-q" aria-expanded="false" aria-controls="a-payment" id="q-payment">
+       What payment methods do you accept?
+        <span class="faq-toggle-indicator">+</span>
+      </button>
+      <div id="a-payment" class="faq-a" role="region" aria-labelledby="q-payment">
+        <p>We accept <strong>Telegraphic Transfer (TT)</strong>,
+          <strong>Letter of Credit (LC)</strong>, and negotiated terms for
+          long-term partners. Payments may be made in
+          <strong>USD, EUR, or XAF</strong> by agreement.</p>
+      </div>
+    </article>
+
+    <article class="faq-item" data-key="shipping-time">
+      <button class="faq-q" aria-expanded="false" aria-controls="a-shipping-time" id="q-shipping-time">
+        How long does cocoa export shipping take?
+        <span class="faq-toggle-indicator">+</span>
+      </button>
+      <div id="a-shipping-time" class="faq-a" role="region" aria-labelledby="q-shipping-time">
+        <p>Shipping time depends on destination and route.
+          Average transit time to Europe is
+          <strong>10–21 days</strong> from the port of loading.
+          Exact ETA is provided after booking.</p>
+    </article>
+
+    <article class="faq-item" data-key="samples">
+      <button class="faq-q" aria-expanded="false" aria-controls="a-samples" id="q-samples">
+        Do you provide Cocoa beans samples?
+        <span class="faq-toggle-indicator">+</span>
+      </button>
+      <div id="a-samples" class="faq-a" role="region" aria-labelledby="q-samples">
+        <p>Yes, cocoa bean samples are available.
+          Sample costs and shipping depend on destination and quantity.
+          Some samples may be free for qualified buyers.</p>
+      </div>
+    </article>
+
+    <article class="faq-item" data-key="customs">
+      <button class="faq-q" aria-expanded="false" aria-controls="a-customs" id="q-customs">
+        Do you handle export customs clearance?
+        <span class="faq-toggle-indicator">+</span>
+      </button>
+      <div id="a-customs" class="faq-a" role="region" aria-labelledby="q-customs">
+        <p>Yes. We handle full <strong>export customs clearance in Cameroon</strong>
+          and provide all required documentation.
+          Import clearance is typically handled by the buyer unless otherwise agreed.</p>
+      </div>
+    </article>
+  </div>
+
+  <!-- Optional admin: add new FAQ quickly (editable) -->
+  <div class="faq-admin">
+    <input id="newQ" placeholder="New FAQ question" aria-label="New FAQ question">
+    <input id="newA" placeholder="New FAQ answer" aria-label="New FAQ answer">
+    <button id="addFaqBtn">Add FAQ</button>
   </div>
 </section>
 
@@ -623,7 +612,7 @@
 
 
 
-    <!-- FOOTER -->
+<!-- FOOTER -->
 <footer 
 class="site-footer"
 itemscope
@@ -1716,6 +1705,10 @@ s0.parentNode.insertBefore(s1,s0);
 
 </div>
 
+
+
+
+
 <script type="text/javascript">
 function googleTranslateElementInit() {
   new google.translate.TranslateElement({pageLanguage: 'en'}, 'google_translate_element');
@@ -1798,11 +1791,6 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 });
 </script>
-
-
-
-
-
 
 
 
@@ -1911,6 +1899,53 @@ window.addEventListener("scroll", activateNavLink);
 
 
 
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const faqButtons = document.querySelectorAll(".faq-q");
+
+  faqButtons.forEach(btn => {
+    btn.addEventListener("click", () => {
+      const item = btn.closest(".faq-item");
+      const isOpen = btn.getAttribute("aria-expanded") === "true";
+
+      // Close all
+      document.querySelectorAll(".faq-item").forEach(i => {
+        i.classList.remove("active");
+        i.querySelector(".faq-q").setAttribute("aria-expanded", "false");
+      });
+
+      // Open selected
+      if (!isOpen) {
+        item.classList.add("active");
+        btn.setAttribute("aria-expanded", "true");
+      }
+    });
+  });
+
+  /* Origin-based dynamic answer */
+  const originSelect = document.getElementById("originSelect");
+  const portsAnswer = document.querySelector(".ports-answer");
+
+  if (originSelect && portsAnswer) {
+    const ports = {
+      douala: "Primary export port: Douala Port (DAP)",
+      kribi: "Primary export port: Kribi Deep Sea Port",
+      limbe: "Secondary export via Limbe with Douala routing",
+      other: "Exports routed via Douala or Kribi depending on shipment size"
+    };
+
+    originSelect.addEventListener("change", () => {
+      portsAnswer.textContent = ports[originSelect.value];
+    });
+
+    portsAnswer.textContent = ports[originSelect.value];
+  }
+});
+</script>
+
+
+
+
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2" defer></script>
 
@@ -1922,16 +1957,3 @@ window.addEventListener("scroll", activateNavLink);
 <script src="script.js" defer></script>
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-

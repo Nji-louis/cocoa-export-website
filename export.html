@@ -361,6 +361,13 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
 
+
+<!-- Google Font -->
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+
+<!-- Font Awesome -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -425,22 +432,20 @@
   ]
 }
 </script>
-
-
 <!-- Load an icon library to show a hamburger menu (bars) on small screens -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
 
-
    <!-- Custom CSS -->
   <link rel="stylesheet" href="style.css">
-
 </head>
 
 
 
+
+
 <body>
- <header class="header">
+  <header class="header">
 <div class="header-logo">
 <img src="images/chococam-logo.png" alt="CHOCOCAM Logo">
 </div>
@@ -485,134 +490,394 @@
 
 
 
-<div id="overlay"></div>
 
-<section class="hero">
-<div class="slide active" style="background-image:url('images/ga1.png')" aria-label="Cameroon cocoa farm producing premium cocoa beans"></div>
-<div class="slide" style="background-image:url('images/ga2.png')" aria-label="Fermented cocoa beans ready for export"></div>
-<div class="slide" style="background-image:url('images/AG1.jpg')" aria-label="Sun-dried cocoa beans for export"></div>
-<div class="slide" style="background-image:url('images/AG3.png')" aria-label="Sun-dried cocoa beans for export"></div>
-<div class="slide" style="background-image:url('images/hero3.png')" aria-label="Sun-dried cocoa beans for export"></div>
-<div class="overlay"></div>
-<div class="hero-content">
-<h1>Cameroon Cocoa Exporter of Premium Fermented Cocoa Beans</h1>
-<p>We supply export-quality cocoa beans from Cameroon to international chocolate manufacturers, processors, and wholesalers. Our cocoa is ethically sourced, fully traceable, fermented, sun-dried, and prepared to meet global export standards.</p>
-<a href="quote.html" class="btn-quote">Request a Cocoa Export Quote</a>
-</div>
-<a class="prev" onclick="changeSlide(-1)">&#10094;</a>
-<a class="next" onclick="changeSlide(1)">&#10095;</a>
-<div class="dots" id="heroDots"></div>
+<!-- ================= Export Section ================= -->
+<!-- ================= Export Hero ================= -->
+<section class="export-hero">
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <h1>Cameroon Cocoa Export & Documentation</h1>
+    <p>End-to-end cocoa export solutions compliant with EU, Asia & Middle East standards</p>
+    <a href="#export" class="btn hero-btn">View Export Process</a>
+  </div>
+</section>
+
+
+<section id="export" class="export-section">
+  <div class="container">
+
+    <h2 class="section-title">Cameroon Cocoa Export Process & Customs Clearance</h2>
+    <p class="section-subtitle">CHOCAM S.A.R.L Ltd manages the complete cocoa export process from Cameroon,
+      ensuring full compliance with national regulations and international trade standards
+      for EU, Asia, and Middle East markets.</p>
+
+    <!-- Timeline Steps -->
+    <div class="timeline">
+      <!-- your existing timeline steps remain unchanged -->
+      <!-- I kept your original timeline exactly the same to avoid breaking your design -->
+      <!-- PRE-EXPORT -->
+      <div class="timeline-step" data-category="Pre-Export">
+        <div class="step-icon">📝</div>
+        <h3>Pre-Export Registration & Compliance</h3>
+        <ul>
+          <li>Registration with the Ministry of Trade as a licensed cocoa exporter.</li>
+          <li>Taxpayer card and customs exporter registration.</li>
+          <li>Preparation of commercial invoices and packing lists.</li>
+          <li>Issuance of Certificate of Origin, Phytosanitary Certificate, and Stuffing Certificate.</li>
+          <li>Independent quality inspection by accredited agencies (e.g. SGS).</li>
+        </ul>
+      </div>
+
+      <!-- TAXATION -->
+      <div class="timeline-step" data-category="Taxation">
+        <div class="step-icon">💰</div>
+        <h3>Export Taxes & Single Window (GUCE)</h3>
+        <ul>
+          <li>Submission of export documents via GUCE (Single Window for Foreign Trade).</li>
+          <li>Issuance of Bordereau de Taxation (BDT).</li>
+          <li>Payment of cocoa export duty (approximately 10% FOB value).</li>
+          <li>Settlement of royalties with the National Cocoa & Coffee Board (ONCC).</li>
+        </ul>
+      </div>
+
+      <!-- DECLARATION -->
+      <div class="timeline-step" data-category="Declaration">
+        <div class="step-icon">📂</div>
+        <h3>Customs Export Declaration</h3>
+        <ul>
+          <li>Electronic export declaration through the SYDONIA++ system.</li>
+          <li>Customs validation of liquidation and fiscal documents.</li>
+          <li>Submission of all inspection and quality certificates.</li>
+        </ul>
+      </div>
+
+      <!-- APPROVAL -->
+      <div class="timeline-step" data-category="Approval">
+        <div class="step-icon">✅</div>
+        <h3>Good-to-Ship (GTS) Authorization</h3>
+        <ul>
+          <li>Final customs authorization for shipment.</li>
+          <li>Physical inspection when required before container sealing.</li>
+          <li>Presentation of waybill and export manifest at the port of exit.</li>
+        </ul>
+      </div>
+
+      <!-- LOADING -->
+      <div class="timeline-step" data-category="Loading">
+        <div class="step-icon">🚢</div>
+        <h3>Container Loading & Shipment</h3>
+        <ul>
+          <li>Container stuffing under supervision using approved procedures.</li>
+          <li>Issuance of Bill of Lading by the shipping line.</li>
+          <li>Final customs clearance prior to vessel departure.</li>
+        </ul>
+      </div>
+
+      <!-- POST-EXPORT -->
+      <div class="timeline-step" data-category="Post-Export">
+        <div class="step-icon">📦</div>
+        <h3>Post-Export Traceability & Reporting</h3>
+        <ul>
+          <li>Archiving of export documents for audits and compliance checks.</li>
+          <li>Traceability aligned with zero-deforestation cocoa requirements.</li>
+          <li>Reporting of exported volumes and quality to ONCC.</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Export Details -->
+    <div class="export-details">
+      <h3><i class="fas fa-cubes"></i> Minimum Export Order</h3>
+      <p>One (1) full 20ft container — approximately 19 to 20 metric tons of cocoa beans.</p>
+
+      <h3><i class="fas fa-file-alt"></i> Export Documents Supplied</h3>
+
+      <!-- ONLY THIS LINE CHANGED -->
+      <ul class="export-doc-list">
+        <li>Certificate of Origin</li>
+        <li>Phytosanitary Certificate</li>
+        <li>EUR.1 Movement Certificate (where applicable)</li>
+        <li>Quality Analysis & Moisture Test Report</li>
+        <li>Fumigation Certificate (if required by destination country)</li>
+      </ul>
+      <!-- END OF CHANGE -->
+
+    </div>
+
+  </div>
+
+
+  <!-- ================= Export Images ================= -->
+<section class="export-images">
+  <div class="container image-grid">
+    <a target="_blank" href="images/ga6.png">
+    <img src="images/ga6.png" alt="Cameroon cocoa beans export quality">
+    </a>
+    <a target="_blank" href="images/ga7.png">
+    <img src="images/ga7.png" alt="Cocoa container loading at Douala port">
+    </a>
+    <a target="_blank" href="images/hero1.png">
+    <img src="images/hero1.png" alt="Kribi deep seaport cocoa export">
+    </a>
+    <a target="_blank" href="images/v2.png">
+    <img src="images/v2.png" alt="Cocoa warehouse fumigation and inspection">
+    </a>
+  </div>
+</section>
+
+
+    <!-- ================= Cocoa Product Specifications ================= -->
+    <div class="product-specs">
+      <h2 class="section-title">Cameroon Cocoa Beans – Export Specifications</h2>
+      <p class="section-subtitle">Export-grade Cameroonian cocoa beans meeting EU, Asian, and Middle Eastern
+      import regulations with full traceability.</p>
+
+      <table class="spec-table">
+        <tr>
+          <th>Parameter</th>
+          <th>Specification</th>
+        </tr>
+        <tr>
+          <td><strong>Variety</strong></td>
+          <td>Forastero (majority), Trinitario (selected regions)</td>
+        </tr>
+        <tr>
+          <td><strong>Origin Regions</strong></td>
+          <td>Southwest, Littoral, Center, South, East (Cameroon)</td>
+        </tr>
+        <tr>
+          <td><strong>Fermentation</strong></td>
+        <td>3–5 days (box or heap fermentation)</td>
+        </tr>
+        <tr>
+          <td><strong>Drying</strong></td>
+        <td>Sun-dried or controlled mechanical drying</td>
+        </tr>
+        <tr>
+          <td><strong>Moisture Content</strong></td>
+          <td>6.5% – 7.5%</td>
+        </tr>
+        <tr>
+          <td><strong>Bean Count</strong></td>
+          <td>90 – 110 beans per 100g</td>
+        </tr>
+        <tr>
+          <td><strong>Flavor Profile</strong></td>
+        <td>Rich cocoa aroma, mild acidity, fruity undertones</td>
+        </tr>
+        <tr>
+          <td><strong>Grades</strong></td>
+          <td>Grade 1 & Grade 2 (export standard)</td>
+        </tr>
+        <tr>
+         <td><strong>Packaging</strong></td>
+        <td>50kg or 65kg jute bags (poly liner on request)</td>
+        </tr>
+        <tr>
+          <td><strong>MOQ</strong></td>
+        <td>1 × 20ft container (19–20 MT)</td>
+        </tr>
+        <tr>
+         <td><strong>HS Code</strong></td>
+        <td>1801.00 — Cocoa beans, whole or broken</td>
+        </tr>
+        <tr>
+          <td><strong>Ports of Loading</strong></td>
+        <td>Douala Port · Kribi Deep Seaport</td>
+        </tr>
+        <tr>
+          <td><strong>Lead Time</strong></td>
+        <td>7–14 days after order confirmation</td>
+        </tr>
+        <tr>
+          <td><strong>Payment Terms</strong></td>
+        <td>TT, LC at Sight, 30/70 or 50/50</td>
+        </tr>
+      </table>
+    </div>
+</section>
+
+
+<!-- ================= HS Code & Incoterms ================= -->
+<section class="trade-info">
+  <div class="container">
+
+    <h2 class="section-title">HS Code, Incoterms & Trade Terms</h2>
+    <p class="section-subtitle">
+      International trade classification and delivery terms used for
+      Cameroon cocoa bean exports.
+    </p>
+
+    <div class="trade-grid">
+
+      <!-- HS CODE -->
+      <div class="trade-card">
+        <i class="fas fa-barcode trade-icon"></i>
+        <h3>Harmonized System (HS) Code</h3>
+        <p>
+          <strong>HS Code:</strong> 1801.00<br>
+          Cocoa beans, whole or broken, raw or roasted.
+        </p>
+        <p class="small-text">
+          Used for customs clearance, duties, and import documentation worldwide.
+        </p>
+      </div>
+
+      <!-- INCOTERMS -->
+      <div class="trade-card">
+        <i class="fas fa-ship trade-icon"></i>
+        <h3>Supported Incoterms</h3>
+        <ul>
+          <li><strong>EXW</strong> – Ex Works (Warehouse Cameroon)</li>
+          <li><strong>FOB</strong> – Free On Board (Douala / Kribi)</li>
+          <li><strong>CFR</strong> – Cost & Freight</li>
+          <li><strong>CIF</strong> – Cost, Insurance & Freight</li>
+        </ul>
+      </div>
+
+      <!-- PAYMENT -->
+      <div class="trade-card">
+        <i class="fas fa-handshake trade-icon"></i>
+        <h3>Payment Terms</h3>
+        <ul>
+          <li>LC at Sight (Preferred)</li>
+          <li>Telegraphic Transfer (TT)</li>
+          <li>30/70 or 50/50 advance arrangements</li>
+        </ul>
+      </div>
+
+    </div>
+
+  </div>
 </section>
 
 
 
+<!-- ================= Buyer CTA ================= -->
+<section class="buyer-cta">
+  <div class="cta-overlay"></div>
+
+  <div class="container cta-content">
+    <h2>Request a Cocoa Export Quotation</h2>
+    <p>
+      Contact our export team for pricing, specifications, Incoterms,
+      and shipment scheduling from Cameroon to your destination.
+    </p>
+
+    <div class="cta-buttons">
+      <a href="quote.html" class="btn cta-btn email-btn">
+        <i class="fas fa-envelope"></i> Request Quote
+      </a>
+
+    </div>
+
+    <p class="cta-note">
+      📦 Minimum order: 1 × 20ft container (19–20 MT)
+    </p>
+  </div>
+</section>
 
 
-<!-- ================= Office & Location ================= -->
-<section
-  id="office"
-  class="section office-section"
-  aria-labelledby="office-heading"
-  itemscope
-  itemtype="https://schema.org/LocalBusiness"
->
 
+<!-- ================= Documents Section ================= -->
+<section id="document" class="documents-section">
   <div class="container">
 
-    <!-- Business identity -->
-    <meta itemprop="name" content="CHOCOCAM S.A.R.L">
-    <meta itemprop="industry" content="Cocoa Exporter">
-    <meta itemprop="url" content="https://chococa.netlify.app">
-
-    <header class="office-header">
-      <h2 id="office-heading" itemprop="name">
-        Our Office in Douala, Cameroon
-      </h2>
-      <p class="office-subtitle">
-        Visit or contact our cocoa export office in Douala — the commercial hub of Cameroon and
-        a strategic gateway for international cocoa shipments.
-      </p>
-    </header>
-
-    <!-- Map -->
-    <div
-      class="map-wrap"
-      role="region"
-      aria-label="CHOCAM cocoa export office location map"
-    >
-      <iframe
-        title="CHOCOCAM S.A.R.L cocoa export office location in Douala, Cameroon"
-        src="https://www.google.com/maps/embed?pb=!1m18..."
-        width="100%"
-        height="300"
-        style="border:0;"
-        allowfullscreen
-        loading="lazy"
-        referrerpolicy="no-referrer-when-downgrade"
-      ></iframe>
-    </div>
-
-    <!-- Address (SEO critical) -->
-    <address
-      class="office-address"
-      itemprop="address"
-      itemscope
-      itemtype="https://schema.org/PostalAddress"
-    >
-      <meta itemprop="addressLocality" content="Douala">
-      <meta itemprop="addressCountry" content="Cameroon">
-
-      <p>
-        📍 <strong>Location:</strong>
-        <span itemprop="addressLocality">Douala</span>,
-        <span itemprop="addressCountry">Cameroon</span>
-      </p>
-    </address>
-
-    <!-- Quick Contact -->
-    <div class="contact-quick">
-
-      <a
-        id="phoneBtn"
-        href="tel:+237671742824"
-        class="btn outline"
-        itemprop="telephone"
-        aria-label="Call CHOCOCAM cocoa export office"
-      >
-        <i class="fa fa-phone" aria-hidden="true"></i>
-        +237 671 742 824
-      </a>
-
-      <a
-        href="https://wa.me/237699745546"
-        id="whatsappBtn"
-        class="btn whatsapp"
-        aria-label="Chat with CHOCOCAM cocoa export team on WhatsApp"
-        target="_blank"
-        rel="noopener"
-      >
-        <i class="fab fa-whatsapp" aria-hidden="true"></i>
-        Chat on WhatsApp
-      </a>
-
-      <a
-        href="https://www.linkedin.com/in/eudriverslicence"
-        id="linkedinBtn"
-        target="_blank"
-        rel="noopener"
-        class="btn outline"
-        aria-label="CHOCOCAM cocoa export LinkedIn page"
-      >
-        <i class="fab fa-linkedin" aria-hidden="true"></i>
-        LinkedIn
-      </a>
-
-    </div>
-
-    <p class="office-note">
-      <strong>Availability:</strong>
-      Office hours & WhatsApp support available for international cocoa buyers.
+    <h2 class="section-title">Cocoa Export Documents & Certifications (Cameroon)</h2>
+    <p class="section-subtitle">
+     Verified export documents and certifications required for international
+      cocoa bean shipments from Cameroon. Issued by authorized government bodies,
+      customs authorities, and independent inspection agencies.
     </p>
+
+    <!-- Documents Grid -->
+    <div class="documents-grid">
+
+      <!-- Certificate of Origin -->
+      <div class="document-card">
+        <i class="fas fa-certificate doc-icon"></i>
+        <h4>Certificate of Origin</h4>
+        <p>Official document issued by the Cameroon Chamber of Commerce,
+          confirming the Cameroonian origin of exported cocoa beans.</p>
+        <a href="docs/certificate-of-origin.pdf" download class="btn">
+          <i class="fas fa-file-pdf"></i> Download PDF
+        </a>
+      </div>
+
+      <!-- Phytosanitary Certificate -->
+      <div class="document-card">
+        <i class="fas fa-leaf doc-icon"></i>
+        <h4>Phytosanitary Certificate</h4>
+        <p>Mandatory plant health certificate issued by the Ministry of Agriculture,
+          ensuring cocoa beans are free from pests and diseases.</p>
+        <a href="docs/phytosanitary-certificate.pdf" download class="btn">
+          <i class="fas fa-file-pdf"></i> Download PDF
+        </a>
+      </div>
+
+      <!-- Fumigation Certificate -->
+      <div class="document-card">
+        <i class="fas fa-shield-alt doc-icon"></i>
+        <h4>Fumigation Certificate</h4>
+        <p>Confirms fumigation of warehouse or container prior to shipment,
+          meeting importing country requirements.</p>
+        <a href="docs/fumigation-certificate.pdf" download class="btn">
+          <i class="fas fa-file-pdf"></i> Download PDF
+        </a>
+      </div>
+
+      <!-- SGS / Bureau Veritas Quality Test -->
+      <div class="document-card">
+        <i class="fas fa-vials doc-icon"></i>
+        <h4>SGS / Bureau Veritas Lab Test Report</h4>
+        <p>Independent laboratory analysis covering moisture content,
+          bean count, mold percentage, defects, and cocoa grade.</p>
+        <a href="docs/lab-test-report.pdf" download class="btn">
+          <i class="fas fa-file-pdf"></i> Download PDF
+        </a>
+      </div>
+
+      <!-- Export License -->
+      <div class="document-card">
+        <i class="fas fa-id-card doc-icon"></i>
+        <h4>Licensed Cocoa Exporter Certificate</h4>
+        <p>Government-issued exporter license authorizing international
+          trade of cocoa beans from Cameroon.</p>
+        <a href="docs/export-license.pdf" download class="btn">
+          <i class="fas fa-file-pdf"></i> Download PDF
+        </a>
+      </div>
+
+      <!-- Quality Analysis -->
+      <div class="document-card">
+        <i class="fas fa-clipboard-check doc-icon"></i>
+        <h4>Cocoa Quality Analysis Report</h4>
+        <p> Detailed quality assessment confirming Grade 1 or Grade 2
+          export standards for each shipment.</p>
+        <a href="docs/quality-analysis.pdf" download class="btn">
+          <i class="fas fa-file-pdf"></i> Download PDF
+        </a>
+      </div>
+
+      <!-- Packaging Specification Sheet -->
+      <div class="document-card">
+        <i class="fas fa-box-open doc-icon"></i>
+        <h4>Packaging & Container Specifications</h4>
+        <p>Specifications covering jute bags, inner liners,
+          container stuffing, sealing, and labeling procedures.</p>
+        <a href="docs/packaging-specs.pdf" download class="btn">
+          <i class="fas fa-file-pdf"></i> Download PDF
+        </a>
+      </div>
+
+    </div>
+
+    <!-- Request Full Pack -->
+    <div class="documents-footer">
+      <a href="mailto:info@chococam.com?subject=Request Full Export Documentation Pack" class="btn request-btn">
+        <i class="fas fa-file-archive"></i> Request Full Cocoa Export Documentation Pack
+      </a>
+    </div>
 
   </div>
 </section>
@@ -623,7 +888,20 @@
 
 
 
-    <!-- FOOTER -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- FOOTER -->
 <footer 
 class="site-footer"
 itemscope
@@ -1716,6 +1994,9 @@ s0.parentNode.insertBefore(s1,s0);
 
 </div>
 
+
+
+
 <script type="text/javascript">
 function googleTranslateElementInit() {
   new google.translate.TranslateElement({pageLanguage: 'en'}, 'google_translate_element');
@@ -1798,10 +2079,6 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 });
 </script>
-
-
-
-
 
 
 
@@ -1910,10 +2187,7 @@ window.addEventListener("scroll", activateNavLink);
 </script>
 
 
-
-
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2" defer></script>
-
 
 <script src="supabase.js" defer></script>
 
@@ -1922,15 +2196,6 @@ window.addEventListener("scroll", activateNavLink);
 <script src="script.js" defer></script>
 </body>
 </html>
-
-
-
-
-
-
-
-
-
 
 
 

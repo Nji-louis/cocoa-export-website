@@ -456,7 +456,7 @@
 <a href="cundeamor.html">Cundeamor</a>
 <a href="criollo.html">Criollo</a>
 <a href="trinitario.html">Trinitario</a>
-<a href="bresilien.html">Bresilien</a>
+<a href="index.html">Bresilien</a>
 </div>
 </div>
 <a href="export.html">Export</a>
@@ -485,137 +485,82 @@
 
 
 
-<div id="overlay"></div>
-
-<section class="hero">
-<div class="slide active" style="background-image:url('images/ga1.png')" aria-label="Cameroon cocoa farm producing premium cocoa beans"></div>
-<div class="slide" style="background-image:url('images/ga2.png')" aria-label="Fermented cocoa beans ready for export"></div>
-<div class="slide" style="background-image:url('images/AG1.jpg')" aria-label="Sun-dried cocoa beans for export"></div>
-<div class="slide" style="background-image:url('images/AG3.png')" aria-label="Sun-dried cocoa beans for export"></div>
-<div class="slide" style="background-image:url('images/hero3.png')" aria-label="Sun-dried cocoa beans for export"></div>
-<div class="overlay"></div>
-<div class="hero-content">
-<h1>Cameroon Cocoa Exporter of Premium Fermented Cocoa Beans</h1>
-<p>We supply export-quality cocoa beans from Cameroon to international chocolate manufacturers, processors, and wholesalers. Our cocoa is ethically sourced, fully traceable, fermented, sun-dried, and prepared to meet global export standards.</p>
-<a href="quote.html" class="btn-quote">Request a Cocoa Export Quote</a>
-</div>
-<a class="prev" onclick="changeSlide(-1)">&#10094;</a>
-<a class="next" onclick="changeSlide(1)">&#10095;</a>
-<div class="dots" id="heroDots"></div>
-</section>
-
-
-
-
-
-<!-- ================= Office & Location ================= -->
-<section
-  id="office"
-  class="section office-section"
-  aria-labelledby="office-heading"
-  itemscope
-  itemtype="https://schema.org/LocalBusiness"
->
-
+<!-- Blog & News Section -->
+<section id="blog" class="blog-section">
   <div class="container">
 
-    <!-- Business identity -->
-    <meta itemprop="name" content="CHOCOCAM S.A.R.L">
-    <meta itemprop="industry" content="Cocoa Exporter">
-    <meta itemprop="url" content="https://chococa.netlify.app">
+    <h2 class="section-title">Cocoa Industry News & Insights from Cameroon</h2>
+    <p class="section-subtitle">Latest updates, expert insights, and trends in cocoa farming,
+      processing, and export from Cameroon to global markets.</p>
 
-    <header class="office-header">
-      <h2 id="office-heading" itemprop="name">
-        Our Office in Douala, Cameroon
-      </h2>
-      <p class="office-subtitle">
-        Visit or contact our cocoa export office in Douala — the commercial hub of Cameroon and
-        a strategic gateway for international cocoa shipments.
-      </p>
-    </header>
-
-    <!-- Map -->
-    <div
-      class="map-wrap"
-      role="region"
-      aria-label="CHOCAM cocoa export office location map"
-    >
-      <iframe
-        title="CHOCOCAM S.A.R.L cocoa export office location in Douala, Cameroon"
-        src="https://www.google.com/maps/embed?pb=!1m18..."
-        width="100%"
-        height="300"
-        style="border:0;"
-        allowfullscreen
-        loading="lazy"
-        referrerpolicy="no-referrer-when-downgrade"
-      ></iframe>
+    <!-- Live Cocoa News -->
+    <div class="live-news-area">
+      <h3 class="live-news-title">Live Cocoa Industry News (Auto-Updated)</h3>
+      <div id="news-list" class="news-list">
+        <p>Loading latest cocoa industry news…</p>
+      </div>
     </div>
 
-    <!-- Address (SEO critical) -->
-    <address
-      class="office-address"
-      itemprop="address"
-      itemscope
-      itemtype="https://schema.org/PostalAddress"
-    >
-      <meta itemprop="addressLocality" content="Douala">
-      <meta itemprop="addressCountry" content="Cameroon">
+    <!-- Existing Blog Posts -->
+    <div class="blog-grid">
 
-      <p>
-        📍 <strong>Location:</strong>
-        <span itemprop="addressLocality">Douala</span>,
-        <span itemprop="addressCountry">Cameroon</span>
-      </p>
-    </address>
+      <!-- Blog Post 1 -->
+      <article class="blog-card" itemscope itemtype="https://schema.org/BlogPosting">
+        <div class="blog-img">
+          <a href="images/h.png" target="_blank">
+          <img src="images/h.png" alt="Cocoa harvesting techniques in Cameroon"
+              itemprop="image"
+              loading="lazy">
+          </a>
+        </div>
+        <div class="blog-content">
+          <h3 itemprop="headline">Cocoa Harvesting Techniques in Cameroon</h3>
+          <p itemprop="description">Learn how Cameroonian cocoa farmers harvest, ferment,
+            and dry cocoa beans to meet international export standards.</p>
+          <a href="https://www.google.com/search?q=Cocoa+Harvesting+Tips+in+cameroon" class="btn-read" target="_blank" rel="noopener noreferrer" itemprop="url">Read More</a>
+        </div>
+      </article>
 
-    <!-- Quick Contact -->
-    <div class="contact-quick">
+      <!-- Blog Post 2 -->
+      <article class="blog-card" itemscope itemtype="https://schema.org/BlogPosting">
+        <div class="blog-img">
+          <a href="images/s.png" target="_blank">
+          <img src="images/s.png" alt="Sustainable cocoa farming practices in Cameroon"
+              itemprop="image"
+              loading="lazy">
+          </a>
+        </div>
+        <div class="blog-content">
+          <h3 itemprop="headline"> Sustainable Cocoa Farming & Ethical Sourcing</h3>
+          <p itemprop="description">Discover sustainable cocoa farming practices in Cameroon,
+            including traceability, ethical sourcing, and environmental protection.</p>
+          <a href="https://www.google.com/search?q=Sustainable+Cocoa+Farming+in+cameroon" class="btn-read" target="_blank" rel="noopener noreferrer" itemprop="url">Read More</a>
+        </div>
+      </article>
 
-      <a
-        id="phoneBtn"
-        href="tel:+237671742824"
-        class="btn outline"
-        itemprop="telephone"
-        aria-label="Call CHOCOCAM cocoa export office"
-      >
-        <i class="fa fa-phone" aria-hidden="true"></i>
-        +237 671 742 824
-      </a>
-
-      <a
-        href="https://wa.me/237699745546"
-        id="whatsappBtn"
-        class="btn whatsapp"
-        aria-label="Chat with CHOCOCAM cocoa export team on WhatsApp"
-        target="_blank"
-        rel="noopener"
-      >
-        <i class="fab fa-whatsapp" aria-hidden="true"></i>
-        Chat on WhatsApp
-      </a>
-
-      <a
-        href="https://www.linkedin.com/in/eudriverslicence"
-        id="linkedinBtn"
-        target="_blank"
-        rel="noopener"
-        class="btn outline"
-        aria-label="CHOCOCAM cocoa export LinkedIn page"
-      >
-        <i class="fab fa-linkedin" aria-hidden="true"></i>
-        LinkedIn
-      </a>
+      <!-- Blog Post 3 -->
+      <article class="blog-card" itemscope itemtype="https://schema.org/BlogPosting">
+        <div class="blog-img">
+          <a href="images/c.png" target="_blank">
+          <img src="images/c.png"  alt="Cameroon cocoa export process to global markets"
+              itemprop="image"
+              loading="lazy">
+          </a>
+        </div>
+        <div class="blog-content">
+          <h3 itemprop="headline">Exporting Cocoa Beans from Cameroon to Global Markets</h3>
+          <p itemprop="description">Explore how Cameroonian cocoa beans are exported worldwide,
+            from quality inspection and documentation to international shipping.</p>
+          <a href="https://www.google.com/search?q=Exporting+cameroon+Cocoa+Worldwide" class="btn-read" target="_blank" rel="noopener noreferrer" itemprop="url">Read More</a>
+        </div>
+      </article>
 
     </div>
-
-    <p class="office-note">
-      <strong>Availability:</strong>
-      Office hours & WhatsApp support available for international cocoa buyers.
-    </p>
-
   </div>
 </section>
+
+
+
 
 
 
@@ -1716,6 +1661,78 @@ s0.parentNode.insertBefore(s1,s0);
 
 </div>
 
+
+
+
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const newsList = document.getElementById("news-list");
+
+  // Curated Cameroon cocoa news with real links
+  const articles = [
+    {
+      title: "Black pod disease devastates cocoa farms in Southwest Cameroon",
+      link: "https://www.reuters.com/business/environment/black-pod-disease-devastates-cocoa-farms-southwest-cameroon-2025-09-16/?utm_source=chatgpt.com",
+      description: "Black pod disease has been affecting cocoa farms in Southwest Cameroon, reducing yield and impacting local farmers.",
+      source: "Reuters"
+    },
+    {
+      title: "Cameroon farmers turn to vigilantes and amulets to stop cocoa theft",
+      link: "https://www.reuters.com/world/africa/cameroon-farmers-turn-vigilantes-amulets-stop-cocoa-theft-2024-10-01/?utm_source=chatgpt.com",
+      description: "Farmers in Cameroon are using unconventional methods such as vigilantes and charms to protect cocoa farms from theft.",
+      source: "Reuters"
+    },
+    {
+      title: "Cameroon to share cocoa location data to meet EU environment rules",
+      link: "https://www.reuters.com/markets/commodities/cameroon-share-cocoa-location-data-meet-eu-environment-rules-2024-08-28/?utm_source=chatgpt.com",
+      description: "Cameroon plans to share cocoa plantation location data to comply with EU deforestation-free regulations.",
+      source: "Reuters"
+    },
+    {
+      title: "Cocoa processing in Cameroon tops 100,000 tons for first time",
+      link: "https://www.businessincameroon.com/agriculture/0808-14904-cocoa-processing-in-cameroon-tops-100-000-tons-for-first-time?utm_source=chatgpt.com",
+      description: "Cameroon’s cocoa processing industry reached a milestone of 100,000 tons, boosting the country’s export potential.",
+      source: "Business in Cameroon"
+    },
+    {
+      title: "Cameroon nears full cocoa traceability as EU deadline looms",
+      link: "https://allafrica.com/stories/202507210357.html?utm_source=chatgpt.com",
+      description: "Cameroon is close to full traceability of cocoa beans, improving transparency and sustainability in the supply chain.",
+      source: "AllAfrica"
+    },
+    {
+      title: "Telcar Cocoa halts processing amid Cameroon bean quality crisis",
+      link: "https://www.foodbusinessmea.com/telcar-cocoa-halts-processing-amid-cameroon-bean-quality-crisis/?utm_source=chatgpt.com",
+      description: "Telcar Cocoa has temporarily stopped processing due to quality issues affecting Cameroon's cocoa beans.",
+      source: "Food Business MEA"
+    },
+  ];
+
+  // Render articles in #news-list
+  newsList.innerHTML = ""; // Clear any placeholder text
+
+  articles.forEach(article => {
+    const div = document.createElement("div");
+    div.className = "news-item";
+
+    div.innerHTML = `
+      <h4>${article.title}</h4>
+      <p class="news-meta">${article.source}</p>
+      <p>${article.description}</p>
+      <a href="${article.link}" target="_blank" rel="noopener noreferrer">Read More →</a>
+    `;
+
+    newsList.appendChild(div);
+  });
+});
+</script>
+
+
+
+
+
+
 <script type="text/javascript">
 function googleTranslateElementInit() {
   new google.translate.TranslateElement({pageLanguage: 'en'}, 'google_translate_element');
@@ -1798,10 +1815,6 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 });
 </script>
-
-
-
-
 
 
 
@@ -1922,16 +1935,3 @@ window.addEventListener("scroll", activateNavLink);
 <script src="script.js" defer></script>
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-

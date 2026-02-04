@@ -426,10 +426,13 @@
 }
 </script>
 
-
 <!-- Load an icon library to show a hamburger menu (bars) on small screens -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
+<link
+  rel="stylesheet"
+  href="https://cdn.jsdelivr.net/npm/intl-tel-input@18.2.1/build/css/intlTelInput.min.css"
+/>
 
 
    <!-- Custom CSS -->
@@ -440,7 +443,7 @@
 
 
 <body>
- <header class="header">
+<header class="header">
 <div class="header-logo">
 <img src="images/chococam-logo.png" alt="CHOCOCAM Logo">
 </div>
@@ -479,141 +482,163 @@
 </nav>
 </header>
 
+ 
 
 
 
 
 
 
-<div id="overlay"></div>
+<!-- Quote (Request a Quote form) -->
+<!-- Quote (Request a Quote form using Formspree) -->
+<section id="quote" 
+class="quote-section" 
+aria-labelledby="quote-title"
+itemscope
+itemtype="https://schema.org/Service">
 
-<section class="hero">
-<div class="slide active" style="background-image:url('images/ga1.png')" aria-label="Cameroon cocoa farm producing premium cocoa beans"></div>
-<div class="slide" style="background-image:url('images/ga2.png')" aria-label="Fermented cocoa beans ready for export"></div>
-<div class="slide" style="background-image:url('images/AG1.jpg')" aria-label="Sun-dried cocoa beans for export"></div>
-<div class="slide" style="background-image:url('images/AG3.png')" aria-label="Sun-dried cocoa beans for export"></div>
-<div class="slide" style="background-image:url('images/hero3.png')" aria-label="Sun-dried cocoa beans for export"></div>
-<div class="overlay"></div>
-<div class="hero-content">
-<h1>Cameroon Cocoa Exporter of Premium Fermented Cocoa Beans</h1>
-<p>We supply export-quality cocoa beans from Cameroon to international chocolate manufacturers, processors, and wholesalers. Our cocoa is ethically sourced, fully traceable, fermented, sun-dried, and prepared to meet global export standards.</p>
-<a href="quote.html" class="btn-quote">Request a Cocoa Export Quote</a>
-</div>
-<a class="prev" onclick="changeSlide(-1)">&#10094;</a>
-<a class="next" onclick="changeSlide(1)">&#10095;</a>
-<div class="dots" id="heroDots"></div>
-</section>
+<meta itemprop="serviceType" content="Cameroon Cocoa Bean Export">
+<meta itemprop="areaServed" content="Worldwide">
+<meta itemprop="provider" content="CHOCOCAM SARL Ltd">
+<meta itemprop="availableChannel" content="Online Request Form">
 
 
-
-
-
-<!-- ================= Office & Location ================= -->
-<section
-  id="office"
-  class="section office-section"
-  aria-labelledby="office-heading"
-  itemscope
-  itemtype="https://schema.org/LocalBusiness"
->
 
   <div class="container">
-
-    <!-- Business identity -->
-    <meta itemprop="name" content="CHOCOCAM S.A.R.L">
-    <meta itemprop="industry" content="Cocoa Exporter">
-    <meta itemprop="url" content="https://chococa.netlify.app">
-
-    <header class="office-header">
-      <h2 id="office-heading" itemprop="name">
-        Our Office in Douala, Cameroon
-      </h2>
-      <p class="office-subtitle">
-        Visit or contact our cocoa export office in Douala — the commercial hub of Cameroon and
-        a strategic gateway for international cocoa shipments.
-      </p>
-    </header>
-
-    <!-- Map -->
-    <div
-      class="map-wrap"
-      role="region"
-      aria-label="CHOCAM cocoa export office location map"
-    >
-      <iframe
-        title="CHOCOCAM S.A.R.L cocoa export office location in Douala, Cameroon"
-        src="https://www.google.com/maps/embed?pb=!1m18..."
-        width="100%"
-        height="300"
-        style="border:0;"
-        allowfullscreen
-        loading="lazy"
-        referrerpolicy="no-referrer-when-downgrade"
-      ></iframe>
-    </div>
-
-    <!-- Address (SEO critical) -->
-    <address
-      class="office-address"
-      itemprop="address"
-      itemscope
-      itemtype="https://schema.org/PostalAddress"
-    >
-      <meta itemprop="addressLocality" content="Douala">
-      <meta itemprop="addressCountry" content="Cameroon">
-
-      <p>
-        📍 <strong>Location:</strong>
-        <span itemprop="addressLocality">Douala</span>,
-        <span itemprop="addressCountry">Cameroon</span>
-      </p>
-    </address>
-
-    <!-- Quick Contact -->
-    <div class="contact-quick">
-
-      <a
-        id="phoneBtn"
-        href="tel:+237671742824"
-        class="btn outline"
-        itemprop="telephone"
-        aria-label="Call CHOCOCAM cocoa export office"
-      >
-        <i class="fa fa-phone" aria-hidden="true"></i>
-        +237 671 742 824
-      </a>
-
-      <a
-        href="https://wa.me/237699745546"
-        id="whatsappBtn"
-        class="btn whatsapp"
-        aria-label="Chat with CHOCOCAM cocoa export team on WhatsApp"
-        target="_blank"
-        rel="noopener"
-      >
-        <i class="fab fa-whatsapp" aria-hidden="true"></i>
-        Chat on WhatsApp
-      </a>
-
-      <a
-        href="https://www.linkedin.com/in/eudriverslicence"
-        id="linkedinBtn"
-        target="_blank"
-        rel="noopener"
-        class="btn outline"
-        aria-label="CHOCOCAM cocoa export LinkedIn page"
-      >
-        <i class="fab fa-linkedin" aria-hidden="true"></i>
-        LinkedIn
-      </a>
-
-    </div>
-
-    <p class="office-note">
-      <strong>Availability:</strong>
-      Office hours & WhatsApp support available for international cocoa buyers.
+    <h4 id="quote-title" itemprop="name">Request a Cocoa Export Quote</h4>
+    <p itemprop="description">
+      Complete the form below to receive product specifications, availability,
+      pricing, and a formal quotation for export-grade Cameroonian cocoa products.
     </p>
 
+
+    <form
+      action="https://formspree.io/f/mzzyprqp"
+      method="POST"
+      class="quote-form"
+      itemprop="offers"
+      itemscope
+      itemtype="https://schema.org/Offer">
+
+
+      <div class="form-row">
+        <div class="form-group floating-label">
+          <input type="text" 
+          id="buyerName" 
+          name="buyerName" 
+          required aria-required="true" 
+          itemprop="eligibleCustomerType" />
+
+          <label for="buyerName">Company / Buyer Name *</label>
+        </div>
+
+
+        <div class="form-group floating-label">
+           <input type="text" id="country" name="country" required />
+           <label for="country">Country *</label>
+          </div>
+
+
+
+        <div class="form-group floating-label">
+          <input type="email" 
+          id="buyerEmail" 
+          name="buyerEmail" 
+          required aria-required="true"
+          itemprop="email" />
+
+          <label for="buyerEmail">Email Address *</label>
+        </div>
+      </div>
+
+
+
+      <input type="hidden" name="_replyto" value="">
+      <input type="hidden" name="_subject" value="Cocoa Export Quote Request Received">
+      <input type="hidden" name="_template" value="table">
+
+
+
+
+      <div class="form-row">
+        <div class="form-group floating-label">
+          <select id="productSelect" 
+          name="productSelect" 
+          required aria-required="true" 
+          itemprop="itemOffered" >
+            <option value="" disabled selected>Select Product</option>
+            <option value="forastero">Forastero</option>
+            <option value="amelonado">Amelonado</option>
+            <option value="cundeamor">Cundeamor</option>
+            <option value="criollo">Criollo</option>
+            <option value="trinitario">Trinitario</option>
+            <option value="bresilien">Cacao Bresilien</option>
+          </select>
+          <label for="productSelect">Product *</label>
+        </div>
+
+
+        <div class="form-group floating-label">
+          <input type="number"
+            id="quantity"
+            name="quantity"
+            min="19"
+            value="19"
+            required
+            aria-required="true"
+            itemprop="eligibleQuantity" />
+          <label for="quantity">Quantity (metric tons) *</label>
+          <small>Minimum order: one 20ft container (~19–20 MT)</small>
+        </div>
+
+
+        <div class="form-group floating-label">
+          <select id="incoterm" 
+          name="incoterm" 
+          required aria-required="true">
+            <option value="" disabled selected>Select Incoterm</option>
+            <option>FOB</option>
+            <option>CIF</option>
+          </select>
+          <label for="incoterm">Preferred Incoterm</label>
+        </div>
+      </div>
+
+
+      <div class="form-group floating-label">
+        <textarea id="quoteMessage"
+          name="quoteMessage"
+          rows="4"
+          placeholder=" "
+         itemprop="description" ></textarea>
+        <label for="quoteMessage">
+          Message / Special Requirements
+        </label>
+      </div>
+
+
+      <div class="form-group">
+  <label>Upload Specification / Requirement File (PDF, DOC)</label>
+  <input
+    type="file"
+    name="attachment"
+    accept=".pdf,.doc,.docx"
+  />
+</div>
+
+
+
+      <button type="submit">
+        <i class="fas fa-paper-plane" aria-hidden="true"></i>
+      Submit Quote Request
+    </button>
+
+      <p class="form-note">
+        * Required fields. Your information will be kept confidential and used
+        only for responding to your cocoa export quotation request.
+      </p>
+
+    </form>
   </div>
 </section>
 
@@ -622,8 +647,7 @@
 
 
 
-
-    <!-- FOOTER -->
+<!-- FOOTER -->
 <footer 
 class="site-footer"
 itemscope
@@ -1716,6 +1740,78 @@ s0.parentNode.insertBefore(s1,s0);
 
 </div>
 
+
+
+
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const newsList = document.getElementById("news-list");
+
+  // Curated Cameroon cocoa news with real links
+  const articles = [
+    {
+      title: "Black pod disease devastates cocoa farms in Southwest Cameroon",
+      link: "https://www.reuters.com/business/environment/black-pod-disease-devastates-cocoa-farms-southwest-cameroon-2025-09-16/?utm_source=chatgpt.com",
+      description: "Black pod disease has been affecting cocoa farms in Southwest Cameroon, reducing yield and impacting local farmers.",
+      source: "Reuters"
+    },
+    {
+      title: "Cameroon farmers turn to vigilantes and amulets to stop cocoa theft",
+      link: "https://www.reuters.com/world/africa/cameroon-farmers-turn-vigilantes-amulets-stop-cocoa-theft-2024-10-01/?utm_source=chatgpt.com",
+      description: "Farmers in Cameroon are using unconventional methods such as vigilantes and charms to protect cocoa farms from theft.",
+      source: "Reuters"
+    },
+    {
+      title: "Cameroon to share cocoa location data to meet EU environment rules",
+      link: "https://www.reuters.com/markets/commodities/cameroon-share-cocoa-location-data-meet-eu-environment-rules-2024-08-28/?utm_source=chatgpt.com",
+      description: "Cameroon plans to share cocoa plantation location data to comply with EU deforestation-free regulations.",
+      source: "Reuters"
+    },
+    {
+      title: "Cocoa processing in Cameroon tops 100,000 tons for first time",
+      link: "https://www.businessincameroon.com/agriculture/0808-14904-cocoa-processing-in-cameroon-tops-100-000-tons-for-first-time?utm_source=chatgpt.com",
+      description: "Cameroon’s cocoa processing industry reached a milestone of 100,000 tons, boosting the country’s export potential.",
+      source: "Business in Cameroon"
+    },
+    {
+      title: "Cameroon nears full cocoa traceability as EU deadline looms",
+      link: "https://allafrica.com/stories/202507210357.html?utm_source=chatgpt.com",
+      description: "Cameroon is close to full traceability of cocoa beans, improving transparency and sustainability in the supply chain.",
+      source: "AllAfrica"
+    },
+    {
+      title: "Telcar Cocoa halts processing amid Cameroon bean quality crisis",
+      link: "https://www.foodbusinessmea.com/telcar-cocoa-halts-processing-amid-cameroon-bean-quality-crisis/?utm_source=chatgpt.com",
+      description: "Telcar Cocoa has temporarily stopped processing due to quality issues affecting Cameroon's cocoa beans.",
+      source: "Food Business MEA"
+    },
+  ];
+
+  // Render articles in #news-list
+  newsList.innerHTML = ""; // Clear any placeholder text
+
+  articles.forEach(article => {
+    const div = document.createElement("div");
+    div.className = "news-item";
+
+    div.innerHTML = `
+      <h4>${article.title}</h4>
+      <p class="news-meta">${article.source}</p>
+      <p>${article.description}</p>
+      <a href="${article.link}" target="_blank" rel="noopener noreferrer">Read More →</a>
+    `;
+
+    newsList.appendChild(div);
+  });
+});
+</script>
+
+
+
+
+
+
 <script type="text/javascript">
 function googleTranslateElementInit() {
   new google.translate.TranslateElement({pageLanguage: 'en'}, 'google_translate_element');
@@ -1801,6 +1897,54 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 
+
+<script>
+// Wait for DOM to load
+document.addEventListener("DOMContentLoaded", function () {
+  const searchForm = document.getElementById("searchForm");
+  const searchInput = document.getElementById("siteSearch");
+  const noResult = document.getElementById("noResult");
+  // Define searchable items (services, sections, products, etc.)
+  const searchableItems = [
+    { name: "Premium Cocoa Beans", selector: "#products .product-card:nth-child(1)" },
+    { name: "Organic Cocoa Beans", selector: "#products .product-card:nth-child(2)" },
+    { name: "Sorting & Packing", selector: "#products .product-card:nth-child(3)" },
+    { name: "Request Quote", selector: "#quote" },
+    { name: "Our Products", selector: "#products" },
+    { name: "Export Process", selector: "#export" },
+    { name: "Documents", selector: "#document" },
+    { name: "Gallery", selector: "#gallery" },
+    { name: "Testimonials", selector: "#testimonials" },
+    { name: "Contact", selector: "#contact" },
+    { name: "About", selector: "#about" },
+    { name: "FAQ", selector: ".faq-container" }
+  ];
+  searchForm.addEventListener("submit", function (e) {
+    e.preventDefault();
+    const query = searchInput.value.trim().toLowerCase();
+    let found = false;
+    // Search through items
+    for (let item of searchableItems) {
+      if (item.name.toLowerCase().includes(query)) {
+        const element = document.querySelector(item.selector);
+        if (element) {
+          element.scrollIntoView({ behavior: "smooth", block: "start" });
+          found = true;
+          noResult.style.display = "none";
+          break;
+        }
+      }
+    }
+    // Redirect to Google if no local match
+    if (!found) {
+      noResult.style.display = "block";
+      setTimeout(() => {
+        window.location.href = `https://www.google.com/search?q=${encodeURIComponent(query)}`;
+      }, 1500);
+    }
+  });
+});
+</script>
 
 
 
@@ -1911,25 +2055,44 @@ window.addEventListener("scroll", activateNavLink);
 
 
 
+<script src="https://cdn.jsdelivr.net/npm/intl-tel-input@18.2.1/build/js/intlTelInput.min.js"></script>
+
+<script>
+  const countryInput = document.querySelector("#country");
+
+  window.intlTelInput(countryInput, {
+    initialCountry: "auto",
+    geoIpLookup: function (callback) {
+      fetch("https://ipapi.co/json")
+        .then(res => res.json())
+        .then(data => callback(data.country_code))
+        .catch(() => callback("US"));
+    },
+    separateDialCode: false,
+    utilsScript:
+      "https://cdn.jsdelivr.net/npm/intl-tel-input@18.2.1/build/js/utils.js",
+  });
+</script>
+
+
+<script>
+  document.querySelector(".quote-form").addEventListener("submit", function (e) {
+    const email = document.getElementById("buyerEmail").value;
+    this.querySelector('input[name="_replyto"]').value = email;
+  });
+</script>
+
+
+
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2" defer></script>
 
-
 <script src="supabase.js" defer></script>
-
 
 
 <script src="script.js" defer></script>
 </body>
 </html>
-
-
-
-
-
-
-
-
 
 
 

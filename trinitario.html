@@ -425,11 +425,11 @@
   ]
 }
 </script>
-
-
 <!-- Load an icon library to show a hamburger menu (bars) on small screens -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
+<link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
 
    <!-- Custom CSS -->
@@ -439,8 +439,8 @@
 
 
 
-<body>
- <header class="header">
+<body class="bg-gray-50 text-gray-800">
+  <header class="header">
 <div class="header-logo">
 <img src="images/chococam-logo.png" alt="CHOCOCAM Logo">
 </div>
@@ -459,6 +459,7 @@
 <a href="bresilien.html">Bresilien</a>
 </div>
 </div>
+
 <a href="export.html">Export</a>
 <a href="gallery.html">Gallery</a>
 <a href="contact.html">Contact</a>
@@ -484,146 +485,103 @@
 
 
 
-
-<div id="overlay"></div>
-
-<section class="hero">
-<div class="slide active" style="background-image:url('images/ga1.png')" aria-label="Cameroon cocoa farm producing premium cocoa beans"></div>
-<div class="slide" style="background-image:url('images/ga2.png')" aria-label="Fermented cocoa beans ready for export"></div>
-<div class="slide" style="background-image:url('images/AG1.jpg')" aria-label="Sun-dried cocoa beans for export"></div>
-<div class="slide" style="background-image:url('images/AG3.png')" aria-label="Sun-dried cocoa beans for export"></div>
-<div class="slide" style="background-image:url('images/hero3.png')" aria-label="Sun-dried cocoa beans for export"></div>
-<div class="overlay"></div>
-<div class="hero-content">
-<h1>Cameroon Cocoa Exporter of Premium Fermented Cocoa Beans</h1>
-<p>We supply export-quality cocoa beans from Cameroon to international chocolate manufacturers, processors, and wholesalers. Our cocoa is ethically sourced, fully traceable, fermented, sun-dried, and prepared to meet global export standards.</p>
-<a href="quote.html" class="btn-quote">Request a Cocoa Export Quote</a>
-</div>
-<a class="prev" onclick="changeSlide(-1)">&#10094;</a>
-<a class="next" onclick="changeSlide(1)">&#10095;</a>
-<div class="dots" id="heroDots"></div>
-</section>
-
-
-
-
-
-<!-- ================= Office & Location ================= -->
-<section
-  id="office"
-  class="section office-section"
-  aria-labelledby="office-heading"
-  itemscope
-  itemtype="https://schema.org/LocalBusiness"
->
-
-  <div class="container">
-
-    <!-- Business identity -->
-    <meta itemprop="name" content="CHOCOCAM S.A.R.L">
-    <meta itemprop="industry" content="Cocoa Exporter">
-    <meta itemprop="url" content="https://chococa.netlify.app">
-
-    <header class="office-header">
-      <h2 id="office-heading" itemprop="name">
-        Our Office in Douala, Cameroon
-      </h2>
-      <p class="office-subtitle">
-        Visit or contact our cocoa export office in Douala — the commercial hub of Cameroon and
-        a strategic gateway for international cocoa shipments.
-      </p>
-    </header>
-
-    <!-- Map -->
-    <div
-      class="map-wrap"
-      role="region"
-      aria-label="CHOCAM cocoa export office location map"
-    >
-      <iframe
-        title="CHOCOCAM S.A.R.L cocoa export office location in Douala, Cameroon"
-        src="https://www.google.com/maps/embed?pb=!1m18..."
-        width="100%"
-        height="300"
-        style="border:0;"
-        allowfullscreen
-        loading="lazy"
-        referrerpolicy="no-referrer-when-downgrade"
-      ></iframe>
+<!-- HERO -->
+  <section class="hero">
+    <div class="container hero-grid">
+      <div>
+        <h1>
+          Premium Trinitario Cocoa Beans
+          From Cameroon
+        </h1>
+        <p>
+          High quality export-grade Trinitario cocoa beans sourced from trusted farmer cooperatives across Cameroon for international chocolate manufacturers and cocoa processors.
+        </p>
+        <a href="quote.html" class="quote-btn">Request Quote</a>
+      </div>
+        <a target="_blank" href="images/tri.png">
+      <img src="images/tri.png" alt="Trinitario Cocoa Beans">
+        </a>
     </div>
+  </section>
 
-    <!-- Address (SEO critical) -->
-    <address
-      class="office-address"
-      itemprop="address"
-      itemscope
-      itemtype="https://schema.org/PostalAddress"
-    >
-      <meta itemprop="addressLocality" content="Douala">
-      <meta itemprop="addressCountry" content="Cameroon">
 
-      <p>
-        📍 <strong>Location:</strong>
-        <span itemprop="addressLocality">Douala</span>,
-        <span itemprop="addressCountry">Cameroon</span>
-      </p>
-    </address>
+  <!-- TRUST -->
+  <section>
+    <div class="container trust-grid">
+      <div class="card">
+        <h3>Premium Hybrid Genetics</h3>
+        <p>Trinitario beans combine Criollo flavor quality with Forastero productivity.</p>
+      </div>
 
-    <!-- Quick Contact -->
-    <div class="contact-quick">
+      <div class="card">
+        <h3>Export Quality Processing</h3>
+        <p>Carefully fermented, dried, sorted and packed for international export standards.</p>
+      </div>
 
-      <a
-        id="phoneBtn"
-        href="tel:+237671742824"
-        class="btn outline"
-        itemprop="telephone"
-        aria-label="Call CHOCOCAM cocoa export office"
-      >
-        <i class="fa fa-phone" aria-hidden="true"></i>
-        +237 671 742 824
-      </a>
-
-      <a
-        href="https://wa.me/237699745546"
-        id="whatsappBtn"
-        class="btn whatsapp"
-        aria-label="Chat with CHOCOCAM cocoa export team on WhatsApp"
-        target="_blank"
-        rel="noopener"
-      >
-        <i class="fab fa-whatsapp" aria-hidden="true"></i>
-        Chat on WhatsApp
-      </a>
-
-      <a
-        href="https://www.linkedin.com/in/eudriverslicence"
-        id="linkedinBtn"
-        target="_blank"
-        rel="noopener"
-        class="btn outline"
-        aria-label="CHOCOCAM cocoa export LinkedIn page"
-      >
-        <i class="fab fa-linkedin" aria-hidden="true"></i>
-        LinkedIn
-      </a>
-
+      <div class="card">
+        <h3>Reliable Bulk Supply</h3>
+        <p>Stable supply chain supported by farmer cooperatives and export logistics partners.</p>
+      </div>
     </div>
-
-    <p class="office-note">
-      <strong>Availability:</strong>
-      Office hours & WhatsApp support available for international cocoa buyers.
-    </p>
-
-  </div>
-</section>
+  </section>
 
 
+  <!-- SPEC -->
+  <section class="spec">
+    <div class="container spec-grid">
+      <a target="_blank" href="images/tr2.jpg">
+      <img src="images/tr2.jpg" alt="Dried Trinitario Cocoa Beans">
+      </a>
+      <div>
+        <h2>Product Specifications</h2>
+        <div class="spec-list">
+          <div><span>Bean Type</span><span>Trinitario</span></div>
+          <div><span>Origin</span><span>Cameroon</span></div>
+          <div><span>Regions</span><span>South West, Centre, Littoral</span></div>
+          <div><span>Moisture</span><span>6% – 7.5%</span></div>
+          <div><span>Fermentation</span><span>Well Fermented</span></div>
+          <div><span>MOQ</span><span>5 – 20 Metric Tons</span></div>
+          <div><span>Packaging</span><span>Export Jute Bags 64kg / 65kg</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- REGION -->
+  <section class="region">
+    <div class="container">
+      <h2 style="text-align:center">Cocoa Growing Regions</h2>
+
+      <div class="region-grid">
+        <div class="card">
+          <h3>South West Region</h3>
+          <p>Major cocoa producing region with strong farmer cooperative networks.</p>
+        </div>
+
+        <div class="card">
+          <h3>Centre Region</h3>
+          <p>Balanced climate supporting consistent cocoa bean fermentation quality.</p>
+        </div>
+
+        <div class="card">
+          <h3>Littoral Region</h3>
+          <p>Strategic logistics location supporting export shipping and processing hubs.</p>
+        </div>
+      </div>
+    </div>
+  </section>
 
 
 
 
 
-    <!-- FOOTER -->
+
+
+
+  
+
+<!-- FOOTER -->
 <footer 
 class="site-footer"
 itemscope
@@ -1716,6 +1674,11 @@ s0.parentNode.insertBefore(s1,s0);
 
 </div>
 
+
+
+
+
+
 <script type="text/javascript">
 function googleTranslateElementInit() {
   new google.translate.TranslateElement({pageLanguage: 'en'}, 'google_translate_element');
@@ -1798,11 +1761,6 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 });
 </script>
-
-
-
-
-
 
 
 
@@ -1918,10 +1876,13 @@ window.addEventListener("scroll", activateNavLink);
 <script src="supabase.js" defer></script>
 
 
-
 <script src="script.js" defer></script>
 </body>
 </html>
+
+
+
+
 
 
 

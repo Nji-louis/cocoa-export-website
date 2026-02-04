@@ -361,6 +361,9 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
 
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+
+
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -426,21 +429,17 @@
 }
 </script>
 
-
 <!-- Load an icon library to show a hamburger menu (bars) on small screens -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
 
-
    <!-- Custom CSS -->
   <link rel="stylesheet" href="style.css">
-
 </head>
 
 
-
 <body>
- <header class="header">
+<header class="header">
 <div class="header-logo">
 <img src="images/chococam-logo.png" alt="CHOCOCAM Logo">
 </div>
@@ -482,138 +481,357 @@
 
 
 
-
-
-
 <div id="overlay"></div>
 
-<section class="hero">
-<div class="slide active" style="background-image:url('images/ga1.png')" aria-label="Cameroon cocoa farm producing premium cocoa beans"></div>
-<div class="slide" style="background-image:url('images/ga2.png')" aria-label="Fermented cocoa beans ready for export"></div>
-<div class="slide" style="background-image:url('images/AG1.jpg')" aria-label="Sun-dried cocoa beans for export"></div>
-<div class="slide" style="background-image:url('images/AG3.png')" aria-label="Sun-dried cocoa beans for export"></div>
-<div class="slide" style="background-image:url('images/hero3.png')" aria-label="Sun-dried cocoa beans for export"></div>
-<div class="overlay"></div>
-<div class="hero-content">
-<h1>Cameroon Cocoa Exporter of Premium Fermented Cocoa Beans</h1>
-<p>We supply export-quality cocoa beans from Cameroon to international chocolate manufacturers, processors, and wholesalers. Our cocoa is ethically sourced, fully traceable, fermented, sun-dried, and prepared to meet global export standards.</p>
-<a href="quote.html" class="btn-quote">Request a Cocoa Export Quote</a>
+<section class="slideshow-section" aria-label="Cocoa slideshow gallery">
+
+
+<!-- About + Why Choose Us -->
+<!-- ================= HERO SECTION ================= -->
+<section class="about-hero" id="export-hero">
+  <div class="container hero-grid">
+
+    <div class="hero-text">
+      <h1>Trusted Cocoa Exporter from Cameroon</h1>
+      <p>
+        Supplying premium Cameroonian cocoa beans to chocolate manufacturers,
+        processors, and wholesalers worldwide.
+      </p>
+      <a href="export.html" class="btn-primary">Request Export Details</a>
+    </div>
+
+    <div class="hero-stats">
+      <div>
+        <strong>500+</strong>
+        <span>Tons / Year</span>
+      </div>
+      <div>
+        <strong>200+</strong>
+        <span>Partner Farmers</span>
+      </div>
+      <div>
+        <strong>10+</strong>
+        <span>Countries Served</span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+
+
+<section class="about-section" id="about">
+<article class="about-block">
+<div class="icon-title">
+<i class="fa-solid fa-building"></i>
+<h3>Who We Are</h3>
 </div>
-<a class="prev" onclick="changeSlide(-1)">&#10094;</a>
-<a class="next" onclick="changeSlide(1)">&#10095;</a>
-<div class="dots" id="heroDots"></div>
+<a target="_blank" href="images/AG4.png">
+<img
+  src="images/AG4.png"
+  alt="Cocoa export warehouse in Douala Cameroon"
+  class="about-img">
+</a>
+<p>
+Based in <strong>Douala, Cameroon</strong>, we are a professional cocoa export company supplying
+<strong>export-quality cocoa beans</strong> sourced directly from farming communities nationwide.
+Our operations focus on transparency, long-term partnerships, and responsible sourcing.
+</p>
+</article>
+
+
+<article class="about-block">
+<div class="about-mission">
+<div class="icon-title">
+<i class="fa-solid fa-seedling"></i>
+<h3>Our Mission</h3>
+</div>
+<p>
+To supply world-class Cameroonian cocoa to global markets through ethical sourcing,
+farmer empowerment, and uncompromising quality—while building transparent,
+sustainable cocoa supply chains.
+</p>
+</div>
+
+
+<div class="about-vision">
+<div class="icon-title">
+<i class="fa-solid fa-eye"></i>
+<h3>Our Vision</h3>
+</div>
+<p>
+To become one of Africa's most trusted cocoa export companies, recognized for excellence,
+innovation, and responsible trade—strengthening Cameroon's presence in the global cocoa industry.
+</p>
+</div>
+</article>
+
+
+<article class="about-block">
+<div class="icon-title">
+<i class="fa-solid fa-book-open"></i>
+<h3>Our Story</h3>
+</div>
+<p>
+Our journey began with a mission to give Cameroonian farmers direct access to global cocoa markets.
+Today, we supply premium fermented cocoa beans to chocolate makers and wholesalers worldwide.
+Through farmer training, fair pricing, and transparent post-harvest systems, we raise cocoa quality
+while supporting rural communities.
+</p>
+</article>
+
+
+<article class="about-block ceo">
+<div class="icon-title">
+<i class="fa-solid fa-user-tie"></i>
+<h3>Message from Our CEO</h3>
+<div>
+<div class="ceo-wrap">
+  <a target="_blank" href="images/louis.jpeg">
+<img src="images/louis.jpeg" alt="CEO of CHOCOCAM">
+  </a>
+</div>
+<p>
+At CHOCOCAM S.A.R.L Ltd, quality starts at the farm and sustainability begins with people.
+Our commitment goes beyond exporting cocoa—we uplift farmers while meeting the highest
+international export standards.
+</p>
+<strong>— Jane Deo, CEO & Founder</strong>
+</article>
+
+
+</div>
 </section>
 
 
 
 
 
-<!-- ================= Office & Location ================= -->
-<section
-  id="office"
-  class="section office-section"
-  aria-labelledby="office-heading"
-  itemscope
-  itemtype="https://schema.org/LocalBusiness"
->
 
+
+
+
+<!-- RESPONSIVE COCOA BLOCKS -->
+<section class="cocoa-blocks">
+<div class="container">
+<h2 class="section-title">Our Cocoa Export Strengths</h2>
+<div class="cocoa-grid">
+<article class="cocoa-card">
+  <a target="_blank" href="images/AG1.jpg">
+<img src="images/AG1.jpg" alt="Cocoa harvesting in Cameroon">
+</a>
+<h3>Farm-Level Sourcing</h3>
+<p>Direct partnerships with trusted Cameroonian cocoa farmers ensure consistent quality and fair trade.</p>
+</article>
+
+
+<article class="cocoa-card">
+  <a target="_blank" href="images/fe.jpeg">
+<img src="images/fe.jpeg" alt="Fermented cocoa beans">
+  </a>
+<h3>Quality Fermentation</h3>
+<p>Carefully fermented and sun-dried cocoa beans that meet international export standards.</p>
+</article>
+
+
+<article class="cocoa-card">
+  <a target="_blank" href="images/ga7.png">
+<img src="images/ga7.png" alt="Cocoa warehouse storage">
+</a>
+<h3>Secure Warehousing</h3>
+<p>Clean, fumigated storage facilities to preserve cocoa quality before export.</p>
+</article>
+
+
+<article class="cocoa-card">
+  <a target="_blank" href="images/c.png">
+<img src="images/c.png" alt="Cocoa export logistics">
+  </a>
+<h3>Global Export Logistics</h3>
+<p>Efficient shipping from Douala and Kribi ports to Europe, Asia, and beyond.</p>
+</article>
+
+
+</div>
+</div>
+</section>
+
+
+
+
+<!-- Export Process Section -->
+<section class="export-process">
+<div class="export-header">
+<h2>Our Cocoa Export Process</h2>
+<p>
+From farm to international markets, our cocoa export process follows strict quality,
+safety, and compliance standards to ensure consistency, traceability, and buyer confidence.
+</p>
+</div>
+
+
+<div class="export-steps">
+<div class="export-step">
+<span>01</span>
+<h3>Harvesting</h3>
+<p>Carefully harvested from trusted partner farmers across Cameroon.</p>
+</div>
+
+
+<div class="export-step">
+<span>02</span>
+<h3>Fermentation</h3>
+<p>Beans are naturally fermented for 5–7 days to develop optimal flavor.</p>
+</div>
+
+
+<div class="export-step">
+<span>03</span>
+<h3>Sun Drying</h3>
+<p>Sun-dried to meet international export moisture standards.</p>
+</div>
+
+
+<div class="export-step">
+<span>04</span>
+<h3>Sorting & Grading</h3>
+<p>Manual and mechanical sorting ensures uniformity and premium quality.</p>
+</div>
+
+
+<div class="export-step">
+<span>05</span>
+<h3>Packaging</h3>
+<p>Packed in food-grade jute bags for safe transportation.</p>
+</div>
+
+
+<div class="export-step">
+<span>06</span>
+<h3>Inspection</h3>
+<p>Quality checks, fumigation, and compliance verification.</p>
+</div>
+
+
+<div class="export-step">
+<span>07</span>
+<h3>Documentation</h3>
+<p>Export permits, phytosanitary certificates, and buyer documents prepared.</p>
+</div>
+<div class="export-step">
+<span>08</span>
+<h3>Shipping</h3>
+<p>Shipped through Douala or Kribi ports to global destinations.</p>
+</div>
+</div>
+<a href="export.html" class="btn-export">Explore Our Cocoa Export Services</a>
+</section>
+</section>
+
+
+
+
+
+  <!-- Team Section -->
+  <section class="team-section" id="team" aria-labelledby="team-heading">
+    <div class="container">
+      <h2 id="team-heading" class="section-title">
+      Meet Our Leadership Team
+    </h2>
+
+
+      <div class="team-row">
+
+        <article class="team-card">
+        <div class="team-img">
+          <img src="images/team-jane.jpg"
+            alt="Jane Doe, CEO and Founder of CHOCOCAM cocoa export company">
+        </div>
+        <div class="team-info">
+          <h3>Jane Doe</h3>
+          <p class="role">CEO & Founder</p>
+          <p class="desc">
+            Visionary leader with extensive experience in agribusiness and
+            international cocoa trade, committed to ethical sourcing.
+          </p>
+          <a href="mailto:jane@example.com" class="btn-outline">Contact</a>
+        </div>
+      </article>
+
+
+        <article class="team-card">
+        <div class="team-img">
+          <img src="images/team-mike.jpg"
+            alt="Mike Ross, Marketing Director at CHOCOCAM">
+        </div>
+        <div class="team-info">
+          <h3>Mike Ross</h3>
+          <p class="role">Marketing Director</p>
+          <p class="desc">
+            Oversees global branding and cocoa export marketing strategies,
+            connecting Cameroonian cocoa with international buyers.
+          </p>
+          <a href="mailto:mike@example.com" class="btn-outline">Contact</a>
+        </div>
+      </article>
+
+
+
+        <article class="team-card">
+        <div class="team-img">
+          <img src="images/louis.jpeg"
+            alt="Nji Louis, Operations Manager at CHOCOCAM">
+        </div>
+        <div class="team-info">
+          <h3>Nji Louis</h3>
+          <p class="role">Operations Manager</p>
+          <p class="desc">
+            Manages logistics, quality control, and cocoa export coordination
+            from farms to ports.
+          </p>
+          <a href="mailto:john@example.com" class="btn-outline">Contact</a>
+        </div>
+      </article>
+
+      </div>
+    </div>
+</section>
+
+
+
+<!-- Why Choose Us -->
+<section class="why-choose-alibaba" id="why-choose" aria-labelledby="why-title">
   <div class="container">
-
-    <!-- Business identity -->
-    <meta itemprop="name" content="CHOCOCAM S.A.R.L">
-    <meta itemprop="industry" content="Cocoa Exporter">
-    <meta itemprop="url" content="https://chococa.netlify.app">
-
-    <header class="office-header">
-      <h2 id="office-heading" itemprop="name">
-        Our Office in Douala, Cameroon
-      </h2>
-      <p class="office-subtitle">
-        Visit or contact our cocoa export office in Douala — the commercial hub of Cameroon and
-        a strategic gateway for international cocoa shipments.
-      </p>
-    </header>
-
-    <!-- Map -->
-    <div
-      class="map-wrap"
-      role="region"
-      aria-label="CHOCAM cocoa export office location map"
-    >
-      <iframe
-        title="CHOCOCAM S.A.R.L cocoa export office location in Douala, Cameroon"
-        src="https://www.google.com/maps/embed?pb=!1m18..."
-        width="100%"
-        height="300"
-        style="border:0;"
-        allowfullscreen
-        loading="lazy"
-        referrerpolicy="no-referrer-when-downgrade"
-      ></iframe>
-    </div>
-
-    <!-- Address (SEO critical) -->
-    <address
-      class="office-address"
-      itemprop="address"
-      itemscope
-      itemtype="https://schema.org/PostalAddress"
-    >
-      <meta itemprop="addressLocality" content="Douala">
-      <meta itemprop="addressCountry" content="Cameroon">
-
-      <p>
-        📍 <strong>Location:</strong>
-        <span itemprop="addressLocality">Douala</span>,
-        <span itemprop="addressCountry">Cameroon</span>
-      </p>
-    </address>
-
-    <!-- Quick Contact -->
-    <div class="contact-quick">
-
-      <a
-        id="phoneBtn"
-        href="tel:+237671742824"
-        class="btn outline"
-        itemprop="telephone"
-        aria-label="Call CHOCOCAM cocoa export office"
-      >
-        <i class="fa fa-phone" aria-hidden="true"></i>
-        +237 671 742 824
-      </a>
-
-      <a
-        href="https://wa.me/237699745546"
-        id="whatsappBtn"
-        class="btn whatsapp"
-        aria-label="Chat with CHOCOCAM cocoa export team on WhatsApp"
-        target="_blank"
-        rel="noopener"
-      >
-        <i class="fab fa-whatsapp" aria-hidden="true"></i>
-        Chat on WhatsApp
-      </a>
-
-      <a
-        href="https://www.linkedin.com/in/eudriverslicence"
-        id="linkedinBtn"
-        target="_blank"
-        rel="noopener"
-        class="btn outline"
-        aria-label="CHOCOCAM cocoa export LinkedIn page"
-      >
-        <i class="fab fa-linkedin" aria-hidden="true"></i>
-        LinkedIn
-      </a>
-
-    </div>
-
-    <p class="office-note">
-      <strong>Availability:</strong>
-      Office hours & WhatsApp support available for international cocoa buyers.
+    <h2 class="section-title" id="why-title">
+      Why Global Buyers Choose CHOCOCAM
+    </h2>
+    <p class="section-subtitle" id="why-subtitle">
+      Reliable cocoa export partner from Cameroon with quality assurance,
+      ethical sourcing, and global logistics expertise.
     </p>
 
+
+    <div class="why-grid" id="why-grid">
+      <article class="why-card">
+        <h3>Export-Grade Cocoa</h3>
+        <p>Meets European and Asian import standards.</p>
+      </article>
+
+      <article class="why-card">
+        <h3>End-to-End Export Handling</h3>
+        <p>Inspection, certification, fumigation, and logistics.</p>
+      </article>
+
+      <article class="why-card">
+        <h3>Ethical & Traceable Sourcing</h3>
+        <p>Direct sourcing with full traceability.</p>
+      </article>
+
+     <article class="why-card">
+        <h3>Competitive B2B Pricing</h3>
+        <p>Transparent market-driven pricing.</p>
+      </article>
+    </div>
   </div>
 </section>
 
@@ -621,9 +839,7 @@
 
 
 
-
-
-    <!-- FOOTER -->
+  <!-- FOOTER -->
 <footer 
 class="site-footer"
 itemscope
@@ -1716,6 +1932,9 @@ s0.parentNode.insertBefore(s1,s0);
 
 </div>
 
+
+
+
 <script type="text/javascript">
 function googleTranslateElementInit() {
   new google.translate.TranslateElement({pageLanguage: 'en'}, 'google_translate_element');
@@ -1798,11 +2017,6 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 });
 </script>
-
-
-
-
-
 
 
 
@@ -1914,23 +2128,12 @@ window.addEventListener("scroll", activateNavLink);
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2" defer></script>
 
-
 <script src="supabase.js" defer></script>
-
 
 
 <script src="script.js" defer></script>
 </body>
 </html>
-
-
-
-
-
-
-
-
-
 
 
 
